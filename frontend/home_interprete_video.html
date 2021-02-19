@@ -13,6 +13,7 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/global-home/home-user.css">
+    <link rel="stylesheet" href="../css/global-home/home_interprete_video.css">
 </head>
 <body>
     <div class="wrapper">
@@ -85,25 +86,114 @@
         </nav>
 
 <!-- FIM SIDEBAR ------------------------------------------------ -->
-<!-- CONTEUDO --------------------------------------------------- -->
+    <div id="content">
 
-        <div id="content">
+       <!-- BOTÃO PARA ABRIR/FECHAR SIDEBAR ---------------------------- -->
+
+       <nav class="container-fluid">
+        <span id="sidebarCollapse">
+            <i class="fas fa-angle-right"></i>
+        </span>
+    </nav>
+
+<!-- FIM BOTÃO PARA ABRIR/FECHAR SIDEBAR ----------------------- -->
+
+    <div class="container">
+
+<!-- NAVEGAÇÃO EM CORTINA --------------------------------------- -->
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#perfil" role="tab" aria-controls="profile" aria-selected="false">Produções</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contato" role="tab" aria-controls="contact" aria-selected="false">Produzir</a>
+    </li>
+</ul>
+
+<!-- FIM NAVEGAÇÃO EM CORTINA --------------------------------------- --> 
+
+<!-- CONTEUDO DO HOME_INTERPRETE_VIDEO --------------------------------------------------- -->
+
+<div class="container justify-content-center py-4">
+    <h3>Suba Sua interpretação</h3>
+
+<!-- Video Interpretado ----------------------------------------------- -->
+
+    <div class="row">
+        <div class="col-sm-9">
+           <div class="embed-responsive embed-responsive-16by9">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/HjAAC6BGp5c" frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+           </iframe>
+           </div>
+        </div>
+
+<!-- Fim do Video ------------------------------------------------------- -->
+
+<!-- Parte de Texto lado do video ----------------------------------------------- -->
+
+        <div class="col-sm-3">
+          <h6>Título:</h6>
+            <p class="p2">Título do vídeo</p>
+
+          <h6>Assunto:</h6>
+            <p class="p2">Assunto do video</p>
+
+          <h6>Autor:</h6>
+            <p class="p2">Nome do produtor</p>
+
+          <h6>Data de Lançamento:</h6>
+            <p class="p2">00/00/0000</p>
+
+          <h6>Tempo:</h6>
+            <p class="p2">35:06 min.</p>
+
+          <h6>Descrição:</h6>
+            <p class="p2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perferendis sed reiciendis ipsam deserunt est nam, quos assumenda exercitationem rerum aspernatur voluptate eaque quam delectus in cumque harum vitae debitis repudiandae!</p>
             
-<!-- BOTÃO PARA ABRIR/FECHAR SIDEBAR ---------------------------- -->
+        </div>
+    </div><br><br> 
 
-            <nav class="container-fluid">
-                <span id="sidebarCollapse">
-                    <i class="fas fa-angle-right"></i>
-                </span>
-            </nav>
+<!-- Fim do Texto de Video ------------------------------------------------------------------ -->
+    
+<!-- Imput para enviar arquivo ------------------------------------------------------------- -->
 
- <!-- FIM BOTÃO PARA ABRIR/FECHAR SIDEBAR ----------------------- -->
+    <p class="p1">Insira seu video de interpretação:</p>
 
-            <div class="container">
-                
-            </div>
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" id="validatedCustomFile" required>
+        <label class="custom-file-label" for="validatedCustomFile"></label>
+    </div>
+
+<!-- Fim do Imput de evio de arquivo --------------------------------------------------------------- -->
+   
+<!-- Começo de termo de  concientização ------------------------------------------------------------------ -->
+
+    <div class="caixa mt-4">
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input form-control-sm" id="customCheck1">
+           <label class="custom-control-label" for="customCheck1"><i>Declaro que os dados postados são de minha autoria.</i> </label>
+        </div>
+
+<!-- Botões para envio,cancelar e limpar -------------------------------------------------------------- -->
+
+        <div>
+            <input class="btn" type="button" value="Voltar">
+    
+            <input class="btn" type="reset" value="Limpar">
+    
+            <input class="btn" name="" type="submit" value="Enviar">
         </div>
     </div>
+
+<!-- Fim dos Botões ------------------------------------------------------------------------------------ -->
+
+</div>
+<!-- Fim do Conteudo da home_interprete_video ------------------------------------------------------------ -->
 
 <!-- CONTROLE DO BOTÃO DE ABRIR/FECHAR SIDEBAR ----------------------- -->
 
