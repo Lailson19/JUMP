@@ -1,12 +1,12 @@
 <?php
 
-session_start();
+// session_start();
 
-//Se não existir um valor do índice 'nome', então encerre a aplicação
-if (!isset($_SESSION['idusuarios'])) {
-    header('Location: index.php');
-    exit;   
-}
+// //Se não existir um valor do índice 'nome', então encerre a aplicação
+// if (!isset($_SESSION['idusuarios'])) {
+//     header('Location: index.php');
+//     exit;   
+// }
 
 ?>
 

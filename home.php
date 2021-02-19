@@ -1,18 +1,18 @@
 <?php
 
-session_start();
+// session_start();
 
-//Se não existir um valor do índice 'nome', então encerre a aplicação
-if (!isset($_SESSION['idusuarios'])) {
-  header('Location: index.html');
-  exit;
-} else {
+// //Se não existir um valor do índice 'nome', então encerre a aplicação
+// if (!isset($_SESSION['idusuarios'])) {
+//   header('Location: index.html');
+//   exit;
+// } else {
 
-  require_once('./backend/conexao.php');
+//   require_once('./backend/conexao.php');
 
-  $postagens = $link->query("SELECT * FROM postagens JOIN usuarios WHERE fk_usuario = idusuarios ORDER BY id_postagens DESC");
+//   $postagens = $link->query("SELECT * FROM postagens JOIN usuarios WHERE fk_usuario = idusuarios ORDER BY id_postagens DESC");
  
-}
+// }
 ?>
 
 <!DOCTYPE html>
