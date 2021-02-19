@@ -37,7 +37,6 @@ span {
     display: flex;
     flex-direction: column;
     align-items: center;
-
     padding-top: 1em;
     min-width: 80px;
     max-width: 80px;
@@ -187,7 +186,7 @@ a[aria-expanded="true"] {
     background-color: #39aebb5d !important;
 }
 
-.tab-pane .container h3{
+.tab-pane .container h4{
     color: #177681;
 }
 
@@ -197,6 +196,24 @@ a[aria-expanded="true"] {
 
 .card .card-text{
     font-size: 0.8rem;
+}
+
+.container form .caixa{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.container form .caixa div label i{
+    color: #177681;
+}
+
+.container form .caixa button{
+    color: #177681;
+    background-color: #39aebb5d;
+    border: 0;
+    border-radius: 4px;
+    padding: 5px 20px;
 }
 
 /* -----------------
