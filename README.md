@@ -2,7 +2,7 @@
     <img alt="Jump" title="Happy" src=".github/marca-preto.png" />
 </h1>
 
-### Jump Projeto-Recode 
+### Jump Projeto-Recode V2 
 
 A Jump é uma plataforma de vídeos educativos com acessibilidade para surdos. Aqui você poderá acessar diversos conteúdos com interpretação em LIBRAS.
 
