@@ -1,15 +1,19 @@
 <?php
 
-$servername = "67.205.138.239";
-$username = "dgsdev";
-$password = "@dgsjuh12";
-$database = "jump";
+$servername = "127.0.0.1:3306";
+$username = "root";
+$password = "@recodepro";
+$database = "jump_squad8";
 
 $link = mysqli_connect($servername, $username, $password, $database);
 
 if(!$link){
-    die("A conexão mySQL falhou!".mysqli_connect_error());
-} 
+    die("A conexão mySQL falhou!".mysqli_connect_error());    
+} else {
+    echo "Ok";
+}
+
+
 /*
 sql102.epizy.com
 epiz_26883339
