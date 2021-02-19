@@ -1,0 +1,172 @@
+/* desabilita alguns controles dos vídeos */
+/* .access-button {
+    width: 80% !important;
+  } */
+
+video::-webkit-media-controls-volume-slider{
+    display: none;
+}
+
+video::-webkit-media-controls-mute-button{
+    display: none;
+}
+
+video::-webkit-media-controls-timeline {
+    display: none;
+}
+
+video::-webkit-media-controls-fullscreen-button {
+    display: none;
+}
+
+.titulo{
+    color: #177681;
+}
+.capsula-video{
+    width: 100%;
+    position: relative;
+    text-align: center;
+    overflow:hidden;
+    font-size: 0px;
+    margin: 20px 0;
+}
+
+.capsula-video video:nth-child(1) {
+    width: 100%;
+    /* max-width: 900px; */
+}
+
+.capsula-video video:nth-child(2) {
+    position: absolute;
+    width: 40%;
+    max-width: 400px;
+}
+
+.titulo-info{
+    font-style: italic;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.descricao{
+    font-size: 0.9em;
+}
+
+.autor-msg{
+    font-size: 0.9em;
+    font-weight: 600;
+    font-style: italic;
+    margin: 0;
+}
+
+.msg{
+    font-size: 0.9em;
+    font-style: italic;
+    margin-bottom: 1em;
+}
+
+.base-msg{
+    display: flex;
+    max-width: 800px;
+    margin: 2em 0 5em;
+}
+
+.area-msg{
+    width: 80%;
+}
+
+.btn{
+    width: 30%;
+    color: #177681;
+    background-color: #39aebb5d;
+    font-size: 0.5em;
+}
+
+
+/* ==============================================
+---------------Responsividade---------------
+============================================== */
+
+
+@media (min-width: 320px) and (max-width: 429.89px) {
+    .capsula-video video:nth-child(2){
+        position: relative;
+        width: 100%;
+    }
+    .titulo-info{
+        font-style: italic;
+        font-weight: bold;
+        font-size: 0.9em;
+    }
+}
+
+@media (min-width: 430px) and (max-width: 575.98px) {
+    .titulo{
+        font-size: 1.2em;
+    }
+    .capsula-video video:nth-child(2){
+        position: absolute;
+        width: 45%;
+        margin-left: -47%;
+        margin-top: 47%;
+        border-radius: 5px;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .titulo{
+        font-size: 1.3em;
+    }
+
+    .capsula-video video:nth-child(2){
+        position: absolute;
+        width: 45%;
+        margin-left: -47%;
+        margin-top: 47%;
+        border-radius: 5px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .titulo{
+        font-size: 1.3em;
+    }
+
+    .capsula-video video:nth-child(2){
+        position: absolute;
+        width: 45%;
+        margin-left: -47%;
+        margin-top: 47%;
+        border-radius: 5px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1021.89px) {
+    .capsula-video video:nth-child(2){
+        position: absolute;
+        width: 45%;
+        margin-left: -46%;
+        margin-top: 48%;
+        border-radius: 5px;
+    }
+}
+
+@media (min-width: 1022px) and (max-width: 1199.98px) {
+    .capsula-video video:nth-child(2){
+        position: absolute;
+        width: 45%;
+        margin-left: -45%;
+        margin-top: 49%;
+        border-radius: 5px;
+    }
+}
+
+@media (min-width: 1200px)  {
+    .capsula-video video:nth-child(2){
+        position: absolute;
+        width: 45%;
+        margin-left: -38%;
+        margin-top: 53%;
+        border-radius: 5px;
+    }
+}

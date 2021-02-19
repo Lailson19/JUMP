@@ -21,7 +21,13 @@ span {
 .line{
     width: 80%;
     margin: 1.1em 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.line-escura{
+    width: 100%;
+    margin: 1.1em 0;
+    border-top: 1px solid rgba(12, 78, 85, 0.316);
 }
 
 /* -----------------
@@ -43,7 +49,7 @@ span {
     background-image: linear-gradient(to bottom, #177681, #39aebb, #2a8994, #33929d, #3b9ca7);
     color: #fff;
     transition: all 0.3s;
-    box-shadow: 1px 2px 20px hsla(186, 76%, 19%, 0.452);
+    box-shadow: 1px 2px 20px rgba(12, 78, 85, 0.452);
 }
 
 .logo-responsive{
