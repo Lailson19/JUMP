@@ -13,6 +13,7 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/global-home/home-user.css">
+    <link rel="stylesheet" href="../css/global-home/home-video.css">
 </head>
 <body>
     <div class="wrapper">
@@ -100,47 +101,76 @@
  <!-- FIM BOTÃO PARA ABRIR/FECHAR SIDEBAR ----------------------- -->
 
             <div class="container">
+                    <div class="container py-3">
 
-<!-- NAVEGAÇÃO EM CORTINA --------------------------------------- -->
+<!-- VÍDEO ---------------------------------------------- -->
 
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item">
-                      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
-                    </li>
-                </ul>
-
-<!-- FIM NAVEGAÇÃO EM CORTINA --------------------------------------- -->
-<!-- PÁGINAÇÃO EM CORTINA ------------------------------------------- -->
-
-                <div class="tab-content" id="myTabContent">
-
-<!-- CORTINA 1 ------------------------------------------------------ -->
-
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <div class="container py-5">                            
-                            <div class="row">
-
-<!-- CARD - LISTA TOTAL -------------------------------------------------------- -->
-
-                        
-
-
-
-
-
-<!-- FIM CARD -LISTA TOTAL ----------------------------------------------------- -->
-
+                        <h3 class="titulo mb-4">Carinhoso - Demo</h3>
+                        <div class="row">
+                            <div class="capsula-video bg-danger">
+                                <video controls class="meus_videos parado">
+                                    <source src="../video/carinhosamente_audio.mp4" type="video/mp4" />
+                                </video>
+                                <video id="vd2" class="meus_videos parado">
+                                    <source src="../video/carinhosamente_libras.mp4" type="video/mp4" />
+                                </video>
                             </div>
-                        </div>                        
+                        </div>
+
+<!-- FIM VÍDEO --------------------------------------------- -->
+
+                        <div class="container">
+                           <h4 class="titulo mt-4 mb-1">Título do conteúdo</h4>
+                           <h6 class="titulo mb-3"><span class="titulo-info">Assunto do conteúdo</span></h6>
+
+                           <p class="descricao">
+                               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum facere assumenda magnam ipsa odit aut? Non natus exercitationem id eveniet accusantium perspiciatis sapiente facilis, ea rerum reiciendis dolor reprehenderit delectus!
+                           </p>
+
+                           <div class="line-escura mt-4 mb-1"></div>
+
+                            <h6 class="titulo mb-1">
+                                <span class="titulo-info">
+                                    Produzido por:
+                                </span>
+                            </h6>
+                            <div class="d-flex justify-content-between justify-content-between">
+                                <p>Pixinguinha</p>
+                                <!-- AQUI SERÁ O CODE DE AVALIAÇÃO -->
+                            </div>
+
+                           <div class="line-escura mb-1"></div>
+
+                            <h6 class="titulo mb-1">
+                                <span class="titulo-info">
+                                    Traduzido por:
+                                </span>
+                            </h6>
+                            <div class="d-flex justify-content-between justify-content-between">
+                                <p>Maria de Alcantera</p>
+                                <!-- AQUI SERÁ O CODE DE AVALIAÇÃO -->
+                            </div>
+
+                            <h4 class="titulo mt-4 mb-1"><i>Comentários</i></h4>
+
+                            <div class="line-escura mt-0 mb-4"></div>
+
+                            <p class="autor-msg">Fulando de tal - 13:25h - 15/01/2021</p>                            
+                            <p class="msg">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis reprehenderit, voluptatem totam, laborum dolores facilis aliquid alias sed odio praesentium ad.</p>
+
+                            <p class="autor-msg">Sicrano Astolfo - 06:13h - 02/02/2021</p>                            
+                            <p class="msg">Lorem ipsum dolor sit amet, consectetur adipisicing elit ipsum dolor sit.</p>
+
+
+                            <form action="" method="">
+                                <div class="base-msg">
+                                    <input type="text" id="disabledTextInput" class="area-msg form-control form-control-sm" placeholder="Comente...">
+                                    <input type="submit" class="btn form-control form-control-sm" value="comentar">
+                                </div>
+                            </form>
+
+                        </div>
                     </div>
-
-<!-- FIM CORTINA 1 ------------------------------------------------ -->
-
-
-                </div>
-
-<!-- FIM PÁGINAÇÃO EM CORTINA ----------------------------------------- -->
-
             </div>
         </div>
     </div>
@@ -156,5 +186,29 @@
     </script>
 
 <!-- FIM CONTROLE DO BOTÃO DE ABRIR/FECHAR SIDEBAR ------------------ -->
+<!-- CONTROLE DE SINCRONIA DOS VÍDEOS ---------------------------- -->
+
+    <script src="./js/jquery_video.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+      $( document ).ready(function($) {
+        $('.parado').on('play', function() {
+          $('.parado').each(function() {
+            $(this).removeClass('parado').addClass('rodando');
+            $(this).get(0).play();
+          });
+        });
+        $('.parado').on('pause', function() {
+          $('.rodando').each(function(){
+            $(this).removeClass('rodando').addClass('parado');
+            $(this).get(0).pause();
+          });
+        });
+      });
+    </script>
+
+<!-- CONTROLE DE SINCRONIA DOS VÍDEOS ---------------------------- -->
+
 </body>
 </html>
