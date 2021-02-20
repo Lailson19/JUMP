@@ -1,24 +1,28 @@
 <?php
 
- session_start();
+session_start();
 
 //Se não existir um valor do índice 'nome', então encerre a aplicação
- if (!isset($_SESSION['id_pessoa'])) {
-   header('Location: indexnada.html');
-   exit;
- } else {
-   $id = $_SESSION['id_pessoa'];
-   $id_conteudo = 7;
+if (!isset($_SESSION['id_pessoa'])) {
+    header('Location: indexnada.html');
+    exit;
+} else {
+    $id = $_SESSION['id_pessoa'];
+    $id_conteudo = 7;
 
-   require_once('../backend/conexao.php');
+    require_once('../backend/conexao.php');
 
-  $postagens = $link->query("SELECT * FROM comentario inner join pessoa on pessoa.id_pessoa = comentario.id_pessoa  ORDER BY id_comentario DESC;");
-  $conteudos =$link->query("SELECT * FROM pessoa LEFT JOIN conteudo on conteudo.id_pessoa = pessoa.id_pessoa WHERE id_conteudo = $id_conteudo");
+    $postagens = $link->query("SELECT * FROM comentario inner join pessoa on pessoa.id_pessoa = comentario.id_pessoa  ORDER BY id_comentario DESC;");
+
+    $conteudos = $link->query("SELECT * FROM pessoa LEFT JOIN conteudo on conteudo.id_pessoa = pessoa.id_pessoa WHERE id_conteudo = $id_conteudo");
+
+    $traducoes = $link->query("SELECT nome FROM conteudo JOIN video_traducao ON conteudo.id_vid_traducao = video_traducao.id_vid_traducao LEFT JOIN pessoa ON pessoa.id_pessoa = video_traducao.id_pessoa WHERE video_traducao.id_pessoa = pessoa.id_pessoa AND conteudo.id_conteudo = $id_conteudo");
 }
 
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,22 +38,23 @@
     <link rel="stylesheet" href="../css/global-home/home-user.css">
     <link rel="stylesheet" href="../css/global-home/home-video.css">
 </head>
+
 <body>
     <div class="wrapper">
 
-<!-- SIDEBAR ---------------------------------------------------- -->
+        <!-- SIDEBAR ---------------------------------------------------- -->
 
         <nav id="sidebar">
             <div class="sidebar-header d-flex align-items-center justify-content-center">
 
-<!-- LOGO ------------------------------------------------------- -->
+                <!-- LOGO ------------------------------------------------------- -->
 
                 <img class="logo" src="../img/marca.svg" alt="Logo do projeto Jump - Recode Pro 2020/2021">
                 <img class="logo-responsive" src="../img/marca-responsive.svg" alt="Logo do projeto Jump responsivo - Recode Pro 2020/2021">
 
-<!-- FIM LOGO --------------------------------------------------- -->
-<!-- DADOS USUARIO ---------------------------------------------- -->
-                
+                <!-- FIM LOGO --------------------------------------------------- -->
+                <!-- DADOS USUARIO ---------------------------------------------- -->
+
                 <div class="container-user text-center d-flex flex-column align-items-center mt-4">
                     <div class="user my-2">
                         <img src="../img/user/Lailson.jpg" alt="User" class="img-user">
@@ -57,12 +62,12 @@
                     <p>Lailson</p>
                 </div>
 
-<!-- FIM DADOS USUARIO ------------------------------------------ -->
+                <!-- FIM DADOS USUARIO ------------------------------------------ -->
 
             </div>
             <div class="line"></div>
 
-<!-- LINKS SIDEBAR----------------------------------------------- -->
+            <!-- LINKS SIDEBAR----------------------------------------------- -->
 
             <ul class="list-unstyled components">
                 <li>
@@ -85,11 +90,11 @@
                 </li>
             </ul>
 
-<!-- FIM LINKS SIDEBAR ------------------------------------------- -->
+            <!-- FIM LINKS SIDEBAR ------------------------------------------- -->
 
             <div class="line"></div>
 
-<!-- DIREITOS ---------------------------------------------------- -->
+            <!-- DIREITOS ---------------------------------------------------- -->
 
             <p class="copy">
                 <span class="copycopy">
@@ -100,16 +105,16 @@
                 </span>
             </p>
 
-<!-- FIM DIREITOS ----------------------------------------------- -->
+            <!-- FIM DIREITOS ----------------------------------------------- -->
 
         </nav>
 
-<!-- FIM SIDEBAR ------------------------------------------------ -->
-<!-- CONTEUDO --------------------------------------------------- -->
+        <!-- FIM SIDEBAR ------------------------------------------------ -->
+        <!-- CONTEUDO --------------------------------------------------- -->
 
         <div id="content">
-            
-<!-- BOTÃO PARA ABRIR/FECHAR SIDEBAR ---------------------------- -->
+
+            <!-- BOTÃO PARA ABRIR/FECHAR SIDEBAR ---------------------------- -->
 
             <nav class="container-fluid">
                 <span id="sidebarCollapse">
@@ -117,126 +122,129 @@
                 </span>
             </nav>
 
- <!-- FIM BOTÃO PARA ABRIR/FECHAR SIDEBAR ----------------------- -->
+            <!-- FIM BOTÃO PARA ABRIR/FECHAR SIDEBAR ----------------------- -->
 
             <div class="container">
-                    <div class="container py-3">
+                <div class="container py-3">
 
-<!-- VÍDEO ---------------------------------------------- -->
-                        <?php foreach ($conteudos as $conteudo) ?>
-                        <h3 class="titulo mb-4"><?php echo $conteudo['titulo_conteudo'] ?></h3>
-                        <div class="row">
-                            <div class="capsula-video bg-danger">
-                                <video controls class="meus_videos parado">
-                                    <source src="../video/carinhosamente_audio.mp4" type="video/mp4" />
-                                </video>
-                                <video id="vd2" class="meus_videos parado">
-                                    <source src="../video/carinhosamente_libras.mp4" type="video/mp4" />
-                                </video>
-                            </div>
+                    <!-- VÍDEO ---------------------------------------------- -->
+                    <?php foreach ($conteudos as $conteudo) ?>
+                    <?php foreach ($traducoes as $traducao) ?>
+                    <h3 class="titulo mb-4"><?php echo $conteudo['titulo_conteudo'] ?></h3>
+                    <div class="row">
+                        <div class="capsula-video bg-danger">
+                            <video controls class="meus_videos parado">
+                                <source src="../video/carinhosamente_audio.mp4" type="video/mp4" />
+                            </video>
+                            <video id="vd2" class="meus_videos parado">
+                                <source src="../video/carinhosamente_libras.mp4" type="video/mp4" />
+                            </video>
                         </div>
-                        
-<!-- FIM VÍDEO --------------------------------------------- -->
-                        
-                     
-                        <div class="container">
-                           <h4 class="titulo mt-4 mb-1"><?php echo $conteudo['titulo_conteudo'] ?></h4>
-                           <h6 class="titulo mb-3"><span class="titulo-info"><?php echo $conteudo['assunto_conteudo'] ?></span></h6>
+                    </div>
 
-                           <p class="descricao">
-                           <?php echo $conteudo['descricao_conteudo'] ?>                               
-                           </p>
+                    <!-- FIM VÍDEO --------------------------------------------- -->
 
-                           <div class="line-escura mt-4 mb-1"></div>
 
-                            <h6 class="titulo mb-1">
-                                <span class="titulo-info">
-                                    Produzido por: 
-                                </span>
-                            </h6>
-                            <div class="d-flex justify-content-between justify-content-between">
-                                <p><?php echo $conteudo['nome'] ?></p>
-                                <!-- AQUI SERÁ O CODE DE AVALIAÇÃO -->
-                            </div>
+                    <div class="container">
+                        <h4 class="titulo mt-4 mb-1"><?php echo $conteudo['titulo_conteudo'] ?></h4>
+                        <h6 class="titulo mb-3"><span class="titulo-info"><?php echo $conteudo['assunto_conteudo'] ?></span></h6>
 
-                           <div class="line-escura mb-1"></div>
+                        <p class="descricao">
+                            <?php echo $conteudo['descricao_conteudo'] ?>
+                        </p>
 
-                            <h6 class="titulo mb-1">
-                                <span class="titulo-info">
-                                    Traduzido por: 
-                                </span>
-                            </h6>
-                            <div class="d-flex justify-content-between justify-content-between">
-                                <p><?php echo $conteudo['nome'] ?></p>
-                                <!-- AQUI SERÁ O CODE DE AVALIAÇÃO -->
-                            </div>
+                        <div class="line-escura mt-4 mb-1"></div>
 
-                            <h4 class="titulo mt-4 mb-1"><i>Comentários</i></h4>
+                        <h6 class="titulo mb-1">
+                            <span class="titulo-info">
+                                Produzido por:
+                            </span>
+                        </h6>
+                        <div class="d-flex justify-content-between justify-content-between">
+                            <p><?php echo $conteudo['nome'] ?></p>
+                            <!-- AQUI SERÁ O CODE DE AVALIAÇÃO -->
+                        </div>
 
-                            <div class="line-escura mt-0 mb-4"></div>
+                        <div class="line-escura mb-1"></div>
 
-                            <?php foreach ($postagens as $postagem) { ?>
+                        <h6 class="titulo mb-1">
+                            <span class="titulo-info">
+                                Traduzido por:
+                            </span>
+                        </h6>
+                        <div class="d-flex justify-content-between justify-content-between">
+                            <p><?php echo $traducao['nome'] ?></p>
+                            <!-- AQUI SERÁ O CODE DE AVALIAÇÃO -->
+                        </div>
+
+                        <h4 class="titulo mt-4 mb-1"><i>Comentários</i></h4>
+
+                        <div class="line-escura mt-0 mb-4"></div>
+
+                        <?php foreach ($postagens as $postagem) { ?>
 
                             <p class="autor-msg">
-                            <img class="rounded-circle img_pessoa" src="<?php echo $postagem["img"] ?>" alt="<?php echo $postagem['nome'] ?>">
-                            <?php echo $postagem['nome'] ?> Postado: <?php echo $postagem['data_comentario'] ?></p>                            
+                                <img class="rounded-circle img_pessoa" src="<?php echo $postagem["img"] ?>" alt="<?php echo $postagem['nome'] ?>">
+                                <?php echo $postagem['nome'] ?> Postado: <?php echo $postagem['data_comentario'] ?>
+                            </p>
                             <p class="msg"><?php echo $postagem["comentario"] ?></p>
 
-                            <?php  } ?> 
+                        <?php  } ?>
 
-                            <!--
+                        <!--
                             <p class="autor-msg">Sicrano Astolfo - 06:13h - 02/02/2021</p>                            
                             <p class="msg">Lorem ipsum dolor sit amet, consectetur adipisicing elit ipsum dolor sit.</p>
                           -->
 
-                            <form action="../backend/registra_postagens.php" method="post">
-                                <div class="base-msg">
-                                    <input type="text" id="disabledTextInput" class="area-msg form-control form-control-sm" name="post" placeholder="No que você está pensando, <?php echo $_SESSION['nome'] ?>?">
-                                    <input type="submit" class="btn form-control form-control-sm text-uppercase" value="Comentar">
-                                </div>
-                            </form>   
-                                                    
+                        <form action="../backend/registra_postagens.php" method="post">
+                            <div class="base-msg">
+                                <input type="text" id="disabledTextInput" class="area-msg form-control form-control-sm" name="post" placeholder="No que você está pensando, <?php echo $_SESSION['nome'] ?>?">
+                                <input type="submit" class="btn form-control form-control-sm text-uppercase" value="Comentar">
+                            </div>
+                        </form>
 
-                        </div>
+
                     </div>
+                </div>
             </div>
         </div>
     </div>
 
-<!-- CONTROLE DO BOTÃO DE ABRIR/FECHAR SIDEBAR ----------------------- -->
+    <!-- CONTROLE DO BOTÃO DE ABRIR/FECHAR SIDEBAR ----------------------- -->
 
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
+        $(document).ready(function() {
+            $('#sidebarCollapse').on('click', function() {
                 $('#sidebar').toggleClass('active');
             });
         });
     </script>
 
-<!-- FIM CONTROLE DO BOTÃO DE ABRIR/FECHAR SIDEBAR ------------------ -->
-<!-- CONTROLE DE SINCRONIA DOS VÍDEOS ---------------------------- -->
+    <!-- FIM CONTROLE DO BOTÃO DE ABRIR/FECHAR SIDEBAR ------------------ -->
+    <!-- CONTROLE DE SINCRONIA DOS VÍDEOS ---------------------------- -->
 
     <script src="./js/jquery_video.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <script>
-      $( document ).ready(function($) {
-        $('.parado').on('play', function() {
-          $('.parado').each(function() {
-            $(this).removeClass('parado').addClass('rodando');
-            $(this).get(0).play();
-          });
+        $(document).ready(function($) {
+            $('.parado').on('play', function() {
+                $('.parado').each(function() {
+                    $(this).removeClass('parado').addClass('rodando');
+                    $(this).get(0).play();
+                });
+            });
+            $('.parado').on('pause', function() {
+                $('.rodando').each(function() {
+                    $(this).removeClass('rodando').addClass('parado');
+                    $(this).get(0).pause();
+                });
+            });
         });
-        $('.parado').on('pause', function() {
-          $('.rodando').each(function(){
-            $(this).removeClass('rodando').addClass('parado');
-            $(this).get(0).pause();
-          });
-        });
-      });
     </script>
 
-<!-- CONTROLE DE SINCRONIA DOS VÍDEOS ---------------------------- -->
+    <!-- CONTROLE DE SINCRONIA DOS VÍDEOS ---------------------------- -->
 
 </body>
+
 </html>
