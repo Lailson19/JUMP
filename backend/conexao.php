@@ -9,10 +9,7 @@ $link = mysqli_connect($servername, $username, $password, $database);
 
 if(!$link){
     die("A conexão mySQL falhou!".mysqli_connect_error());    
-} else {
-    echo "Ok";
-}
-
+} 
 
 /*
 sql102.epizy.com

@@ -1,3 +1,22 @@
+<?php
+
+ session_start();
+
+//Se não existir um valor do índice 'nome', então encerre a aplicação
+ if (!isset($_SESSION['id_pessoa'])) {
+   header('Location: indexnada.html');
+   exit;
+ } else {
+   $id = $_SESSION['id_pessoa'];
+   $id_conteudo = 7;
+
+   require_once('../backend/conexao.php');
+
+  $postagens = $link->query("SELECT * FROM comentario inner join pessoa on pessoa.id_pessoa = comentario.id_pessoa  ORDER BY id_comentario DESC;");
+  $conteudos =$link->query("SELECT * FROM pessoa LEFT JOIN conteudo on conteudo.id_pessoa = pessoa.id_pessoa WHERE id_conteudo = $id_conteudo");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -104,8 +123,8 @@
                     <div class="container py-3">
 
 <!-- VÍDEO ---------------------------------------------- -->
-
-                        <h3 class="titulo mb-4">Carinhoso - Demo</h3>
+                        <?php foreach ($conteudos as $conteudo) ?>
+                        <h3 class="titulo mb-4"><?php echo $conteudo['titulo_conteudo'] ?></h3>
                         <div class="row">
                             <div class="capsula-video bg-danger">
                                 <video controls class="meus_videos parado">
@@ -116,26 +135,27 @@
                                 </video>
                             </div>
                         </div>
-
+                        
 <!-- FIM VÍDEO --------------------------------------------- -->
-
+                        
+                     
                         <div class="container">
-                           <h4 class="titulo mt-4 mb-1">Título do conteúdo</h4>
-                           <h6 class="titulo mb-3"><span class="titulo-info">Assunto do conteúdo</span></h6>
+                           <h4 class="titulo mt-4 mb-1"><?php echo $conteudo['titulo_conteudo'] ?></h4>
+                           <h6 class="titulo mb-3"><span class="titulo-info"><?php echo $conteudo['assunto_conteudo'] ?></span></h6>
 
                            <p class="descricao">
-                               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum facere assumenda magnam ipsa odit aut? Non natus exercitationem id eveniet accusantium perspiciatis sapiente facilis, ea rerum reiciendis dolor reprehenderit delectus!
+                           <?php echo $conteudo['descricao_conteudo'] ?>                               
                            </p>
 
                            <div class="line-escura mt-4 mb-1"></div>
 
                             <h6 class="titulo mb-1">
                                 <span class="titulo-info">
-                                    Produzido por:
+                                    Produzido por: 
                                 </span>
                             </h6>
                             <div class="d-flex justify-content-between justify-content-between">
-                                <p>Pixinguinha</p>
+                                <p><?php echo $conteudo['nome'] ?></p>
                                 <!-- AQUI SERÁ O CODE DE AVALIAÇÃO -->
                             </div>
 
@@ -143,11 +163,11 @@
 
                             <h6 class="titulo mb-1">
                                 <span class="titulo-info">
-                                    Traduzido por:
+                                    Traduzido por: 
                                 </span>
                             </h6>
                             <div class="d-flex justify-content-between justify-content-between">
-                                <p>Maria de Alcantera</p>
+                                <p><?php echo $conteudo['nome'] ?></p>
                                 <!-- AQUI SERÁ O CODE DE AVALIAÇÃO -->
                             </div>
 
@@ -155,19 +175,27 @@
 
                             <div class="line-escura mt-0 mb-4"></div>
 
-                            <p class="autor-msg">Fulando de tal - 13:25h - 15/01/2021</p>                            
-                            <p class="msg">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis reprehenderit, voluptatem totam, laborum dolores facilis aliquid alias sed odio praesentium ad.</p>
+                            <?php foreach ($postagens as $postagem) { ?>
 
+                            <p class="autor-msg">
+                            <img class="rounded-circle img_pessoa" src="<?php echo $postagem["img"] ?>" alt="<?php echo $postagem['nome'] ?>">
+                            <?php echo $postagem['nome'] ?> Postado: <?php echo $postagem['data_comentario'] ?></p>                            
+                            <p class="msg"><?php echo $postagem["comentario"] ?></p>
+
+                            <?php  } ?> 
+
+                            <!--
                             <p class="autor-msg">Sicrano Astolfo - 06:13h - 02/02/2021</p>                            
                             <p class="msg">Lorem ipsum dolor sit amet, consectetur adipisicing elit ipsum dolor sit.</p>
+                          -->
 
-
-                            <form action="" method="">
+                            <form action="../backend/registra_postagens.php" method="post">
                                 <div class="base-msg">
-                                    <input type="text" id="disabledTextInput" class="area-msg form-control form-control-sm" placeholder="Comente...">
-                                    <input type="submit" class="btn form-control form-control-sm" value="comentar">
+                                    <input type="text" id="disabledTextInput" class="area-msg form-control form-control-sm" name="post" placeholder="No que você está pensando, <?php echo $_SESSION['nome'] ?>?">
+                                    <input type="submit" class="btn form-control form-control-sm text-uppercase" value="Comentar">
                                 </div>
-                            </form>
+                            </form>   
+                                                    
 
                         </div>
                     </div>
