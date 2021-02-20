@@ -4,7 +4,6 @@ require_once('conexao.php');
 
 session_start();
 
-//Se não existir um valor do índice 'nome', então encerre a aplicação
 if (!isset($_SESSION['nome']) && !isset($_SESSION['idusuarios'])) {
     header('Location: ../index.php');
     exit;
@@ -12,36 +11,27 @@ if (!isset($_SESSION['nome']) && !isset($_SESSION['idusuarios'])) {
 
 $idusuario = $_SESSION['idusuarios'];
 $nome = $_POST['nome'];
-$imagem = $_POST['imagem'];
+$img = $_POST['img'];
 $email = $_POST['email'];
 $senha = $_POST['senha'];
-$conf_senha = $_POST['conf_senha'];
+$confirmar_senha = $_POST["confirmar_senha"];
 $situacao = $_POST['situacao'];
 $grau = $_POST['grau'];
 $sexo = $_POST['sexo'];
-$nascimento = $_POST['nascimento'];
-$endereco = $_POST['endereco'];
-$bairro = $_POST['bairro'];
-$cidade = $_POST['cidade'];
-$estado = $_POST['estado'];
-$cep = $_POST['cep'];
-$pais = $_POST['pais'];
-/*
+$dt_nasc = $_POST['dt_nasc'];
+
+
+
 echo '<br> Nome: '.$nome;
-echo '<br> Apelido: '.$apelido;
-echo '<br> Imagem: '.$imagem;
+echo '<br> Imagem: '.$img;
 echo '<br> Email: '.$email;
 echo '<br> Senha: '.$senha;
 echo '<br> Confirmação: '.$conf_senha;
 echo '<br> Situação: '.$situacao;
 echo '<br> Grau: '.$grau;
-echo '<br> Data de Nascimento: '.$nascimento;
-echo '<br> Endereço: '.$endereco;
-echo '<br> Bairro: '.$bairro;
-echo '<br> Cidade: '.$cidade;
-echo '<br> Estado: '.$estado;
-echo '<br> CEP: '.$cep;
-echo '<br> País: '.$pais; */
+echo '<br> Data de Nascimento: '.$dt_nasc;
+
+ 
 
 if($senha == $conf_senha) {
     
@@ -50,7 +40,7 @@ if($senha == $conf_senha) {
     /*  $sql = "UPDATE INTO `usuarios` (`idusuarios`, `nome`, `apelido`, `imagem`, `email`, `senha`, `conf_senha`, `situacao`, `grau`, `sexo`, `nascimento`, `endereco`, `bairro`, `cidade`, `estado`, `cep`, `pais`) 
     VALUES (NULL, '$nome', '$apelido', '$imagem', '$email', '$senha_cripto', '', '$situacao', '$grau', '$sexo', '$nascimento', '$endereco', '$bairro', '$cidade', '$estado', '$cep', '$pais')"; */
     
-    $update = "UPDATE `usuarios` SET `nome`= '$nome', `imagem`='$imagem', `email`='$email', `senha`='$senha_cripto', `situacao`='$situacao', `grau`='$grau', `sexo`='$sexo', `nascimento`='$nascimento', `endereco`='$endereco', `bairro`='$bairro', `cidade`='$cidade', `estado`='$estado', `cep`='$cep', `pais`='$pais' WHERE `idusuarios` = '$idusuario'";
+    $update = "UPDATE `pessoa` SET `nome`= '$nome', `img`='$img', `email`='$email', `senha`='$senha_cripto', `situacao`='$situacao', `grau`='$grau', `sexo`='$sexo', `dt_nasc`='$dt_nasc' WHERE `idusuarios` = '$idusuario'";
     
     $link->query($update); 
     

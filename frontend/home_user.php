@@ -1,3 +1,20 @@
+<?php
+
+session_start();
+
+if (!isset($_SESSION['nome'])) {
+    header('Location: ../index.html');
+    exit;
+  } else {
+    $id = $_SESSION['id_pessoa'];    
+ 
+    require_once('../backend/conexao.php');
+ 
+   $videohome = $link->query("SELECT * FROM conteudo");
+  
+ }
+ ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -37,9 +54,9 @@
 </div>
                 <div class="container-user text-center d-flex flex-column align-items-center mt-4">
                     <div class="user my-2">
-                        <img src="../img/user/Lailson.jpg" alt="User" class="img-user">
+                        <img src="<?php echo $_SESSION['img']; ?>" alt="<?php echo $_SESSION['nome']; ?>" class="img-user">
                     </div>
-                    <p>Lailson</p>
+                    <p><?php echo $_SESSION['nome']; ?></p>
                 </div>
 
 <!-- FIM DADOS USUARIO ------------------------------------------ -->
@@ -51,11 +68,11 @@
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="#">
+                    <a href="./home_user.php">
                         <i class="fas fa-home"></i>
                         <span>Home</span>
                     </a>
-                    <a href="#">
+                    <a href="../perfil_usuario.php">
                         <i class="fas fa-user-cog"></i>
                         <span>Meus dados</span>
                     </a>
@@ -63,8 +80,8 @@
                         <i class="fas fa-film"></i>
                         <span>Colaborar</span>
                     </a>
-                    <a href="#">
-                        <i class="fas fa-sign-out-alt"></i>
+                    <a href="../backend/sair.php">
+                        <i class="fas fa-sign-out-alt"></i>                       
                         <span>Sair</span>
                     </a>
                 </li>
@@ -111,10 +128,11 @@
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
                       <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
-                    </li>
-                    <!-- <li class="nav-item">
-                      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#perfil" role="tab" aria-controls="profile" aria-selected="false">Produções</a>
-                    </li>
+                    <!--
+                    </li>                  
+                      <li class="nav-item">
+                      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#perfil" role="tab" aria-controls="profile" aria-selected="false"><h5>Olá, <?php echo $_SESSION['nome']; ?>!</h5></a>
+                    
                     <li class="nav-item">
                       <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contato" role="tab" aria-controls="contact" aria-selected="false">Produzir</a>
                     </li> -->
@@ -132,7 +150,23 @@
                             <div class="row">
 
 <!-- CARD - LISTA TOTAL -------------------------------------------------------- -->
+                               <?php foreach ($videohome as $video) { ?>
+                                <div class="col-md-4 p-2">
+                                    <a href="#">
+                                        <div class="card">
+                                            <img class="card-img-top" src="<?php echo $video['capa_conteudo'] ?>" alt="<?php echo $video['assunto_conteudo'] ?>">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><?php echo $video['titulo_conteudo'] ?></h5>
+                                                <p class="card-text">
+                                                <?php echo $video['descricao_conteudo'] ?>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <?php } ?> 
 
+                                <!--
                                 <div class="col-md-4 p-2">
                                     <a href="#">
                                         <div class="card">
@@ -146,20 +180,7 @@
                                         </div>
                                     </a>
                                 </div>
-
-                                <div class="col-md-4 p-2">
-                                    <a href="#">
-                                        <div class="card">
-                                            <img class="card-img-top" src="../img/campo.jpg" alt="Imagem de capa do card">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Título</h5>
-                                                <p class="card-text">
-                                                    Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
+                               -->
 
 <!-- FIM CARD -LISTA TOTAL ----------------------------------------------------- -->
 

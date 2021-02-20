@@ -5,24 +5,17 @@ require_once('./backend/conexao.php');
 session_start();
 
 //Se não existir um valor do índice 'nome', então encerre a aplicação
-if (!isset($_SESSION['nome'])) {
+if (!isset($_SESSION['id_pessoa'])) {
     header('Location: index.php');
     exit;
 }else {
  
+  $_SESSION['id_pessoa']; 
   $_SESSION['nome']; 
-  $_SESSION['imagem']; 
+  $_SESSION['img']; 
   $_SESSION['email']; 
-  $_SESSION['idusuarios']; 
-  $_SESSION['nascimento'];
-  $_SESSION['apelido'];
+  $_SESSION['dt_nasc']; 
   $_SESSION['sexo'];
-  $_SESSION['endereco']; 
-  $_SESSION['bairro']; 
-  $_SESSION['cidade']; 
-  $_SESSION['estado'];
-  $_SESSION['pais']; 
-  $_SESSION['cep'];
   $_SESSION['situacao'];
   $_SESSION['grau'];
 }
@@ -64,7 +57,7 @@ if (!isset($_SESSION['nome'])) {
                     alt="Jump">
             <li class="nav-item mx-auto active">
                 <a class="nav-link" href="perfil_usuario.php">
-                  <img class="border rounded-circle avatar mb-2 mx-auto" src="<?php echo $_SESSION['imagem']; ?>"
+                  <img class="border rounded-circle avatar mb-2 mx-auto" src="<?php echo $_SESSION['img']; ?>"
                   alt="<?php echo $_SESSION['nome']; ?>">
                   <span> Meu Perfil </span> </a>
             </li>
@@ -93,14 +86,14 @@ if (!isset($_SESSION['nome'])) {
             <form class="d-flex align-items-center mt-5" action="./backend/perfil.php" method="post">
 
                 <div class="col-lg-3 d-flex justify-content-center">
-                  <img src="<?php echo $_SESSION['imagem'] ?>" class="border rounded-circle avatar-perfil" alt="<?php echo $_SESSION['nome']; ?>">
+                  <img src="<?php echo $_SESSION['img'] ?>" class="border rounded-circle avatar-perfil" alt="<?php echo $_SESSION['nome']; ?>">
                 </div>
                 
                 <div class="col-lg-9">
                   <div class="row mb-3">
                    
                     <div class="col-lg-5">
-                      <input type="url" class="border border-info rounded form-control form-grupo1" id="imagem" value="<?php echo $_SESSION['imagem']; ?>" name="imagem">
+                      <input type="url" class="border border-info rounded form-control form-grupo1" id="imagem" value="<?php echo $_SESSION['img']; ?>" name="imagem">
                       <small for="imagem">Imagem:</small>
                     </div>
                     <div class="col-lg-6">

@@ -27,17 +27,12 @@ if (strlen($email) > 3 && strlen($senha) > 3) {
     $_SESSION['situacao'] = $usuarios["situacao"];
     $_SESSION['grau'] = $usuarios["grau"];    
 
- /*   echo $usuarios["nome"];
-    echo $usuarios["imagem"];
-    echo $usuarios["email"];
-    echo $usuarios["idusuarios"]; */
-
-    header('location: ../home.php');
+    //header('location: ../frontend/home_user.php');
 
 }if ($resultado_consulta == true){
 
     echo "<script>
-     location.href = '../home.php'
+     location.href = '../frontend/home_user.php'
     </script>"; 
 
 }else {

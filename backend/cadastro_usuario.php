@@ -8,12 +8,13 @@ $email = $_POST["email"];
 $senha = $_POST["senha"];
 $confirmar_senha = $_POST["confirmar_senha"];
 
-
+/*
 echo '<br> Nome: '.$nome;
 echo '<br> Imagem: '.$img;
 echo '<br> Email: '.$email;
 echo '<br> Senha: '.$senha;
 echo '<br> Confirmação: '.$confirmar_senha;
+*/
 
 if((strlen($nome) > 3) && (strlen($email) > 3) && (strlen($senha) > 3) && ($senha === $confirmar_senha)) {
     $senha_cripto = md5($senha);
