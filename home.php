@@ -1,18 +1,19 @@
 <?php
 
-// session_start();
+ session_start();
 
-// //Se não existir um valor do índice 'nome', então encerre a aplicação
-// if (!isset($_SESSION['idusuarios'])) {
-//   header('Location: index.html');
-//   exit;
-// } else {
+//Se não existir um valor do índice 'nome', então encerre a aplicação
+ if (!isset($_SESSION['id_pessoa'])) {
+   header('Location: indexnada.html');
+   exit;
+ } else {
+   $id = $_SESSION['id_pessoa'];
 
-//   require_once('./backend/conexao.php');
+   require_once('./backend/conexao.php');
 
-//   $postagens = $link->query("SELECT * FROM postagens JOIN usuarios WHERE fk_usuario = idusuarios ORDER BY id_postagens DESC");
+  $postagens = $link->query("SELECT * FROM comentario inner join pessoa on pessoa.id_pessoa = comentario.id_pessoa  ORDER BY id_comentario DESC;");
  
-// }
+}
 ?>
 
 <!DOCTYPE html>
@@ -50,7 +51,7 @@
                 <a class="nav-link" href="perfil_usuario.php">
 
                   <br>
-                  <img class="border avatar mb-2 mx-auto" src="<?php echo $_SESSION['imagem']; ?>" alt="<?php echo $_SESSION['nome']; ?>">
+                  <img class="border avatar mb-2 mx-auto" src="<?php echo $_SESSION['img']; ?>" alt="<?php echo $_SESSION['nome']; ?>">
                   <br>
                   <span> Meu Perfil </span> </a>
               </li>
@@ -192,6 +193,35 @@
       <!-- Fim da seção de produtos -->
     </div>
   </div>
+  <main class="container-fluid">
+<form class="input-group  input-group-lg mb-3 container-fluid" method="post" action="./backend/registra_postagens.php" style="max-width: 90%;">
+  <input type="text" class="form-control" id="post" name="post" placeholder="No que você está pensando, <?php echo $_SESSION['nome'] ?>?" aria-label="mensagem" aria-describedby="button-addon2">
+  <div class="input-group-append">   
+  <button class="btn btn-outline-danger my-3 my-sm-0" type="submit">Publicar</button>
+  </div>
+</form>
+
+<?php
+
+foreach ($postagens as $postagem) {
+
+
+?>
+
+  <div class="card mt-5">
+    <div class="card-header">
+     <img class="rounded-circle" src="<?php echo $postagem["img"] ?>" alt="<?php echo $postagem['nome'] ?>">
+     <h5 class="ml-3 mb-0"><?php echo $postagem['nome'] ?> Postado: <?php echo $postagem['data_comentario'] ?></h5>
+    </div>
+    <div class="card-body">
+     <?php echo $postagem["comentario"] ?>
+    </div>
+   </div>
+
+<?php  } ?>
+
+</main>
+<br>
   
 
   <!-- Plugin Vlibras -->

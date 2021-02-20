@@ -81,6 +81,10 @@ video::-webkit-media-controls-fullscreen-button {
     background-color: #39aebb5d;
     font-size: 0.5em;
 }
+.img_pessoa {
+    width: 48px;
+    height: 48px;
+ }
 
 
 /* ==============================================

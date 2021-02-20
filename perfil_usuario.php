@@ -110,8 +110,8 @@ if (!isset($_SESSION['nome'])) {
                   </div>
                   <div class="row">
                     <div class="col-lg-5">
-                      <input type="date" class="border border-info rounded form-control form-grupo1" id="nascimento" value="<?php echo $_SESSION['nascimento']; ?>" name="nascimento">
-                      <small for="nascimento">Data de Nascimento:</small>
+                      <input type="date" class="border border-info rounded form-control form-grupo1" id="dt_nasc" value="<?php echo $_SESSION['dt_nasc']; ?>" name="nascimento">
+                      <small for="dt_nasc">Data de Nascimento:</small>
                     </div>
                     <div class="col-lg-6">
                       <select class="border border-info rounded form-control form-grupo1" id="sexo" name="sexo">
@@ -126,7 +126,7 @@ if (!isset($_SESSION['nome'])) {
            
          </div>
 
-         <!-- Seção 2 -->
+         <!-- Seção 2 
          <div class="container-form">
            <br>
                 <div class="col-lg-12">
@@ -164,7 +164,7 @@ if (!isset($_SESSION['nome'])) {
                   </div>
                 </div>     
          </div>
-
+    -->
          <!-- Seção 3 -->
          
           <div class="container-form mt-2">

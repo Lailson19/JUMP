@@ -13,24 +13,17 @@ if (strlen($email) > 3 && strlen($senha) > 3) {
  
     // Execução da instrução SQL
     /*$resultado_consulta = $conn->query("SELECT * from usuarios where email = '$email' AND senha = '$senha'");*/
-   $resultado_consulta = $link->query("SELECT * FROM usuarios WHERE email = '$email' AND senha = '$senha_cripto'");
+   $resultado_consulta = $link->query("SELECT * FROM pessoa WHERE email = '$email' AND senha = '$senha_cripto'");
 
     //$usuarios recebe lista de usuários
     $usuarios = mysqli_fetch_assoc($resultado_consulta);
 
     $_SESSION['nome'] = $usuarios["nome"];
-    $_SESSION['imagem'] = $usuarios["imagem"];
+    $_SESSION['img'] = $usuarios["img"];
     $_SESSION['email'] = $usuarios["email"];
-    $_SESSION['idusuarios'] = $usuarios["idusuarios"];
-    $_SESSION['nascimento'] = $usuarios["nascimento"];
-    $_SESSION['apelido'] = $usuarios["apelido"];
-    $_SESSION['sexo'] = $usuarios["sexo"];
-    $_SESSION['endereco'] = $usuarios["endereco"];
-    $_SESSION['bairro'] = $usuarios["bairro"];
-    $_SESSION['cidade'] = $usuarios["cidade"];
-    $_SESSION['estado'] = $usuarios["estado"];
-    $_SESSION['pais'] = $usuarios["pais"];
-    $_SESSION['cep'] = $usuarios["cep"];
+    $_SESSION['id_pessoa'] = $usuarios["id_pessoa"];
+    $_SESSION['dt_nasc'] = $usuarios["dt_nasc"];  
+    $_SESSION['sexo'] = $usuarios["sexo"];   
     $_SESSION['situacao'] = $usuarios["situacao"];
     $_SESSION['grau'] = $usuarios["grau"];    
 

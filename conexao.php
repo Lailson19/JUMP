@@ -11,6 +11,11 @@ if(!$link){
     die("A conexão mySQL falhou!".mysqli_connect_error());
 } 
 /*
+$servername = "67.205.138.239:3306";
+$username = "dgsdev";
+$password = "@dgsjuh12";
+$database = "jump";
+
 sql102.epizy.com
 epiz_26883339
 @DGSjuh12
