@@ -1,5 +1,5 @@
 body{
-    font-family: 'Comfortaa', cursive;
+    font-family: 'Comfortaa',cursive;
 }
 
 ::-webkit-scrollbar{
@@ -16,10 +16,16 @@ body{
     padding: 15px 0;
     /* background-color: #1d8490; */
     background-image: linear-gradient(to bottom, #177681, #217f8a, #2a8994, #33929d, #3b9ca7);
+    box-shadow: 1px 1px 30px #043a41 !important;
+    z-index: 9999;
 }
 
 .img-logo{
     width: 145px;
+}
+
+.img-logo-respon{
+    display: none;
 }
 
 button{
@@ -84,6 +90,11 @@ h1{
     color: #106770;
 }
 
+.video-libras{
+    /* max-width: 500px; */
+    width: 100%;
+}
+
 .sessao1 .carousel{
     width: 100%;
     height: 100%;
@@ -93,29 +104,28 @@ h1{
     width: 100%;
     height: inherit;
     overflow: visible;
+    position: relative;
 }
 
 .sessao1-box-texto{
     color: white;
-    width: 550px;
-    height: 50%;
+    width: 35%;
+    margin-left: 3em;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    position: absolute;
 }
 
 .sessao1-box-texto h1{
     color: white;
+    font-size: 2rem;
 }
 
 .sessao1-box-texto p{
     font-weight: bold;
-    font-size: 1.4rem;
+    font-size: 1rem;
     line-height: 1.6rem;
-}
-
-.sessao1-box-texto{
-    position: absolute;
 }
 
 .sessao2{
@@ -135,7 +145,6 @@ h1{
 }
 
 .sessao2-box-texto p{
-    max-width: 450px;
     font-size: 1rem !important;
 }
 
@@ -157,10 +166,6 @@ h1{
 
 .sessao3-box-texto .row .media-body{
     font-size: 0.8rem !important;
-}
-
-.sessao3-box-texto .row p{
-    margin-left: 1.1rem;
 }
 
 #mais{
@@ -195,10 +200,6 @@ h1{
 
 .sessao4-box-texto .row span{
     font-size: 0.8rem;
-}
-
-.sessao4-box-texto .row p{
-    max-width: 450px;
 }
 
 .sessao5{
@@ -262,4 +263,231 @@ h1{
     color: white;
     font-size: 0.8rem;
     font-style: italic;
+}
+
+
+@media (min-width: 320px) and (max-width: 575.98px) {
+    .navbar{
+        padding: 0 20px !important;
+    }
+    .img-logo{
+        display: none !important;
+    }
+    .img-logo-respon{
+        width: 30px;
+        display: block !important;
+    }
+    button{
+        font-size: 0.8em !important;
+    }
+    .dropdown .dropdown-menu{
+        margin-left: -9rem !important;
+        width: 14rem !important;
+    }
+    .col-lg-6{
+        text-align: center !important;
+    }
+    h1{
+        font-size: 1.3em !important;
+    }
+    .sessao1-box-texto{
+       display: none;
+    }
+    .sessao2-box-texto{
+        width: 100%;
+        padding: 2em 1em;
+        margin: 0px 0px !important;
+    }
+    .sessao2-box-texto .row div p{
+        font-size: 0.9rem !important;
+    }
+    .sessao3-box-texto{
+        width: 100%;
+        padding: 2em 1em;
+        margin: 0px 0px !important;
+    }
+    .sessao3-box-texto .row div .media .media-body p{
+        font-size: 0.9rem !important;
+    }
+    .sessao4-box-texto{
+        width: 100%;
+        padding: 2em 1em;
+        margin: 0px 0px !important;
+    }
+    .sessao4-box-texto .row div p{
+        font-size: 0.9rem !important;
+    }
+    .sessao5 .sessao5-box-texto div .figure img{
+        width: 35% !important;
+    }
+    .sessao6-box-texto{
+        width: 100%;
+        padding: 2em 1em;
+        margin: 0px 0px !important;
+    }
+    .sessao6-box-texto div .carousel-inner .carousel-item .descricao{
+        font-size: 0.5rem !important;
+        width: 100% !important;
+        margin: 0;
+    }
+    main footer{
+        font-size: 0.7em !important;
+        text-align: center;
+        box-shadow: 1px 1px 20px #043a41 !important;
+        z-index: 9999;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .navbar{
+        padding: 5px 20px !important;
+    }
+    .img-logo{
+        display: block;
+        width: 90px;
+    }
+    .img-logo-respon{
+        display: none !important;
+        width: 35px;
+    }
+    button{
+        font-size: 0.8em !important;
+    }
+    .dropdown .dropdown-menu{
+        margin-left: -9rem !important;
+        width: 14rem !important;
+    }
+    .col-lg-6{
+        text-align: center !important;
+    }
+    h1{
+        font-size: 1.3em !important;
+    }
+    .sessao1-box-texto{
+       display: display;
+    }
+    .sessao1-box-texto p{
+       font-size: 0.7em !important;
+       line-height: 1rem;
+    }
+    .sessao2-box-texto{
+        width: 100%;
+        padding: 2em 1em;
+        margin: 0px 0px !important;
+    }
+    .sessao2-box-texto .row div p{
+        font-size: 0.9rem !important;
+    }
+    .sessao3-box-texto{
+        width: 100%;
+        padding: 2em 1em;
+        margin: 0px 0px !important;
+    }
+    .sessao3-box-texto .row div .media .media-body p{
+        font-size: 0.9rem !important;
+    }
+    .sessao4-box-texto{
+        width: 100%;
+        padding: 2em 1em;
+        margin: 0px 0px !important;
+    }
+    .sessao4-box-texto .row div p{
+        font-size: 0.9rem !important;
+    }
+    .sessao5 .sessao5-box-texto div .figure img{
+        width: 35% !important;
+    }
+    .sessao6-box-texto{
+        width: 100%;
+        padding: 2em 1em;
+        margin: 0px 0px !important;
+    }
+    .sessao6-box-texto div .carousel-inner .carousel-item .descricao{
+        font-size: 0.5rem !important;
+        width: 100% !important;
+        margin: 0;
+    }
+    main footer{
+        font-size: 0.7em !important;
+        text-align: center;
+        box-shadow: 1px 1px 20px #043a41 !important;
+        z-index: 9999;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px){
+    .navbar{
+        padding: 5px 20px !important;
+    }
+    .img-logo{
+        display: block;
+        width: 90px;
+    }
+    .img-logo-respon{
+        display: none !important;
+        width: 35px;
+    }
+    button{
+        font-size: 0.8em !important;
+    }
+    .dropdown .dropdown-menu{
+        margin-left: -9rem !important;
+        width: 14rem !important;
+    }
+    .col-lg-6{
+        text-align: center !important;
+    }
+    h1{
+        font-size: 1.3em !important;
+    }
+    .sessao1-box-texto{
+       display: display;
+    }
+    .sessao1-box-texto p{
+       font-size: 1em !important;
+       line-height: 1.2rem;
+    }
+    .sessao2-box-texto{
+        width: 85%;
+        padding: 2em 1em;
+        margin: 0px 0px !important;
+    }
+    .sessao2-box-texto .row div p{
+        font-size: 0.9rem !important;
+    }
+    .sessao3-box-texto{
+        width: 85%;
+        padding: 2em 1em;
+        margin: 0px 0px !important;
+    }
+    .sessao3-box-texto .row div .media .media-body p{
+        font-size: 0.9rem !important;
+    }
+    .sessao4-box-texto{
+        width: 85%;
+        padding: 2em 1em;
+        margin: 0px 0px !important;
+    }
+    .sessao4-box-texto .row div p{
+        font-size: 0.9rem !important;
+    }
+    .sessao5 .sessao5-box-texto div .figure img{
+        width: 35% !important;
+    }
+    .sessao6-box-texto{
+        width: 100%;
+        padding: 2em 1em;
+        margin: 0px 0px !important;
+    }
+    .sessao6-box-texto div .carousel-inner .carousel-item .descricao{
+        font-size: 0.5rem !important;
+        width: 100% !important;
+        margin: 0;
+    }
+    main footer{
+        font-size: 0.7em !important;
+        text-align: center;
+        box-shadow: 1px 1px 20px #043a41 !important;
+        z-index: 9999;
+    }
 }
