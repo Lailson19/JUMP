@@ -20,6 +20,7 @@ $sexo = $_POST['sexo'];
 $dt_nasc = $_POST['dt_nasc'];
 
 // Se não cadastra imagem de perfil, entra imagem avatar
+
 if(!$img){
     $img = 'avatar.png';
 }

@@ -1,18 +1,28 @@
 <?php
 
 require_once('conexao.php');
-
 session_start();
 
 $email = $_POST['email'];
 $senha = $_POST['senha'];
 
-if (strlen($email) > 3 && strlen($senha) > 3) {
+if (strlen($email) > 3 && strlen($senha) > 3)  {
     $senha_cripto = md5($senha);
  
     // Execução da instrução SQL
     /*$resultado_consulta = $conn->query("SELECT * from usuarios where email = '$email' AND senha = '$senha'");*/
    $resultado_consulta = $link->query("SELECT * FROM pessoa WHERE email = '$email' AND senha = '$senha_cripto'");
+
+} else{
+
+    echo "<script>
+    alert('E-mail ou Senha Inválidos!')
+    location.href = '../index.html'
+    </script>";
+
+}
+
+if ($resultado_consulta == true){
 
     //$usuarios recebe lista de usuários
     $usuarios = mysqli_fetch_assoc($resultado_consulta);
@@ -25,22 +35,15 @@ if (strlen($email) > 3 && strlen($senha) > 3) {
     $_SESSION['sexo'] = $usuarios["sexo"];   
     $_SESSION['situacao'] = $usuarios["situacao"];
     $_SESSION['grau'] = $usuarios["grau"];
+    $_SESSION['nivel_acesso'] = $usuarios["nivel_acesso"];
 
-    //header('location: ../frontend/home_user.php');
-
-}if ($resultado_consulta == true){
-
-    echo "<script>
-     location.href = '../frontend/home_user.php'
-    </script>"; 
-
-}else {
-
-    echo "<script>
-    alert('E-mail ou Senha Inválidos!')
-    location.href = '../index.html'
-    </script>";
+    if($_SESSION['nivel_acesso'] == "comum"){
+        header('location: ../frontend/home_user.php');
+    }elseif ($_SESSION['nivel_acesso'] == "produtor"){
+        header('location: ../frontend/home_produtor.php');
+    }elseif ($_SESSION['nivel_acesso'] == "interprete"){
+        header('location: ../frontend/home_interprete.php');
+    }
 }
-
 
 ?>

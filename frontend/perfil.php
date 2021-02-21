@@ -67,7 +67,7 @@ if (!isset($_SESSION['nome'])) {
                     <h4>Meus dados</h4>
                     <div class="container-fluid my-4">
 
-                        <form action="../backend/perfil.php" method="POST">
+                        <form action="../backend/perfil.php" method="POST" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -120,10 +120,16 @@ if (!isset($_SESSION['nome'])) {
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="custom-file">
+                                    <!-- <div class="custom-file">
                                         <input type="file" value="<?php echo $_SESSION['img']; ?>" name="img" class="custom-file-input" id="customFileLang" lang="en">
                                         <label class="custom-file-label" for="customFileLang">Escolha sua foto do perfil...</label>
+                                    </div> -->
+
+                                    <div class="custom-file">
+                                        <label for="img">Imagem</label>
+                                        <input class="form-control" id="img" type="file" name="img"/>
                                     </div>
+
                                 </div>
                             </div>
                             <div class="row">
