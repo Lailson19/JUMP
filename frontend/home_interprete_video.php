@@ -20,30 +20,9 @@
 
 <!-- SIDEBAR ---------------------------------------------------- -->
 
-        <nav id="sidebar">
-            <div class="sidebar-header d-flex align-items-center justify-content-center">
+<?php include('./sidebar.php') ?>
 
-<!-- LOGO ------------------------------------------------------- -->
-
-                <img class="logo" src="../img/marca.svg" alt="Logo do projeto Jump - Recode Pro 2020/2021">
-                <img class="logo-responsive" src="../img/marca-responsive.svg" alt="Logo do projeto Jump responsivo - Recode Pro 2020/2021">
-
-<!-- FIM LOGO --------------------------------------------------- -->
-<!-- DADOS USUARIO ---------------------------------------------- -->
-                
-                <div class="container-user text-center d-flex flex-column align-items-center mt-4">
-                    <div class="user my-2">
-                        <img src="../img/user/Lailson.jpg" alt="User" class="img-user">
-                    </div>
-                    <p>Lailson</p>
-                </div>
-
-<!-- FIM DADOS USUARIO ------------------------------------------ -->
-
-            </div>
-            <div class="line"></div>
-
-<!-- LINKS SIDEBAR----------------------------------------------- -->
+<!-- FIM SIDEBAR ------------------------------------------------ -->
 
             <ul class="list-unstyled components">
                 <li>
