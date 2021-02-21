@@ -43,7 +43,7 @@ if($senha === $confirmar_senha) {
         
         echo "<script>
         alert('Atualizado com Sucesso!')
-        window.location.href = './index.html'
+        window.location.href = '../index.html'
         </script>";
     } else {
         echo "<script>

@@ -62,7 +62,7 @@ if (!isset($_SESSION['id_pessoa'])) {
                   <span> Meu Perfil </span> </a>
             </li>
             <li class="nav-item mx-auto">
-                <a class="nav-link" href="home.php"> Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="index.html"> Home <span class="sr-only">(current)</span></a>
             </li>
             <!--<li class="nav-item mx-auto">
                 <a class="nav-link" href="#"> Certificados </a>
