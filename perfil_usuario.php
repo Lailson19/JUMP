@@ -160,26 +160,17 @@ if (!isset($_SESSION['nome'])) {
     -->
          <!-- Seção 3 -->
          
-          <div class="container-form mt-2">
-            
+          <div class="container-form mt-2">            
 
             <?php
-            $value=$_SESSION['situacao'];                   
-            
-            $result1 = ($value == "Ouvinte") ? "checked" : "";
-           
-            $result2 = ($value == "Surdo") ? "checked" : "";           
-           
-            $value=$_SESSION['grau'];  
-
-            $result3 = ($value == "Leve") ? "checked" : "";
-            
-            $result4 = ($value == "Moderada") ? "checked" : "";
-             
-            $result5 = ($value == "Severa") ? "checked" : "";
-            
-            $result6 = ($value == "Profunda") ? "checked" : "";
-
+              $value=$_SESSION['situacao'];            
+              $result1 = ($value == "Ouvinte") ? "checked" : "";           
+              $result2 = ($value == "Surdo") ? "checked" : "";           
+              $value=$_SESSION['grau'];
+              $result3 = ($value == "Leve") ? "checked" : "";            
+              $result4 = ($value == "Moderada") ? "checked" : "";             
+              $result5 = ($value == "Severa") ? "checked" : "";            
+              $result6 = ($value == "Profunda") ? "checked" : "";
             ?>
           
                 <div class="col-lg-9">
@@ -274,7 +265,6 @@ if (!isset($_SESSION['nome'])) {
                     <div class="col-lg-4 col-md-4 d-flex justify-content-center">
                     <button type="submit" class="btn nova-cor text-white mt-2">Atualizar</button>
                     </div>
-
                    
                     <section class="mt-5 p-5">
                     <div class="alert alert-danger form-control-sm" role="alert">
@@ -288,18 +278,17 @@ if (!isset($_SESSION['nome'])) {
             </form>  
          </div>
       </section>
-                      <!-- Fim da seção perfil -->
+      <!-- Fim da seção perfil -->
           </div>
         </div>
 
-
-
+        <!-- Controle de exclusão de conta -->
         <script>
           function confirmar(){
-          let confirmacao = confirm("Você Realmente Deseja Excluir sua Conta?");
+            let confirmacao = confirm("Você Realmente Deseja Excluir sua Conta?\nAo Remover sua Conta, não poderá ser recuperada!");
 
-          if (confirmacao == true) {
-        location.href = "./backend/remover.php?id=" + <?php echo $_SESSION['id_pessoa']; ?>
+            if (confirmacao == true) {
+              location.href = "./backend/remover.php?id=" + <?php echo $_SESSION['id_pessoa']; ?>
             }
           }
         </script>

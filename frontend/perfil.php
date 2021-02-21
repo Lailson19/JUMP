@@ -72,14 +72,14 @@ if (!isset($_SESSION['nome'])) {
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Nome</label>
-                                        <input type="text" value="" name="" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite aqui o seu nome" required>
+                                        <input type="text" value="<?php echo $_SESSION['nome']; ?>" name="nome" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite aqui o seu nome" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="inputSexo">Sexo</label>
-                                        <select id="inputSexo" class="form-control form-control-sm">
-                                            <option selected>Escolher...</option>
+                                        <select id="inputSexo" class="form-control form-control-sm" name="sexo">
+                                            <option selected><?php echo $_SESSION['sexo']; ?></option>
                                             <option>Masculino</option>
                                             <option>Feminino</option>
                                             <option>Outros</option>
@@ -91,14 +91,14 @@ if (!isset($_SESSION['nome'])) {
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Data nasc.</label>
-                                        <input type="date" value="" name="" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite aqui o seu nome">
+                                        <input type="date" value="<?php echo $_SESSION['dt_nasc']; ?>" name="dt_nasc" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite aqui o seu nome">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="inputSexo">Você é surdo(a)?</label>
-                                        <select id="inputSexo" class="form-control form-control-sm">
-                                            <option selected>Escolher...</option>
+                                        <select id="inputSexo" class="form-control form-control-sm" name="situacao">
+                                            <option selected><?php echo $_SESSION['situacao']; ?></option>
                                             <option>Sim</option>
                                             <option>Não</option>
                                         </select>
@@ -107,8 +107,9 @@ if (!isset($_SESSION['nome'])) {
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="inputSexo">Grau</label>
-                                        <select id="inputSexo" class="form-control form-control-sm">
-                                            <option selected>Escolher...</option>
+                                        <select id="inputSexo" class="form-control form-control-sm" name="grau">
+                                            <option selected><?php echo $_SESSION['grau']; ?></option>
+                                            <option>Nenhum</option>
                                             <option>Leve</option>
                                             <option>Moderado</option>
                                             <option>Severo</option>
@@ -120,7 +121,7 @@ if (!isset($_SESSION['nome'])) {
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="custom-file">
-                                        <input type="file" name="img" class="custom-file-input" id="customFileLang" lang="en">
+                                        <input type="file" value="<?php echo $_SESSION['img']; ?>" name="img" class="custom-file-input" id="customFileLang" lang="en">
                                         <label class="custom-file-label" for="customFileLang">Escolha sua foto do perfil...</label>
                                     </div>
                                 </div>
@@ -129,19 +130,19 @@ if (!isset($_SESSION['nome'])) {
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">E-mail</label>
-                                        <input type="email" value="" name="" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite aqui seu e-mail" required>
+                                        <input type="email" value="<?php echo $_SESSION['email']; ?>" name="email" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite aqui seu e-mail" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Senha</label>
-                                        <input type="password" value="" name="" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite aqui sua senha" required>
+                                        <input type="password" name="senha" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite aqui sua senha" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Confirme sua senha</label>
-                                        <input type="password" value="" name="" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite aqui sua senha" required>
+                                        <input type="password" name="confirmar_senha" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite aqui sua senha" required>
                                     </div>
                                 </div>
                             </div>
@@ -149,9 +150,9 @@ if (!isset($_SESSION['nome'])) {
                                 <div class="col-md-12">
                                     <div class="caixa">
                                         <div class="base-btn">
-                                            <button class="btn" type="button">Voltar</button>
-                                            <button class="btn" type="reset">Limpar</button>
-                                            <button class="btn" type="submit">Enviar</button>
+                                            <button class="btn" onclick="confirmar()"type="button">Excluir conta</button>
+                                            <button class="btn" type="reset">Resetar</button>
+                                            <button class="btn" type="submit">Atualizar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -163,8 +164,19 @@ if (!isset($_SESSION['nome'])) {
         </div>
     </div>
 
-    <!-- CONTROLE DO BOTÃO DE ABRIR/FECHAR SIDEBAR ----------------------- -->
 
+    <!-- CONTROLE CONFIRMAÇÃO DE EXCLUSÃO E ENVIO DE ID PARA EXCLUSÃO ----------------------- -->
+    <script>
+        function confirmar(){
+            let confirmacao = confirm("Você Realmente Deseja Excluir sua Conta? \nAo Remover sua Conta, não poderá ser recuperada!");
+
+            if (confirmacao == true) {
+                location.href = "../backend/remover.php?id=" + <?php echo $_SESSION['id_pessoa']; ?>
+            }
+        }
+    </script>
+
+    <!-- CONTROLE DO BOTÃO DE ABRIR/FECHAR SIDEBAR ----------------------- -->
     <script type="text/javascript">
         $(document).ready(function() {
             $('#sidebarCollapse').on('click', function() {

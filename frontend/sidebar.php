@@ -9,14 +9,9 @@
 <!-- FIM LOGO --------------------------------------------------- -->
 <!-- DADOS USUARIO ---------------------------------------------- -->
                 
-<div>
-<div></div>
-<div></div>
-<div></div>
-</div>
                 <div class="container-user text-center d-flex flex-column align-items-center mt-4">
                     <div class="user my-2">
-                        <img src="<?php echo $_SESSION['img']; ?>" alt="<?php echo $_SESSION['nome']; ?>" class="img-user">
+                        <img src="../img/user/<?php echo $_SESSION['img']; ?>" alt="" class="img-user">
                     </div>
                     <p><?php echo $_SESSION['nome']; ?></p>
                 </div>

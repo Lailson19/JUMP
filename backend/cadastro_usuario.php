@@ -8,6 +8,11 @@ $email = $_POST["email"];
 $senha = $_POST["senha"];
 $confirmar_senha = $_POST["confirmar_senha"];
 
+// Se não cadastra imagem de perfil, entra imagem avatar
+if(!$img){
+    $img = 'avatar.png';
+}
+
 /*
 echo '<br> Nome: '.$nome;
 echo '<br> Imagem: '.$img;

@@ -9,7 +9,6 @@ $senha = $_POST['senha'];
 
 if (strlen($email) > 3 && strlen($senha) > 3) {
     $senha_cripto = md5($senha);
-
  
     // Execução da instrução SQL
     /*$resultado_consulta = $conn->query("SELECT * from usuarios where email = '$email' AND senha = '$senha'");*/
@@ -25,7 +24,7 @@ if (strlen($email) > 3 && strlen($senha) > 3) {
     $_SESSION['dt_nasc'] = $usuarios["dt_nasc"];  
     $_SESSION['sexo'] = $usuarios["sexo"];   
     $_SESSION['situacao'] = $usuarios["situacao"];
-    $_SESSION['grau'] = $usuarios["grau"];    
+    $_SESSION['grau'] = $usuarios["grau"];
 
     //header('location: ../frontend/home_user.php');
 
