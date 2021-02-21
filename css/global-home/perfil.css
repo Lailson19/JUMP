@@ -1,0 +1,19 @@
+h4{
+    color: #177681;
+}
+
+.form-group{
+    width: 100%;
+}
+
+.row .col-md-5, .row .col-md-2{
+    display: flex;
+    justify-content: center;
+}
+
+.row div .img-perfil img{
+    max-width: 100px;
+    width: 100%;
+    border-radius: 100%;
+}
+

@@ -1,25 +1,3 @@
-<?php
-
-session_start();
-
-//Se não existir um valor do índice 'nome', então encerre a aplicação
-if (!isset($_SESSION['id_pessoa'])) {
-    header('Location: ../index.html');
-    exit;
-} else {
-    $id = $_SESSION['id_pessoa'];
-    $id_conteudo = 7;
-
-    require_once('../backend/conexao.php');
-
-    $postagens = $link->query("SELECT * FROM comentario inner join pessoa on pessoa.id_pessoa = comentario.id_pessoa  ORDER BY id_comentario DESC;");
-
-    $conteudos = $link->query("SELECT * FROM pessoa LEFT JOIN conteudo on conteudo.id_pessoa = pessoa.id_pessoa WHERE id_conteudo = $id_conteudo");
-
-    $traducoes = $link->query("SELECT nome FROM conteudo JOIN video_traducao ON conteudo.id_vid_traducao = video_traducao.id_vid_traducao LEFT JOIN pessoa ON pessoa.id_pessoa = video_traducao.id_pessoa WHERE video_traducao.id_pessoa = pessoa.id_pessoa AND conteudo.id_conteudo = $id_conteudo");
-}
-
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -36,7 +14,7 @@ if (!isset($_SESSION['id_pessoa'])) {
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/global-home/home-user.css">
-    <link rel="stylesheet" href="../css/global-home/home-video.css">
+    <link rel="stylesheet" href="../css/global-home/perfil.css">
 </head>
 
 <body>
@@ -125,90 +103,49 @@ if (!isset($_SESSION['id_pessoa'])) {
             <!-- FIM BOTÃO PARA ABRIR/FECHAR SIDEBAR ----------------------- -->
 
             <div class="container">
-                   
-
-                <div class="container py-3">
-
-                    <!-- VÍDEO ---------------------------------------------- -->
-                    <?php foreach ($conteudos as $conteudo) ?>
-                    <?php foreach ($traducoes as $traducao) ?>
-                    <h3 class="titulo mb-4"><?php echo $conteudo['titulo_conteudo'] ?></h3>
-                    <div class="row">
-                        <div class="capsula-video">
-                            <video controls class="meus_videos parado">
-                                <source src="../video/carinhosamente_audio.mp4" type="video/mp4" />
-                            </video>
-                            <video id="vd2" class="meus_videos parado">
-                                <source src="../video/carinhosamente_libras.mp4" type="video/mp4" />
-                            </video>
-
-                        </div>
-                    </div>
-
-                    <!-- FIM VÍDEO --------------------------------------------- -->
-
-
-                    <div class="container">
-                        <h4 class="titulo mt-4 mb-1"><?php echo $conteudo['titulo_conteudo'] ?></h4>
-                        <h6 class="titulo mb-3"><span class="titulo-info"><?php echo $conteudo['assunto_conteudo'] ?></span></h6>
-
-                        <p class="descricao">
-                            <?php echo $conteudo['descricao_conteudo'] ?>
-                        </p>
-
-                        <div class="line-escura mt-4 mb-1"></div>
-
-                        <h6 class="titulo mb-1">
-                            <span class="titulo-info">
-                                Produzido por:
-                            </span>
-                        </h6>
-                        <div class="d-flex justify-content-between justify-content-between">
-                            <p><?php echo $conteudo['nome'] ?></p>
-                            <!-- AQUI SERÁ O CODE DE AVALIAÇÃO -->
-                        </div>
-
-                        <div class="line-escura mb-1"></div>
-
-                        <h6 class="titulo mb-1">
-                            <span class="titulo-info">
-                                Traduzido por:
-                            </span>
-                        </h6>
-                        <div class="d-flex justify-content-between justify-content-between">
-                            <p><?php echo $traducao['nome'] ?></p>
-                            <!-- AQUI SERÁ O CODE DE AVALIAÇÃO -->
-                        </div>
-
-                        <h4 class="titulo mt-4 mb-1"><i>Comentários</i></h4>
-
-                        <div class="line-escura mt-0 mb-4"></div>
-
-                        <?php foreach ($postagens as $postagem) { ?>
-
-                            <p class="autor-msg">
-                                <img class="rounded-circle img_pessoa" src="<?php echo $postagem["img"] ?>" alt="<?php echo $postagem['nome'] ?>">
-                                <?php echo $postagem['nome'] ?> Postado: <?php echo $postagem['data_comentario'] ?>
-                            </p>
-                            <p class="msg"><?php echo $postagem["comentario"] ?></p>
-
-                        <?php  } ?>
-
-                        <!--
-                            <p class="autor-msg">Sicrano Astolfo - 06:13h - 02/02/2021</p>                            
-                            <p class="msg">Lorem ipsum dolor sit amet, consectetur adipisicing elit ipsum dolor sit.</p>
-                          -->
-
-                        <form action="../backend/registra_postagens.php" method="post">
-                            <div class="base-msg">
-                                <input type="text" id="disabledTextInput" class="area-msg form-control form-control-sm" name="post" placeholder="No que você está pensando, <?php echo $_SESSION['nome'] ?>?">
-                                <input type="submit" class="btn form-control form-control-sm text-uppercase" value="Comentar">
+                <main class="base-perfil">
+                    <h4>Meus dados</h4>
+                    <div class="container-fluid my-5">
+                        
+                        <form action="" method="POST">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="img-perfil">
+                                        <img src="../img/user/Lailson.jpg" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Nome</label>
+                                        <input type="text" value="" name="" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite aqui o seu nome">
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label for="inputSexo">Sexo</label>
+                                        <select id="inputSexo" class="form-control form-control-sm">
+                                            <option selected>Escolher...</option>
+                                            <option>Masculino</option>
+                                            <option>Feminino</option>
+                                            <option>Outros</option>
+                                        </select>
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 bg-info">
+                                    d
+                                </div>
+                                <div class="col-md-4 bg-primary">
+                                    d
+                                </div>
+                                <div class="col-md-4 bg-success">
+                                    d
+                                </div>
                             </div>
                         </form>
-
-
                     </div>
-                </div>
+                </main>
             </div>
         </div>
     </div>
