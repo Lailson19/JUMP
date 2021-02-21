@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Tempo de geração: 20-Fev-2021 às 02:26
--- Versão do servidor: 8.0.21
--- versão do PHP: 7.4.12
+-- Host: 127.0.0.1
+-- Tempo de geração: 21-Fev-2021 às 22:42
+-- Versão do servidor: 10.4.17-MariaDB
+-- versão do PHP: 7.4.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,17 +28,22 @@ USE `jump_squad8`;
 --
 -- Estrutura da tabela `comentario`
 --
+-- Criação: 21-Fev-2021 às 20:54
+--
 
-DROP TABLE IF EXISTS `comentario`;
-CREATE TABLE IF NOT EXISTS `comentario` (
-  `id_comentario` int NOT NULL AUTO_INCREMENT,
-  `id_pessoa` int DEFAULT NULL,
+CREATE TABLE `comentario` (
+  `id_comentario` int(11) NOT NULL,
+  `id_pessoa` int(11) DEFAULT NULL,
   `comentario` varchar(500) COLLATE utf8_bin DEFAULT NULL,
-  `data_comentario` datetime DEFAULT CURRENT_TIMESTAMP,
-  `status_comentario` tinyint DEFAULT '0',
-  PRIMARY KEY (`id_comentario`),
-  KEY `comentario_pessoa_idx` (`id_pessoa`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `data_comentario` datetime DEFAULT current_timestamp(),
+  `status_comentario` tinyint(4) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- RELACIONAMENTOS PARA TABELAS `comentario`:
+--   `id_pessoa`
+--       `pessoa` -> `id_pessoa`
+--
 
 --
 -- Extraindo dados da tabela `comentario`
@@ -66,24 +71,31 @@ INSERT INTO `comentario` (`id_comentario`, `id_pessoa`, `comentario`, `data_come
 --
 -- Estrutura da tabela `conteudo`
 --
+-- Criação: 21-Fev-2021 às 20:55
+--
 
-DROP TABLE IF EXISTS `conteudo`;
-CREATE TABLE IF NOT EXISTS `conteudo` (
-  `id_conteudo` int NOT NULL AUTO_INCREMENT,
-  `id_pessoa` int DEFAULT NULL,
-  `id_vid_produtor` int DEFAULT NULL,
-  `id_vid_traducao` int DEFAULT NULL,
+CREATE TABLE `conteudo` (
+  `id_conteudo` int(11) NOT NULL,
+  `id_pessoa` int(11) DEFAULT NULL,
+  `id_vid_produtor` int(11) DEFAULT NULL,
+  `id_vid_traducao` int(11) DEFAULT NULL,
   `titulo_conteudo` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `assunto_conteudo` varchar(45) COLLATE utf8_bin DEFAULT NULL,
   `capa_conteudo` varchar(150) COLLATE utf8_bin DEFAULT NULL,
   `descricao_conteudo` varchar(1000) COLLATE utf8_bin DEFAULT NULL,
-  `status_conteudo` tinyint DEFAULT '0',
-  `data_conteudo` datetime DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_conteudo`),
-  KEY `conteudo_midia_idx` (`id_vid_produtor`),
-  KEY `conteudo_traducao_idx` (`id_vid_traducao`),
-  KEY `conteudo_pessoa_idx` (`id_pessoa`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `status_conteudo` tinyint(4) DEFAULT 0,
+  `data_conteudo` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- RELACIONAMENTOS PARA TABELAS `conteudo`:
+--   `id_pessoa`
+--       `pessoa` -> `id_pessoa`
+--   `id_vid_produtor`
+--       `video_produtor` -> `id_vid_produtor`
+--   `id_vid_traducao`
+--       `video_traducao` -> `id_vid_traducao`
+--
 
 --
 -- Extraindo dados da tabela `conteudo`
@@ -99,10 +111,12 @@ INSERT INTO `conteudo` (`id_conteudo`, `id_pessoa`, `id_vid_produtor`, `id_vid_t
 --
 -- Estrutura da tabela `pessoa`
 --
+-- Criação: 21-Fev-2021 às 20:52
+-- Última actualização: 21-Fev-2021 às 20:59
+--
 
-DROP TABLE IF EXISTS `pessoa`;
-CREATE TABLE IF NOT EXISTS `pessoa` (
-  `id_pessoa` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `pessoa` (
+  `id_pessoa` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
   `img` varchar(150) DEFAULT NULL,
   `email` varchar(80) NOT NULL,
@@ -111,12 +125,14 @@ CREATE TABLE IF NOT EXISTS `pessoa` (
   `situacao` varchar(45) DEFAULT NULL,
   `grau` varchar(45) DEFAULT NULL,
   `dt_nasc` date DEFAULT NULL,
-  `status` tinyint DEFAULT '0',
-  `dt_pessoa` datetime DEFAULT CURRENT_TIMESTAMP,
-  `nivel_acesso` varchar(10) NOT NULL DEFAULT 'comum',
-  PRIMARY KEY (`id_pessoa`),
-  UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+  `status` tinyint(4) DEFAULT 0,
+  `dt_pessoa` datetime DEFAULT current_timestamp(),
+  `nivel_acesso` varchar(10) NOT NULL DEFAULT 'comum'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- RELACIONAMENTOS PARA TABELAS `pessoa`:
+--
 
 --
 -- Extraindo dados da tabela `pessoa`
@@ -128,23 +144,28 @@ INSERT INTO `pessoa` (`id_pessoa`, `nome`, `img`, `email`, `senha`, `sexo`, `sit
 (4, 'teste', 'https://avatars.githubusercontent.com/u/72608626?s=460&u=18c68566217ffdcfc5c8d869f895b6f466af1345&v=4', 'teste@teste.com', 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, NULL, NULL, 0, '2021-02-19 16:33:38', 'comum'),
 (5, 'teste2', 'https://ik.imagekit.io/feq0hccnlg/999107_LS_yxRktr.jpg', 'teste2@teste.com', 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, NULL, NULL, 0, '2021-02-19 16:44:22', 'comum'),
 (6, 'Pixinguinha', 'https://ik.imagekit.io/feq0hccnlg/pixinguinha_HJ_JgKWYQk.jpg', 'pixinguinha@jump.com', 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, NULL, NULL, 0, '2021-02-19 20:59:39', 'produtor'),
-(7, 'Maria de Alcantera', 'https://ik.imagekit.io/feq0hccnlg/maria_-CuHNPvkS.png', 'maria@jump.com', 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, NULL, NULL, 0, '2021-02-19 20:59:39', 'traducao');
+(7, 'Maria de Alcantera', 'https://ik.imagekit.io/feq0hccnlg/maria_-CuHNPvkS.png', 'maria@jump.com', 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, NULL, NULL, 0, '2021-02-19 20:59:39', 'traducao'),
+(8, 'Lailson EU', 'avatar.png', 'lailson@123', '4297f44b13955235245b2497399d7a93', 'Masculino', 'Não', 'Nenhum', '0000-00-00', 0, '2021-02-21 17:58:07', 'comum');
 
 -- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `video_produtor`
 --
+-- Criação: 21-Fev-2021 às 20:52
+--
 
-DROP TABLE IF EXISTS `video_produtor`;
-CREATE TABLE IF NOT EXISTS `video_produtor` (
-  `id_vid_produtor` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `video_produtor` (
+  `id_vid_produtor` int(11) NOT NULL,
   `nome_vid_produtor` varchar(80) COLLATE utf8_bin NOT NULL,
   `temp_vid_produtor` varchar(45) COLLATE utf8_bin NOT NULL,
-  `data_vid_produtor` datetime DEFAULT CURRENT_TIMESTAMP,
-  `avaliacao_vid_produtor` int DEFAULT NULL,
-  PRIMARY KEY (`id_vid_produtor`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `data_vid_produtor` datetime DEFAULT current_timestamp(),
+  `avaliacao_vid_produtor` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- RELACIONAMENTOS PARA TABELAS `video_produtor`:
+--
 
 --
 -- Extraindo dados da tabela `video_produtor`
@@ -160,18 +181,23 @@ INSERT INTO `video_produtor` (`id_vid_produtor`, `nome_vid_produtor`, `temp_vid_
 --
 -- Estrutura da tabela `video_traducao`
 --
+-- Criação: 21-Fev-2021 às 20:55
+--
 
-DROP TABLE IF EXISTS `video_traducao`;
-CREATE TABLE IF NOT EXISTS `video_traducao` (
-  `id_vid_traducao` int NOT NULL AUTO_INCREMENT,
-  `id_pessoa` int DEFAULT NULL,
+CREATE TABLE `video_traducao` (
+  `id_vid_traducao` int(11) NOT NULL,
+  `id_pessoa` int(11) DEFAULT NULL,
   `nome_vid_traducao` varchar(45) COLLATE utf8_bin NOT NULL,
   `temp_vid_traducao` varchar(15) COLLATE utf8_bin DEFAULT NULL,
-  `data_vid_traducao` datetime DEFAULT CURRENT_TIMESTAMP,
-  `avaliacao_vid_traduc` int DEFAULT NULL,
-  PRIMARY KEY (`id_vid_traducao`),
-  KEY `traducao_pessoa_idx` (`id_pessoa`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `data_vid_traducao` datetime DEFAULT current_timestamp(),
+  `avaliacao_vid_traduc` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- RELACIONAMENTOS PARA TABELAS `video_traducao`:
+--   `id_pessoa`
+--       `pessoa` -> `id_pessoa`
+--
 
 --
 -- Extraindo dados da tabela `video_traducao`
@@ -183,6 +209,80 @@ INSERT INTO `video_traducao` (`id_vid_traducao`, `id_pessoa`, `nome_vid_traducao
 (7, 7, 'Carinhoso Libras', '00:36', '2021-02-19 21:08:32', NULL);
 
 --
+-- Índices para tabelas despejadas
+--
+
+--
+-- Índices para tabela `comentario`
+--
+ALTER TABLE `comentario`
+  ADD PRIMARY KEY (`id_comentario`),
+  ADD KEY `comentario_pessoa_idx` (`id_pessoa`);
+
+--
+-- Índices para tabela `conteudo`
+--
+ALTER TABLE `conteudo`
+  ADD PRIMARY KEY (`id_conteudo`),
+  ADD KEY `conteudo_midia_idx` (`id_vid_produtor`),
+  ADD KEY `conteudo_traducao_idx` (`id_vid_traducao`),
+  ADD KEY `conteudo_pessoa_idx` (`id_pessoa`);
+
+--
+-- Índices para tabela `pessoa`
+--
+ALTER TABLE `pessoa`
+  ADD PRIMARY KEY (`id_pessoa`),
+  ADD UNIQUE KEY `email_UNIQUE` (`email`);
+
+--
+-- Índices para tabela `video_produtor`
+--
+ALTER TABLE `video_produtor`
+  ADD PRIMARY KEY (`id_vid_produtor`);
+
+--
+-- Índices para tabela `video_traducao`
+--
+ALTER TABLE `video_traducao`
+  ADD PRIMARY KEY (`id_vid_traducao`),
+  ADD KEY `traducao_pessoa_idx` (`id_pessoa`);
+
+--
+-- AUTO_INCREMENT de tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `comentario`
+--
+ALTER TABLE `comentario`
+  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT de tabela `conteudo`
+--
+ALTER TABLE `conteudo`
+  MODIFY `id_conteudo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de tabela `pessoa`
+--
+ALTER TABLE `pessoa`
+  MODIFY `id_pessoa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT de tabela `video_produtor`
+--
+ALTER TABLE `video_produtor`
+  MODIFY `id_vid_produtor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de tabela `video_traducao`
+--
+ALTER TABLE `video_traducao`
+  MODIFY `id_vid_traducao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- Restrições para despejos de tabelas
 --
 
@@ -190,21 +290,51 @@ INSERT INTO `video_traducao` (`id_vid_traducao`, `id_pessoa`, `nome_vid_traducao
 -- Limitadores para a tabela `comentario`
 --
 ALTER TABLE `comentario`
-  ADD CONSTRAINT `comentario_pessoa` FOREIGN KEY (`id_pessoa`) REFERENCES `pessoa` (`id_pessoa`);
+  ADD CONSTRAINT `comentario_pessoa` FOREIGN KEY (`id_pessoa`) REFERENCES `pessoa` (`id_pessoa`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `conteudo`
 --
 ALTER TABLE `conteudo`
-  ADD CONSTRAINT `conteudo_pessoa` FOREIGN KEY (`id_pessoa`) REFERENCES `pessoa` (`id_pessoa`),
-  ADD CONSTRAINT `conteudo_produtor` FOREIGN KEY (`id_vid_produtor`) REFERENCES `video_produtor` (`id_vid_produtor`),
-  ADD CONSTRAINT `conteudo_traducao` FOREIGN KEY (`id_vid_traducao`) REFERENCES `video_traducao` (`id_vid_traducao`);
+  ADD CONSTRAINT `conteudo_pessoa` FOREIGN KEY (`id_pessoa`) REFERENCES `pessoa` (`id_pessoa`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `conteudo_produtor` FOREIGN KEY (`id_vid_produtor`) REFERENCES `video_produtor` (`id_vid_produtor`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `conteudo_traducao` FOREIGN KEY (`id_vid_traducao`) REFERENCES `video_traducao` (`id_vid_traducao`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `video_traducao`
 --
 ALTER TABLE `video_traducao`
-  ADD CONSTRAINT `traducao_pessoa` FOREIGN KEY (`id_pessoa`) REFERENCES `pessoa` (`id_pessoa`);
+  ADD CONSTRAINT `traducao_pessoa` FOREIGN KEY (`id_pessoa`) REFERENCES `pessoa` (`id_pessoa`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+--
+-- Metadata
+--
+USE `phpmyadmin`;
+
+--
+-- Metadata para tabela comentario
+--
+
+--
+-- Metadata para tabela conteudo
+--
+
+--
+-- Metadata para tabela pessoa
+--
+
+--
+-- Metadata para tabela video_produtor
+--
+
+--
+-- Metadata para tabela video_traducao
+--
+
+--
+-- Metadata para o banco de dados jump_squad8
+--
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
