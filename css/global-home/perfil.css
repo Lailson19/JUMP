@@ -2,18 +2,36 @@ h4{
     color: #177681;
 }
 
+form{
+    color: #177681;
+}
+
+.row:nth-child(1) label, .row:nth-child(2) label, .row:nth-child(4) label{
+    font-size: 0.8em;
+    font-weight: 500;
+}
+
 .form-group{
     width: 100%;
 }
 
-.row .col-md-5, .row .col-md-2{
+.row .col-md-6, .row .col-md-4{
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
-.row div .img-perfil img{
-    max-width: 100px;
-    width: 100%;
-    border-radius: 100%;
+.row:nth-child(4){
+    margin: 2rem 0;
+}
+
+.row:nth-child(5) .col-md-12{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.caixa .base-btn .btn{
+    margin: 0 0.1em;
+
 }
 
