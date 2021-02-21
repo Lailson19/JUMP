@@ -93,8 +93,8 @@ if (!isset($_SESSION['id_pessoa'])) {
                   <div class="row mb-3">
                    
                     <div class="col-lg-5">
-                      <input type="url" class="border border-info rounded form-control form-grupo1" id="imagem" value="<?php echo $_SESSION['img']; ?>" name="imagem">
-                      <small for="imagem">Imagem:</small>
+                      <input type="url" class="border border-info rounded form-control form-grupo1" id="img" value="<?php echo $_SESSION['img']; ?>" name="img">
+                      <small for="img">Imagem:</small>
                     </div>
                     <div class="col-lg-6">
                       <input type="text" class="border border-info rounded form-control form-grupo1" id="nome" value="<?php echo $_SESSION['nome']; ?>" name="nome">
@@ -103,7 +103,7 @@ if (!isset($_SESSION['id_pessoa'])) {
                   </div>
                   <div class="row">
                     <div class="col-lg-5">
-                      <input type="date" class="border border-info rounded form-control form-grupo1" id="dt_nasc" value="<?php echo $_SESSION['dt_nasc']; ?>" name="nascimento">
+                      <input type="date" class="border border-info rounded form-control form-grupo1" id="dt_nasc" value="<?php echo $_SESSION['dt_nasc']; ?>" name="dt_nasc">
                       <small for="dt_nasc">Data de Nascimento:</small>
                     </div>
                     <div class="col-lg-6">
@@ -263,8 +263,8 @@ if (!isset($_SESSION['id_pessoa'])) {
                     </div>
 
                     <div class="col-lg-4 col-md-6">
-                      <input type="password" class="border border-info rounded form-control form-grupo1" id="conf-senha" name="conf_senha">
-                      <small for="conf-senha">Confirmar senha:</small>
+                      <input type="password" class="border border-info rounded form-control form-grupo1" id="confirmar_senha" name="confirmar_senha">
+                      <small for="confirmar_senha">Confirmar senha:</small>
                     </div>
 
                     <div class="col-lg-2 col-md-2 d-flex justify-content-center">
