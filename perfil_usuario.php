@@ -6,7 +6,7 @@ session_start();
 
 //Se não existir um valor do índice 'nome', então encerre a aplicação
 if (!isset($_SESSION['id_pessoa'])) {
-    header('Location: index.php');
+    header('Location: index.html');
     exit;
 }else {
  
