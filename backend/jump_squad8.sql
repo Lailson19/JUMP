@@ -310,7 +310,6 @@ ALTER TABLE `video_traducao`
 --
 -- Metadata
 --
-USE `phpmyadmin`;
 
 --
 -- Metadata para tabela comentario
