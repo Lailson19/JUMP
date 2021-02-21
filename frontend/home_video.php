@@ -2,7 +2,6 @@
 
 session_start();
 
-//Se não existir um valor do índice 'nome', então encerre a aplicação
 if (!isset($_SESSION['id_pessoa'])) {
     header('Location: ../index.html');
     exit;
@@ -71,7 +70,7 @@ if (!isset($_SESSION['id_pessoa'])) {
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="#">
+                    <a href="./home_user.php">
                         <i class="fas fa-home"></i>
                         <span>Home</span>
                     </a>

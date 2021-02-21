@@ -4,8 +4,8 @@ require_once('./backend/conexao.php');
 
 session_start();
 
-//Se não existir um valor do índice 'nome', então encerre a aplicação
-if (!isset($_SESSION['id_pessoa'])) {
+
+if (!isset($_SESSION['nome'])) {
     header('Location: index.html');
     exit;
 }else {
@@ -299,7 +299,7 @@ if (!isset($_SESSION['id_pessoa'])) {
           let confirmacao = confirm("Você Realmente Deseja Excluir sua Conta?");
 
           if (confirmacao == true) {
-        location.href = "./backend/remover_conta.php?id=" + <?php echo $_SESSION['idusuarios']; ?>
+        location.href = "./backend/remover.php?id=" + <?php echo $_SESSION['id_pessoa']; ?>
             }
           }
         </script>

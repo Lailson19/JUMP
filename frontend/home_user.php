@@ -152,7 +152,7 @@ if (!isset($_SESSION['nome'])) {
 <!-- CARD - LISTA TOTAL -------------------------------------------------------- -->
                                <?php foreach ($videohome as $video) { ?>
                                 <div class="col-md-4 p-2">
-                                    <a href="#">
+                                    <a href="./home_video.php">
                                         <div class="card">
                                             <img class="card-img-top" src="<?php echo $video['capa_conteudo'] ?>" alt="<?php echo $video['assunto_conteudo'] ?>">
                                             <div class="card-body">

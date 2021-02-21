@@ -7,11 +7,13 @@ session_start();
 $id = $_GET['id'];
 
 
-if ($id == $_SESSION['idusuarios']) {
+if ($id === $_SESSION['id_pessoa']) {  
+    
+    $sql = "DELETE FROM pessoa WHERE id_pessoa = $id";
 
-    $result = $link->query("DELETE FROM usuarios WHERE idusuarios = $id");
+    //$result = $link->query("DELETE FROM pessoa WHERE id_pessoa = $id");
 
-    if($result == true){
+    if($link->query($sql) === TRUE){
         session_destroy();
 
         echo "<script>
@@ -30,4 +32,3 @@ if ($id == $_SESSION['idusuarios']) {
     window.location.href = '../index.html'
     </script>";
 }
-
