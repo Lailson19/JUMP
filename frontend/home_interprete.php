@@ -1,4 +1,6 @@
 <?php
+require_once('../backend/conexao.php');
+
 session_start();
 
 if (!isset($_SESSION['id_pessoa'])) {
@@ -7,19 +9,17 @@ if (!isset($_SESSION['id_pessoa'])) {
 } else {
     $id = $_SESSION['id_pessoa'];
 
-    require_once('../backend/conexao.php');
-
     $videohome = $link->query("SELECT * FROM conteudo");
 
     $videointerprete = $link->query("SELECT * FROM conteudo JOIN video_traducao ON conteudo.id_vid_traducao = video_traducao.id_vid_traducao JOIN pessoa ON video_traducao.id_pessoa = pessoa.id_pessoa WHERE conteudo.id_vid_traducao = video_traducao.id_vid_traducao AND video_traducao.id_pessoa = $id");
 
     $lista = $link->query("SELECT nome, titulo_conteudo, assunto_conteudo, temp_vid_produtor, data_vid_produtor FROM conteudo INNER JOIN pessoa ON pessoa.id_pessoa = conteudo.id_pessoa INNER JOIN video_produtor ON video_produtor.id_vid_produtor = conteudo.id_vid_produtor");
-        
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,19 +34,20 @@ if (!isset($_SESSION['id_pessoa'])) {
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/global-home/home-user.css">
 </head>
+
 <body>
     <div class="wrapper">
 
-<!-- SIDEBAR ---------------------------------------------------- -->
+        <!-- SIDEBAR ---------------------------------------------------- -->
 
-<?php include('./sidebar.php') ?>
+        <?php include('./sidebar.php') ?>
 
-<!-- FIM SIDEBAR ------------------------------------------------ -->
-<!-- CONTEUDO --------------------------------------------------- -->
+        <!-- FIM SIDEBAR ------------------------------------------------ -->
+        <!-- CONTEUDO --------------------------------------------------- -->
 
         <div id="content">
-            
-<!-- BOTÃO PARA ABRIR/FECHAR SIDEBAR ---------------------------- -->
+
+            <!-- BOTÃO PARA ABRIR/FECHAR SIDEBAR ---------------------------- -->
 
             <nav class="container-fluid">
                 <span id="sidebarCollapse">
@@ -54,50 +55,50 @@ if (!isset($_SESSION['id_pessoa'])) {
                 </span>
             </nav>
 
- <!-- FIM BOTÃO PARA ABRIR/FECHAR SIDEBAR ----------------------- -->
+            <!-- FIM BOTÃO PARA ABRIR/FECHAR SIDEBAR ----------------------- -->
 
             <div class="container">
 
-<!-- NAVEGAÇÃO EM CORTINA --------------------------------------- -->
+                <!-- NAVEGAÇÃO EM CORTINA --------------------------------------- -->
 
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
-                      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#perfil" role="tab" aria-controls="profile" aria-selected="false">Interpretações</a>
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#perfil" role="tab" aria-controls="profile" aria-selected="false">Interpretações</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contato" role="tab" aria-controls="contact" aria-selected="false">Interpretar</a>
+                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contato" role="tab" aria-controls="contact" aria-selected="false">Interpretar</a>
                     </li>
                 </ul>
 
-<!-- FIM NAVEGAÇÃO EM CORTINA --------------------------------------- -->
-<!-- PÁGINAÇÃO EM CORTINA ------------------------------------------- -->
+                <!-- FIM NAVEGAÇÃO EM CORTINA --------------------------------------- -->
+                <!-- PÁGINAÇÃO EM CORTINA ------------------------------------------- -->
 
                 <div class="tab-content" id="myTabContent">
 
-<!-- CORTINA 1 ------------------------------------------------------ -->
+                    <!-- CORTINA 1 ------------------------------------------------------ -->
 
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <div class="container py-5">                            
+                        <div class="container py-5">
                             <div class="row">
 
-<!-- CARD - LISTA TOTAL -------------------------------------------------------- -->
-                               <?php foreach ($videohome as $video) { ?>
-                                <div class="col-md-4 p-2">
-                                    <a href="#">
-                                        <div class="card">
-                                            <img class="card-img-top" src="<?php echo $video['capa_conteudo'] ?>" alt="<?php echo $video['assunto_conteudo'] ?>">
-                                            <div class="card-body">
-                                                <h5 class="card-title"><?php echo $video['titulo_conteudo'] ?></h5>
-                                                <p class="card-text">
-                                                <?php echo $video['descricao_conteudo'] ?>
-                                                </p>
+                                <!-- CARD - LISTA TOTAL -------------------------------------------------------- -->
+                                <?php foreach ($videohome as $video) { ?>
+                                    <div class="col-md-4 p-2">
+                                        <a href="./home_video.php?id=<?php echo $video['id_conteudo']; ?>">
+                                            <div class="card">
+                                                <img class="card-img-top" src="<?php echo $video['capa_conteudo'] ?>" alt="<?php echo $video['assunto_conteudo'] ?>">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"><?php echo $video['titulo_conteudo'] ?></h5>
+                                                    <p class="card-text">
+                                                        <?php echo $video['descricao_conteudo'] ?>
+                                                    </p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                </div>
+                                        </a>
+                                    </div>
                                 <?php } ?>
 
                                 <!--
@@ -115,72 +116,72 @@ if (!isset($_SESSION['id_pessoa'])) {
                                     </a>
                                 </div>
                                 -->
-<!-- FIM CARD -LISTA TOTAL ----------------------------------------------------- -->
-
-                            </div>
-                        </div>                        
-                    </div>
-
-<!-- FIM CORTINA 1 ------------------------------------------------ -->
-<!-- CORTINA 2 ---------------------------------------------------- -->
-
-                    <div class="tab-pane fade" id="perfil" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="container py-5">
-                            <div class="row">
-
- <!-- CARD - LISTA PRODUZIDOS -------------------------------------------------------- -->
-                               <?php foreach ($videointerprete as $interprete) { ?>
-                                <div class="col-md-4 p-2">
-                                    <a href="#">
-                                        <div class="card">
-                                            <img class="card-img-top" src="<?php echo $interprete['capa_conteudo'] ?>" alt="<?php echo $interprete['assunto_conteudo'] ?>">
-                                            <div class="card-body">
-                                                <h5 class="card-title"><?php echo $interprete['titulo_conteudo'] ?></h5>
-                                                <p class="card-text">
-                                                <?php echo $interprete['descricao_conteudo'] ?>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <?php } ?> 
-
-<!-- FIM CARD - LISTA PRODUZIDOS -------------------------------------------------------- -->
+                                <!-- FIM CARD -LISTA TOTAL ----------------------------------------------------- -->
 
                             </div>
                         </div>
                     </div>
 
-<!-- FIM CORTINA 2 ---------------------------------------------------------------------- -->
-<!-- CORTINA 3 -------------------------------------------------------------------------- -->
+                    <!-- FIM CORTINA 1 ------------------------------------------------ -->
+                    <!-- CORTINA 2 ---------------------------------------------------- -->
+
+                    <div class="tab-pane fade" id="perfil" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="container py-5">
+                            <div class="row">
+
+                                <!-- CARD - LISTA PRODUZIDOS -------------------------------------------------------- -->
+                                <?php foreach ($videointerprete as $interprete) { ?>
+                                    <div class="col-md-4 p-2">
+                                        <a href="#">
+                                            <div class="card">
+                                                <img class="card-img-top" src="<?php echo $interprete['capa_conteudo'] ?>" alt="<?php echo $interprete['assunto_conteudo'] ?>">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"><?php echo $interprete['titulo_conteudo'] ?></h5>
+                                                    <p class="card-text">
+                                                        <?php echo $interprete['descricao_conteudo'] ?>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                <?php } ?>
+
+                                <!-- FIM CARD - LISTA PRODUZIDOS -------------------------------------------------------- -->
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FIM CORTINA 2 ---------------------------------------------------------------------- -->
+                    <!-- CORTINA 3 -------------------------------------------------------------------------- -->
 
                     <div class="tab-pane fade" id="contato" role="tabpanel" aria-labelledby="contact-tab">
                         <div class="container py-5">
                             <h4 class="pb-2 d-flex justify-content-center">Lista de conteúdo a ser interpretados</h4>
-<!-- LISTA -------------------------------------------------------------------->
-<div class="table-responsive">                         
-    <table id="lista" class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">Autor</th>
-          <th scope="col">Título</th>
-          <th scope="col">Assunto</th>
-          <th scope="col">Data</th>
-          <th scope="col">Duração</th>
-        </tr>
-      </thead>
-      <?php foreach ($lista as $traduzir) { ?>
-      <tbody>
-<tr>
-          <td><?php echo $traduzir['nome'] ?></td>
-          <td><?php echo $traduzir['titulo_conteudo'] ?></td>
-          <td><?php echo $traduzir['assunto_conteudo'] ?></td>
-          <td><?php echo $traduzir['data_vid_produtor'] ?></td>
-          <td><?php echo $traduzir['temp_vid_produtor'] ?></td>
-          <td type="button" class="btn btn-secondary btn-sm" href="#">Interpretar</td>
-        </tr>
+                            <!-- LISTA -------------------------------------------------------------------->
+                            <div class="table-responsive">
+                                <table id="lista" class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Autor</th>
+                                            <th scope="col">Título</th>
+                                            <th scope="col">Assunto</th>
+                                            <th scope="col">Data</th>
+                                            <th scope="col">Duração</th>
+                                        </tr>
+                                    </thead>
+                                    <?php foreach ($lista as $traduzir) { ?>
+                                        <tbody>
+                                            <tr>
+                                                <td><?php echo $traduzir['nome'] ?></td>
+                                                <td><?php echo $traduzir['titulo_conteudo'] ?></td>
+                                                <td><?php echo $traduzir['assunto_conteudo'] ?></td>
+                                                <td><?php echo $traduzir['data_vid_produtor'] ?></td>
+                                                <td><?php echo $traduzir['temp_vid_produtor'] ?></td>
+                                                <td type="button" class="btn btn-secondary btn-sm" href="#"><a href="home_interprete_video.php">Interpretar</a></td>
+                                            </tr>
 
-        <!--
+                                            <!--
         <tr>
             <td>xxxxxx</td>
             <td>xxxxxx</td>
@@ -191,38 +192,39 @@ if (!isset($_SESSION['id_pessoa'])) {
           </tr>
           -->
 
-        </tbody>
-        <?php } ?> 
+                                        </tbody>
+                                    <?php } ?>
 
-        </table>
-  </div>
+                                </table>
+                            </div>
 
 
-<!-- FIM LISTA ---------------------------------------------------------------->
+                            <!-- FIM LISTA ---------------------------------------------------------------->
 
                         </div>
                     </div>
 
-<!-- FIM CORTINA 3 ---------------------------------------------------------------------- -->
+                    <!-- FIM CORTINA 3 ---------------------------------------------------------------------- -->
 
                 </div>
 
-<!-- FIM PÁGINAÇÃO EM CORTINA ----------------------------------------- -->
+                <!-- FIM PÁGINAÇÃO EM CORTINA ----------------------------------------- -->
 
             </div>
         </div>
     </div>
 
-<!-- CONTROLE DO BOTÃO DE ABRIR/FECHAR SIDEBAR ----------------------- -->
+    <!-- CONTROLE DO BOTÃO DE ABRIR/FECHAR SIDEBAR ----------------------- -->
 
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
+        $(document).ready(function() {
+            $('#sidebarCollapse').on('click', function() {
                 $('#sidebar').toggleClass('active');
             });
         });
     </script>
 
-<!-- FIM CONTROLE DO BOTÃO DE ABRIR/FECHAR SIDEBAR ------------------ -->
+    <!-- FIM CONTROLE DO BOTÃO DE ABRIR/FECHAR SIDEBAR ------------------ -->
 </body>
+
 </html>

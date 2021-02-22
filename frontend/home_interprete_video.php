@@ -1,5 +1,20 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['id_pessoa'])) {
+    header('Location: ../index.html');
+    exit;
+} else {
+    $id = $_SESSION['id_pessoa'];
+    $id_conteudo = $id;
+
+    require_once('../backend/conexao.php');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,157 +30,117 @@
     <link rel="stylesheet" href="../css/global-home/home-user.css">
     <link rel="stylesheet" href="../css/global-home/home_interprete_video.css">
 </head>
+
 <body>
     <div class="wrapper">
 
-<!-- SIDEBAR ---------------------------------------------------- -->
+        <!-- SIDEBAR ---------------------------------------------------- -->
 
-<?php include('./sidebar.php') ?>
-
-<!-- FIM SIDEBAR ------------------------------------------------ -->
-
-            <ul class="list-unstyled components">
-                <li>
-                    <a href="#">
-                        <i class="fas fa-home"></i>
-                        <span>Home</span>
-                    </a>
-                    <a href="#">
-                        <i class="fas fa-user-cog"></i>
-                        <span>Meus dados</span>
-                    </a>
-                    <a href="#">
-                        <i class="fas fa-film"></i>
-                        <span>Colaborar</span>
-                    </a>
-                    <a href="#">
-                        <i class="fas fa-sign-out-alt"></i>
-                        <span>Sair</span>
-                    </a>
-                </li>
-            </ul>
-
-<!-- FIM LINKS SIDEBAR ------------------------------------------- -->
-
-            <div class="line"></div>
-
-<!-- DIREITOS ---------------------------------------------------- -->
-
-            <p class="copy">
-                <span class="copycopy">
-                    &copycopyright SQUAD8-SP2
-                </span>
-                <span class="recode">
-                    Recode Pro | 2020-2021
-                </span>
-            </p>
-
-<!-- FIM DIREITOS ----------------------------------------------- -->
+        <?php include('./sidebar.php') ?>
 
         </nav>
 
-<!-- FIM SIDEBAR ------------------------------------------------ -->
-    <div id="content">
+        <!-- FIM SIDEBAR ------------------------------------------------ -->
+        <div id="content">
 
-       <!-- BOTÃO PARA ABRIR/FECHAR SIDEBAR ---------------------------- -->
+            <!-- BOTÃO PARA ABRIR/FECHAR SIDEBAR ---------------------------- -->
 
-       <nav class="container-fluid">
-        <span id="sidebarCollapse">
-            <i class="fas fa-angle-right"></i>
-        </span>
-    </nav>
+            <nav class="container-fluid">
+                <span id="sidebarCollapse">
+                    <i class="fas fa-angle-right"></i>
+                </span>
+            </nav>
 
-<!-- FIM BOTÃO PARA ABRIR/FECHAR SIDEBAR ------------------------------- -->
+            <!-- FIM BOTÃO PARA ABRIR/FECHAR SIDEBAR ------------------------------- -->
 
-    <div class="container">
+            <div class="container">
 
-<!-- CONTEUDO DO HOME_INTERPRETE_VIDEO -------------------------------- -->
+                <!-- CONTEUDO DO HOME_INTERPRETE_VIDEO -------------------------------- -->
 
-<div class="container justify-content-center py-4">
-    <h4>Suba Sua interpretação</h4>
+                <div class="container justify-content-center py-4">
+                    <h4>Suba Sua interpretação</h4>
 
-<!-- Video Interpretado ----------------------------------------------- -->
+                    <!-- Video Interpretado ----------------------------------------------- -->
 
-    <div class="row">
-        <div class="col-sm-9">
-           <div class="embed-responsive embed-responsive-16by9">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/HjAAC6BGp5c" frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-           </iframe>
-           </div>
-        </div>
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <div class="embed-responsive embed-responsive-16by9">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/aZIZPsqGnNw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        </div>
 
-<!-- Fim do Video ------------------------------------------------------- -->
+                        <!-- Fim do Video ------------------------------------------------------- -->
 
-<!-- Parte de Texto lado do video -------------------------------------- -->
+                        <!-- Parte de Texto lado do video -------------------------------------- -->
 
-        <div class="col-sm-3">
-          <h6>Título:</h6>
-            <p class="p2">Título do vídeo</p>
+                        <div class="col-sm-3">
+                            <h6>Título:</h6>
+                            <p class="p2">Título do vídeo</p>
 
-          <h6>Assunto:</h6>
-            <p class="p2">Assunto do video</p>
+                            <h6>Assunto:</h6>
+                            <p class="p2">Assunto do video</p>
 
-          <h6>Autor:</h6>
-            <p class="p2">Nome do produtor</p>
+                            <h6>Autor:</h6>
+                            <p class="p2">Nome do produtor</p>
 
-          <h6>Data de Lançamento:</h6>
-            <p class="p2">00/00/0000</p>
+                            <h6>Data de Lançamento:</h6>
+                            <p class="p2">00/00/0000</p>
 
-          <h6>Tempo:</h6>
-            <p class="p2">35:06 min.</p>
+                            <h6>Tempo:</h6>
+                            <p class="p2">35:06 min.</p>
 
-          <h6>Descrição:</h6>
-            <p class="p2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perferendis sed reiciendis ipsam deserunt est nam, quos assumenda exercitationem rerum aspernatur voluptate eaque quam delectus in cumque harum vitae debitis repudiandae!</p>
-            
-        </div>
-    </div><br><br> 
+                            <h6>Descrição:</h6>
+                            <p class="p2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perferendis sed reiciendis ipsam deserunt est nam, quos assumenda exercitationem rerum aspernatur voluptate eaque quam delectus in cumque harum vitae debitis repudiandae!</p>
 
-<!-- Fim do Texto de Video --------------------------------------------------------------------------------- -->
-    
-<!-- Imput para enviar arquivo -------------------------------------------------- -->
+                        </div>
+                    </div><br><br>
 
-    <p class="p1">Insira seu video de interpretação:</p>
+                    <!-- Fim do Texto de Video --------------------------------------------------------------------------------- -->
 
-    <div class="custom-file">
-        <input type="file" class="custom-file-input" id="validatedCustomFile" required>
-        <label class="custom-file-label" for="validatedCustomFile"></label>
-    </div>
+                    <!-- Imput para enviar arquivo -------------------------------------------------- -->
 
-<!-- Fim do Imput de evio de arquivo --------------------------------------------------------------- -->
-   
-<!-- Começo de termo de  concientização ------------------------------------------------------------------ -->
+                    <p class="p1">Insira seu video de interpretação:</p>
 
-    <div class="caixa mt-4">
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input form-control-sm" id="customCheck1">
-           <label class="custom-control-label" for="customCheck1"><i>Declaro que os dados postados são de minha autoria.</i> </label>
-        </div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="validatedCustomFile" required>
+                        <label class="custom-file-label" for="validatedCustomFile"></label>
+                    </div>
 
-<!-- Botões para envio,cancelar e limpar -------------------------------------------------------------- -->
+                    <!-- Fim do Imput de evio de arquivo --------------------------------------------------------------- -->
 
-        <div>
-            <input class="btn" type="button" value="Voltar">    
-            <input class="btn" type="reset" value="Limpar">    
-            <input class="btn" name="" type="submit" value="Enviar">
-        </div>
-    </div>
+                    <!-- Começo de termo de  concientização ------------------------------------------------------------------ -->
 
-<!-- Fim dos Botões ------------------------------------------------------------------------------------ -->
+                    <div class="caixa mt-4">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input form-control-sm" id="customCheck1">
+                            <label class="custom-control-label" for="customCheck1"><i>Declaro que os dados postados são de minha autoria.</i> </label>
+                        </div>
 
-</div>
-<!-- Fim do Conteudo da home_interprete_video ------------------------------------------------------------ -->
+                        <!-- Botões para envio,cancelar e limpar -------------------------------------------------------------- -->
 
-<!-- CONTROLE DO BOTÃO DE ABRIR/FECHAR SIDEBAR ----------------------- -->
+                        <div>
+                            <input class="btn" type="button" value="Voltar">
+                            <input class="btn" type="reset" value="Limpar">
+                            <input class="btn" name="" type="submit" value="Enviar">
+                        </div>
+                    </div>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-            });
-        });
-    </script>
+                    <!-- Fim dos Botões ------------------------------------------------------------------------------------ -->
 
-<!-- FIM CONTROLE DO BOTÃO DE ABRIR/FECHAR SIDEBAR ------------------ -->
+                </div>
+                <!-- Fim do Conteudo da home_interprete_video ------------------------------------------------------------ -->
+
+                <!-- CONTROLE DO BOTÃO DE ABRIR/FECHAR SIDEBAR ----------------------- -->
+
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        $('#sidebarCollapse').on('click', function() {
+                            $('#sidebar').toggleClass('active');
+                        });
+                    });
+                </script>
+
+                <!-- FIM CONTROLE DO BOTÃO DE ABRIR/FECHAR SIDEBAR ------------------ -->
 </body>
+
 </html>

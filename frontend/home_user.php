@@ -1,22 +1,24 @@
 <?php
 
+require_once('../backend/conexao.php');
+
 session_start();
+
+
 
 if (!isset($_SESSION['nome'])) {
     header('Location: ../index.html');
     exit;
-  } else {
-    $id = $_SESSION['id_pessoa'];    
- 
-    require_once('../backend/conexao.php');
- 
-   $videohome = $link->query("SELECT * FROM conteudo");
-  
- }
- ?>
+} else {
+    $id = $_SESSION['id_pessoa'];
+
+    $videohome = $link->query("SELECT * FROM conteudo");
+}
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -31,20 +33,21 @@ if (!isset($_SESSION['nome'])) {
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/global-home/home-user.css">
 </head>
+
 <body>
     <div class="wrapper">
 
-<!-- SIDEBAR ---------------------------------------------------- -->
+        <!-- SIDEBAR ---------------------------------------------------- -->
 
         <?php include('./sidebar.php') ?>
 
-<!-- FIM SIDEBAR ------------------------------------------------ -->
+        <!-- FIM SIDEBAR ------------------------------------------------ -->
 
-<!-- CONTEUDO --------------------------------------------------- -->
+        <!-- CONTEUDO --------------------------------------------------- -->
 
         <div id="content">
 
-<!-- BOTÃO PARA ABRIR/FECHAR SIDEBAR ---------------------------- -->
+            <!-- BOTÃO PARA ABRIR/FECHAR SIDEBAR ---------------------------- -->
 
             <nav class="container-fluid">
                 <span id="sidebarCollapse">
@@ -52,16 +55,16 @@ if (!isset($_SESSION['nome'])) {
                 </span>
             </nav>
 
- <!-- FIM BOTÃO PARA ABRIR/FECHAR SIDEBAR ----------------------- -->
+            <!-- FIM BOTÃO PARA ABRIR/FECHAR SIDEBAR ----------------------- -->
 
             <div class="container">
 
-<!-- NAVEGAÇÃO EM CORTINA --------------------------------------- -->
+                <!-- NAVEGAÇÃO EM CORTINA --------------------------------------- -->
 
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
-                      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
-                    <!--
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                        <!--
                     </li>                  
                       <li class="nav-item">
                       <a class="nav-link" id="profile-tab" data-toggle="tab" href="#perfil" role="tab" aria-controls="profile" aria-selected="false"><h5>Olá, <?php echo $_SESSION['nome']; ?>!</h5></a>
@@ -71,33 +74,35 @@ if (!isset($_SESSION['nome'])) {
                     </li> -->
                 </ul>
 
-<!-- FIM NAVEGAÇÃO EM CORTINA --------------------------------------- -->
-<!-- PÁGINAÇÃO EM CORTINA ------------------------------------------- -->
+                <!-- FIM NAVEGAÇÃO EM CORTINA --------------------------------------- -->
+                <!-- PÁGINAÇÃO EM CORTINA ------------------------------------------- -->
 
                 <div class="tab-content" id="myTabContent">
 
-<!-- CORTINA 1 ------------------------------------------------------ -->
+                    <!-- CORTINA 1 ------------------------------------------------------ -->
 
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <div class="container py-5">                            
+                        <div class="container py-5">
                             <div class="row">
 
-<!-- CARD - LISTA TOTAL -------------------------------------------------------- -->
-                               <?php foreach ($videohome as $video) { ?>
-                                <div class="col-md-4 p-2">
-                                    <a href="./home_video.php">
-                                        <div class="card">
-                                            <img class="card-img-top" src="../img/capa/<?php echo $video['capa_conteudo'] ?>" alt="<?php echo $video['assunto_conteudo'] ?>">
-                                            <div class="card-body">
-                                                <h5 class="card-title"><?php echo $video['titulo_conteudo'] ?></h5>
-                                                <p class="card-text">
-                                                <?php echo $video['descricao_conteudo'] ?>
-                                                </p>
+
+                                <!-- CARD - LISTA TOTAL -------------------------------------------------------- -->
+                                <?php foreach ($videohome as $video) { ?>
+                                    <div class="col-md-4 p-2">
+                                        <a href="./home_video.php?id=<?php echo $video['id_conteudo']; ?>">
+                                            <div class="card">
+                                                <img class="card-img-top" src="<?php echo $video['capa_conteudo'] ?>" alt="<?php echo $video['assunto_conteudo'] ?>">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"><?php echo $video['titulo_conteudo'] ?></h5>
+                                                    <p class="card-text">
+                                                        <?php echo $video['descricao_conteudo'] ?>
+                                                    </p>
+                                                </div>
+
                                             </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <?php } ?> 
+                                        </a>
+                                    </div>
+                                <?php } ?>
 
                                 <!--
                                 <div class="col-md-4 p-2">
@@ -115,33 +120,34 @@ if (!isset($_SESSION['nome'])) {
                                 </div>
                                -->
 
-<!-- FIM CARD -LISTA TOTAL ----------------------------------------------------- -->
+                                <!-- FIM CARD -LISTA TOTAL ----------------------------------------------------- -->
 
                             </div>
-                        </div>                        
+                        </div>
                     </div>
 
-<!-- FIM CORTINA 1 ------------------------------------------------ -->
+                    <!-- FIM CORTINA 1 ------------------------------------------------ -->
 
 
                 </div>
 
-<!-- FIM PÁGINAÇÃO EM CORTINA ----------------------------------------- -->
+                <!-- FIM PÁGINAÇÃO EM CORTINA ----------------------------------------- -->
 
             </div>
         </div>
     </div>
 
-<!-- CONTROLE DO BOTÃO DE ABRIR/FECHAR SIDEBAR ----------------------- -->
+    <!-- CONTROLE DO BOTÃO DE ABRIR/FECHAR SIDEBAR ----------------------- -->
 
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
+        $(document).ready(function() {
+            $('#sidebarCollapse').on('click', function() {
                 $('#sidebar').toggleClass('active');
             });
         });
     </script>
 
-<!-- FIM CONTROLE DO BOTÃO DE ABRIR/FECHAR SIDEBAR ------------------ -->
+    <!-- FIM CONTROLE DO BOTÃO DE ABRIR/FECHAR SIDEBAR ------------------ -->
 </body>
+
 </html>

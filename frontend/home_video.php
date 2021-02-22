@@ -1,20 +1,23 @@
 <?php
 session_start();
 
+$id_conteudo = $_GET['id'];
+
 if (!isset($_SESSION['id_pessoa'])) {
     header('Location: ../index.html');
     exit;
 } else {
-    $id = $_SESSION['id_pessoa'];
-    $id_conteudo = 7;
+    $id = $_SESSION['id_pessoa'];    
 
     require_once('../backend/conexao.php');
 
-    $postagens = $link->query("SELECT * FROM comentario inner join pessoa on pessoa.id_pessoa = comentario.id_pessoa  ORDER BY id_comentario DESC;");
+    $postagens = $link->query("SELECT * FROM comentario inner join pessoa on pessoa.id_pessoa = comentario.id_pessoa  ORDER BY id_comentario DESC;"); //comentários
 
     $conteudos = $link->query("SELECT * FROM pessoa LEFT JOIN conteudo on conteudo.id_pessoa = pessoa.id_pessoa WHERE id_conteudo = $id_conteudo");
+     
+    $traducoes = $link->query("SELECT nome FROM conteudo JOIN video_traducao ON conteudo.id_vid_traducao = video_traducao.id_vid_traducao LEFT JOIN pessoa ON pessoa.id_pessoa = video_traducao.id_pessoa WHERE video_traducao.id_pessoa = pessoa.id_pessoa AND conteudo.id_conteudo = 7");
 
-    $traducoes = $link->query("SELECT nome FROM conteudo JOIN video_traducao ON conteudo.id_vid_traducao = video_traducao.id_vid_traducao LEFT JOIN pessoa ON pessoa.id_pessoa = video_traducao.id_pessoa WHERE video_traducao.id_pessoa = pessoa.id_pessoa AND conteudo.id_conteudo = $id_conteudo");
+    $getvideos = $link->query("SELECT * FROM conteudo WHERE id_conteudo = $id_conteudo");
 }
 
 ?>
@@ -40,11 +43,11 @@ if (!isset($_SESSION['id_pessoa'])) {
 <body>
     <div class="wrapper">
 
- <!-- SIDEBAR ---------------------------------------------------- -->
+        <!-- SIDEBAR ---------------------------------------------------- -->
 
- <?php include('./sidebar.php') ?>
+        <?php include('./sidebar.php') ?>
 
-<!-- FIM SIDEBAR ------------------------------------------------ -->
+        <!-- FIM SIDEBAR ------------------------------------------------ -->
         <!-- CONTEUDO --------------------------------------------------- -->
 
         <div id="content">
@@ -60,13 +63,13 @@ if (!isset($_SESSION['id_pessoa'])) {
             <!-- FIM BOTÃO PARA ABRIR/FECHAR SIDEBAR ----------------------- -->
 
             <div class="container">
-                   
+
 
                 <div class="container py-3">
 
                     <!-- VÍDEO ---------------------------------------------- -->
-                    <?php foreach ($conteudos as $conteudo) ?>
-                    <?php foreach ($traducoes as $traducao) ?>
+                    <?php foreach ($conteudos as $conteudo)  ?>
+                    <?php foreach ($traducoes as $traducao)  ?>
                     <h3 class="titulo mb-4"><?php echo $conteudo['titulo_conteudo'] ?></h3>
                     <div class="row">
                         <div class="capsula-video">
@@ -122,13 +125,13 @@ if (!isset($_SESSION['id_pessoa'])) {
                         <?php foreach ($postagens as $postagem) { ?>
 
                             <p class="autor-msg">
-                                <img class="rounded-circle img_pessoa" src="<?php echo $postagem["img"] ?>" alt="<?php echo $postagem['nome'] ?>">
+                                <img class="rounded-circle img_pessoa" src="../img/user/<?php echo $postagem["img"] ?>" alt="<?php echo $postagem['nome'] ?>">
                                 <?php echo $postagem['nome'] ?> Postado: <?php echo $postagem['data_comentario'] ?>
                             </p>
                             <p class="msg"><?php echo $postagem["comentario"] ?></p>
 
                         <?php  } ?>
-
+                     
                         <!--
                             <p class="autor-msg">Sicrano Astolfo - 06:13h - 02/02/2021</p>                            
                             <p class="msg">Lorem ipsum dolor sit amet, consectetur adipisicing elit ipsum dolor sit.</p>
