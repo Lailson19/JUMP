@@ -7,10 +7,9 @@ if (!isset($_SESSION['id_pessoa'])) {
     header('Location: ../index.html');
     exit;
 } else {
-    $id = $_SESSION['id_pessoa'];      
+    $id = $_SESSION['id_pessoa'];
 
     $videohome = $link->query("SELECT * FROM conteudo");
-
     $videoprodutor = $link->query("SELECT * FROM conteudo WHERE conteudo.id_pessoa = $id_conteudo");
 }
 
