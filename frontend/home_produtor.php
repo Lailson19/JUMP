@@ -1,3 +1,24 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['id_pessoa'])) {
+    header('Location: ../index.html');
+    exit;
+} else {
+    $id = $_SESSION['id_pessoa'];
+    $id_conteudo = $id;
+
+    require_once('../backend/conexao.php');
+
+    $videohome = $link->query("SELECT * FROM conteudo");
+
+    $videoprodutor = $link->query("SELECT * FROM conteudo WHERE conteudo.id_pessoa = $id_conteudo");
+        
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -64,7 +85,22 @@
                             <div class="row">
 
 <!-- CARD - LISTA TOTAL -------------------------------------------------------- -->
-
+                                <?php foreach ($videohome as $video) { ?>
+                                <div class="col-md-4 p-2">
+                                    <a href="#">
+                                        <div class="card">
+                                            <img class="card-img-top" src="<?php echo $video['capa_conteudo'] ?>" alt="<?php echo $video['assunto_conteudo'] ?>">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><?php echo $video['titulo_conteudo'] ?></h5>
+                                                <p class="card-text">
+                                                <?php echo $video['descricao_conteudo'] ?>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <?php } ?>
+                               <!--
                                 <div class="col-md-4 p-2">
                                     <a href="#">
                                         <div class="card">
@@ -78,21 +114,7 @@
                                         </div>
                                     </a>
                                 </div>
-
-                                <div class="col-md-4 p-2">
-                                    <a href="#">
-                                        <div class="card">
-                                            <img class="card-img-top" src="../img/campo.jpg" alt="Imagem de capa do card">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Título</h5>
-                                                <p class="card-text">
-                                                    Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-
+                                -->
 <!-- FIM CARD -LISTA TOTAL ----------------------------------------------------- -->
 
                             </div>
@@ -107,20 +129,21 @@
                             <div class="row">
 
  <!-- CARD - LISTA PRODUZIDOS -------------------------------------------------------- -->
-
+                               <?php foreach ($videoprodutor as $produtor) { ?>
                                 <div class="col-md-4 p-2">
                                     <a href="#">
                                         <div class="card">
-                                            <img class="card-img-top" src="../img/campo.jpg" alt="Imagem de capa do card">
+                                            <img class="card-img-top" src="<?php echo $produtor['capa_conteudo'] ?>" alt="<?php echo $produtor['assunto_conteudo'] ?>">
                                             <div class="card-body">
-                                                <h5 class="card-title">Título</h5>
+                                                <h5 class="card-title"><?php echo $produtor['titulo_conteudo'] ?></h5>
                                                 <p class="card-text">
-                                                    Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.
+                                                <?php echo $produtor['descricao_conteudo'] ?>
                                                 </p>
                                             </div>
                                         </div>
                                     </a>
                                 </div>
+                                <?php } ?> 
 
 <!-- FIM CARD - LISTA PRODUZIDOS -------------------------------------------------------- -->
 

@@ -1,3 +1,18 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['id_pessoa'])) {
+    header('Location: ../index.html');
+    exit;
+} else {
+    $id = $_SESSION['id_pessoa'];
+    $id_conteudo = 7;
+
+    require_once('../backend/conexao.php');
+        
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -20,25 +35,6 @@
 <!-- SIDEBAR ---------------------------------------------------- -->
 
 <?php include('./sidebar.php') ?>
-
-<!-- FIM SIDEBAR ------------------------------------------------ -->
-
-            <div class="line"></div>
-
-<!-- DIREITOS ---------------------------------------------------- -->
-
-            <p class="copy">
-                <span class="copycopy">
-                    &copycopyright SQUAD8-SP2
-                </span>
-                <span class="recode">
-                    Recode Pro | 2020-2021
-                </span>
-            </p>
-
-<!-- FIM DIREITOS ----------------------------------------------- -->
-
-        </nav>
 
 <!-- FIM SIDEBAR ------------------------------------------------ -->
 <!-- CONTEUDO --------------------------------------------------- -->
