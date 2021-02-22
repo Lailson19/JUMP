@@ -14,13 +14,13 @@ if (strlen($postagem) > 0) {
         echo "
         <script>
             alert('Postagem Cadastrada com Sucesso!')
-            location.href = '../home.php'
+            location.href = '../frontend/home_video.php'
         </script>";
     } else {
         echo "
         <script>
             alert('Não foi Possível Cadastrar a Postagem!')
-            location.href = '../home.php'
+            location.href = '../frontend/home_video.php'
         </script>";
     }
 
@@ -30,6 +30,6 @@ if (strlen($postagem) > 0) {
     echo "
         <script>
             alert('Digite Algo para Postar!')
-            location.href = '../home.php'
+            location.href = '../frontend/home.php'
         </script>";
 }

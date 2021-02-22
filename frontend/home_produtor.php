@@ -18,7 +18,6 @@ if (!isset($_SESSION['id_pessoa'])) {
 
 ?>
 
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
