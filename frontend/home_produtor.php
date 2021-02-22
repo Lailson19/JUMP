@@ -1,19 +1,17 @@
 <?php
+require_once('../backend/conexao.php');
+
 session_start();
 
 if (!isset($_SESSION['id_pessoa'])) {
     header('Location: ../index.html');
     exit;
 } else {
-    $id = $_SESSION['id_pessoa'];
-    $id_conteudo = $id;
-
-    require_once('../backend/conexao.php');
+    $id = $_SESSION['id_pessoa'];      
 
     $videohome = $link->query("SELECT * FROM conteudo");
 
     $videoprodutor = $link->query("SELECT * FROM conteudo WHERE conteudo.id_pessoa = $id_conteudo");
-        
 }
 
 ?>
@@ -86,7 +84,7 @@ if (!isset($_SESSION['id_pessoa'])) {
 <!-- CARD - LISTA TOTAL -------------------------------------------------------- -->
                                 <?php foreach ($videohome as $video) { ?>
                                 <div class="col-md-4 p-2">
-                                    <a href="#">
+                                <a href="../home_video.php?id=<?php echo $video['id_conteudo']; ?>">
                                         <div class="card">
                                             <img class="card-img-top" src="<?php echo $video['capa_conteudo'] ?>" alt="<?php echo $video['assunto_conteudo'] ?>">
                                             <div class="card-body">
