@@ -2,7 +2,7 @@
 
 $servername = "127.0.0.1:3306";
 $username = "root";
-$password = "@recodepro";
+$password = "";
 $database = "jump_squad8";
 
 // $servername = "127.0.0.1:3306";
