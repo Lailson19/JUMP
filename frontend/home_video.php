@@ -1,8 +1,10 @@
 <?php
+error_reporting(0);
 session_start();
 
 $id_conteudo = $_GET['id'];
 echo $id_conteudo;
+
 
 if (!isset($_SESSION['id_pessoa'])) {
     header('Location: ../index.html');
@@ -14,9 +16,9 @@ if (!isset($_SESSION['id_pessoa'])) {
 
     $postagens = $link->query("SELECT * FROM comentario inner join pessoa on pessoa.id_pessoa = comentario.id_pessoa  ORDER BY id_comentario DESC;"); //comentários
 
-    $conteudos = $link->query("SELECT * FROM pessoa LEFT JOIN conteudo on conteudo.id_pessoa = pessoa.id_pessoa WHERE id_conteudo = $id_conteudo");
+    $conteudos = $link->query("SELECT * FROM conteudo JOIN video_produtor ON conteudo.id_vid_produtor = video_produtor.id_vid_produtor JOIN pessoa ON conteudo.id_pessoa = pessoa.id_pessoa WHERE conteudo.id_conteudo = $id_conteudo");
      
-    $traducoes = $link->query("SELECT nome FROM conteudo JOIN video_traducao ON conteudo.id_vid_traducao = video_traducao.id_vid_traducao LEFT JOIN pessoa ON pessoa.id_pessoa = video_traducao.id_pessoa WHERE video_traducao.id_pessoa = pessoa.id_pessoa AND conteudo.id_conteudo = 7");
+    $traducoes = $link->query("SELECT * FROM pessoa RIGHT JOIN video_traducao ON video_traducao.id_pessoa = pessoa.id_pessoa JOIN conteudo ON conteudo.id_vid_traducao = video_traducao.id_vid_traducao where conteudo.id_conteudo = $id_conteudo");
 
     $getvideos = $link->query("SELECT * FROM conteudo WHERE id_conteudo = $id_conteudo");
 }
@@ -43,6 +45,7 @@ if (!isset($_SESSION['id_pessoa'])) {
 
 <body>
     <div class="wrapper">
+        
 
         <!-- SIDEBAR ---------------------------------------------------- -->
 
@@ -65,7 +68,6 @@ if (!isset($_SESSION['id_pessoa'])) {
 
             <div class="container">
 
-
                 <div class="container py-3">
 
                     <!-- VÍDEO ---------------------------------------------- -->
@@ -75,7 +77,7 @@ if (!isset($_SESSION['id_pessoa'])) {
                     <div class="row">
                         <div class="capsula-video">
                             <video controls class="meus_videos parado">
-                                <source src="../video/carinhosamente_audio.mp4" type="video/mp4" />
+                                <source src="../video/principal/<?php echo $conteudo['nome_vid_produtor'];?>" type="video/mp4" />
                             </video>
                             <video id="vd2" class="meus_videos parado">
                                 <source src="../video/carinhosamente_libras.mp4" type="video/mp4" />

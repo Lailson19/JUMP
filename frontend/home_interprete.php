@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 require_once('../backend/conexao.php');
 
 session_start();
@@ -9,11 +10,11 @@ if (!isset($_SESSION['id_pessoa'])) {
 } else {
     $id = $_SESSION['id_pessoa'];
 
-    $videohome = $link->query("SELECT * FROM conteudo");
+    $videohome = $link->query("SELECT * FROM conteudo WHERE conteudo.id_vid_traducao IS NOT NULL");
 
-    $videointerprete = $link->query("SELECT * FROM conteudo JOIN video_traducao ON conteudo.id_vid_traducao = video_traducao.id_vid_traducao JOIN pessoa ON video_traducao.id_pessoa = pessoa.id_pessoa WHERE conteudo.id_vid_traducao = video_traducao.id_vid_traducao AND video_traducao.id_pessoa = $id");
+    $videointerprete = $link->query("SELECT * FROM conteudo JOiN video_traducao ON conteudo.id_vid_traducao = video_traducao.id_vid_traducao WHERE video_traducao.id_pessoa = $id");
 
-    $lista = $link->query("SELECT nome, titulo_conteudo, assunto_conteudo, temp_vid_produtor, data_vid_produtor FROM conteudo INNER JOIN pessoa ON pessoa.id_pessoa = conteudo.id_pessoa INNER JOIN video_produtor ON video_produtor.id_vid_produtor = conteudo.id_vid_produtor");
+    $lista = $link->query("SELECT * FROM conteudo JOIN pessoa ON conteudo.id_pessoa = pessoa.id_pessoa WHERE conteudo.id_vid_traducao IS NULL");
 }
 ?>
 
@@ -89,7 +90,7 @@ if (!isset($_SESSION['id_pessoa'])) {
                                     <div class="col-md-4 p-2">
                                         <a href="./home_video.php?id=<?php echo $video['id_conteudo']; ?>">
                                             <div class="card">
-                                                <img class="card-img-top" src="<?php echo $video['capa_conteudo'] ?>" alt="<?php echo $video['assunto_conteudo'] ?>">
+                                                <img class="card-img-top" src="../img/capa/<?php echo $video['capa_conteudo'] ?>" alt="<?php echo $video['assunto_conteudo'] ?>">
                                                 <div class="card-body">
                                                     <h5 class="card-title"><?php echo $video['titulo_conteudo'] ?></h5>
                                                     <p class="card-text">
@@ -132,9 +133,9 @@ if (!isset($_SESSION['id_pessoa'])) {
                                 <!-- CARD - LISTA PRODUZIDOS -------------------------------------------------------- -->
                                 <?php foreach ($videointerprete as $interprete) { ?>
                                     <div class="col-md-4 p-2">
-                                        <a href="#">
+                                        <a href="./home_video.php?id=<?php echo $interprete['id_conteudo']; ?>">
                                             <div class="card">
-                                                <img class="card-img-top" src="<?php echo $interprete['capa_conteudo'] ?>" alt="<?php echo $interprete['assunto_conteudo'] ?>">
+                                                <img class="card-img-top" src="../img/capa/<?php echo $interprete['capa_conteudo'] ?>" alt="<?php echo $interprete['assunto_conteudo'] ?>">
                                                 <div class="card-body">
                                                     <h5 class="card-title"><?php echo $interprete['titulo_conteudo'] ?></h5>
                                                     <p class="card-text">
@@ -176,22 +177,10 @@ if (!isset($_SESSION['id_pessoa'])) {
                                                 <td><?php echo $traduzir['nome'] ?></td>
                                                 <td><?php echo $traduzir['titulo_conteudo'] ?></td>
                                                 <td><?php echo $traduzir['assunto_conteudo'] ?></td>
-                                                <td><?php echo $traduzir['data_vid_produtor'] ?></td>
+                                                <td><?php echo $traduzir['data_conteudo'] ?></td>
                                                 <td><?php echo $traduzir['temp_vid_produtor'] ?></td>
-                                                <td type="button" class="btn btn-secondary btn-sm" href="#"><a href="home_interprete_video.php">Interpretar</a></td>
+                                                <td type="button" class="btn btn-secondary btn-sm"><a href="./home_interprete_video.php?id=<?php echo $traduzir['id_conteudo'];?>">Interpretar</a></td>
                                             </tr>
-
-                                            <!--
-        <tr>
-            <td>xxxxxx</td>
-            <td>xxxxxx</td>
-            <td>xxxxxx</td>
-            <td>00/00/0000</td>
-            <td>00:00</td>
-            <td type="button" class="btn btn-secondary btn-sm" href="#">Interpretar</td>
-          </tr>
-          -->
-
                                         </tbody>
                                     <?php } ?>
 

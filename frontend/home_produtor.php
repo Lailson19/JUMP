@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 require_once('../backend/conexao.php');
 
 session_start();
@@ -7,11 +8,13 @@ if (!isset($_SESSION['id_pessoa'])) {
     header('Location: ../index.html');
     exit;
 } else {
-    $id = $_SESSION['id_pessoa'];      
+    $id = $_SESSION['id_pessoa'];
 
-    $videohome = $link->query("SELECT * FROM conteudo");
+    $videohome = $link->query("SELECT * FROM conteudo WHERE conteudo.id_vid_traducao IS NOT NULL");
 
-    $videoprodutor = $link->query("SELECT * FROM conteudo WHERE conteudo.id_pessoa = $id_conteudo");
+    $videoproduzi = $link->query("SELECT * FROM conteudo WHERE conteudo.id_pessoa = $id");
+
+    // $videoprodutor = $link->query("SELECT * FROM conteudo JOIN video_produtor ON conteudo.id_vid_produtor = video_produtor.id_vid_produtor JOIN pessoa ON conteudo.id_pessoa = pessoa.id_pessoa WHERE conteudo.id_conteudo = $id_conteudo");
 }
 
 ?>
@@ -84,7 +87,7 @@ if (!isset($_SESSION['id_pessoa'])) {
 <!-- CARD - LISTA TOTAL -------------------------------------------------------- -->
                                 <?php foreach ($videohome as $video) { ?>
                                 <div class="col-md-4 p-2">
-                                <a href="../home_video.php?id=<?php echo $video['id_conteudo']; ?>">
+                                <a href="./home_video.php?id=<?php echo $video['id_conteudo']; ?>">
                                         <div class="card">
                                             <img class="card-img-top" src="../img/capa/<?php echo $video['capa_conteudo'] ?>" alt="<?php echo $video['assunto_conteudo'] ?>">
                                             <div class="card-body">
@@ -126,9 +129,9 @@ if (!isset($_SESSION['id_pessoa'])) {
                             <div class="row">
 
  <!-- CARD - LISTA PRODUZIDOS -------------------------------------------------------- -->
-                               <?php foreach ($videoprodutor as $produtor) { ?>
+                               <?php foreach ($videoproduzi as $produtor) { ?>
                                 <div class="col-md-4 p-2">
-                                    <a href="#">
+                                    <a href="./home_video.php?id=<?php echo $produtor['id_conteudo']; ?>">
                                         <div class="card">
                                             <img class="card-img-top" src="../img/capa/<?php echo $produtor['capa_conteudo'] ?>" alt="<?php echo $produtor['assunto_conteudo'] ?>">
                                             <div class="card-body">

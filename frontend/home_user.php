@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(0);
 require_once('../backend/conexao.php');
 
 session_start();
@@ -12,7 +12,8 @@ if (!isset($_SESSION['nome'])) {
 } else {
     $id = $_SESSION['id_pessoa'];
 
-    $videohome = $link->query("SELECT * FROM conteudo");
+    $videohome = $link->query("SELECT * FROM conteudo WHERE conteudo.id_vid_traducao IS NOT NULL");
+    
 }
 ?>
 
@@ -98,7 +99,13 @@ if (!isset($_SESSION['nome'])) {
                                                         <?php echo $video['descricao_conteudo'] ?>
                                                     </p>
                                                 </div>
-                                                <?php  } ?>                          
+
+                                            </div>
+                                        </a>
+                                    </div>
+                                <?php } ?>
+                             
+
 
                                 <!--
                                 <div class="col-md-4 p-2">
