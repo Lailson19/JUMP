@@ -99,11 +99,13 @@ if (!isset($_SESSION['nome'])) {
                                                         <?php echo $video['descricao_conteudo'] ?>
                                                     </p>
                                                 </div>
+
                                             </div>
                                         </a>
                                     </div>
                                 <?php } ?>
                              
+
 
                                 <!--
                                 <div class="col-md-4 p-2">

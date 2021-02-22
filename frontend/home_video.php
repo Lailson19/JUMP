@@ -3,6 +3,7 @@ error_reporting(0);
 session_start();
 
 $id_conteudo = $_GET['id'];
+echo $id_conteudo;
 
 
 if (!isset($_SESSION['id_pessoa'])) {
