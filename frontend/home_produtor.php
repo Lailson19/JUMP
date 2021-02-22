@@ -86,7 +86,7 @@ if (!isset($_SESSION['id_pessoa'])) {
                                 <div class="col-md-4 p-2">
                                 <a href="../home_video.php?id=<?php echo $video['id_conteudo']; ?>">
                                         <div class="card">
-                                            <img class="card-img-top" src="<?php echo $video['capa_conteudo'] ?>" alt="<?php echo $video['assunto_conteudo'] ?>">
+                                            <img class="card-img-top" src="../img/capa/<?php echo $video['capa_conteudo'] ?>" alt="<?php echo $video['assunto_conteudo'] ?>">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $video['titulo_conteudo'] ?></h5>
                                                 <p class="card-text">
@@ -130,7 +130,7 @@ if (!isset($_SESSION['id_pessoa'])) {
                                 <div class="col-md-4 p-2">
                                     <a href="#">
                                         <div class="card">
-                                            <img class="card-img-top" src="<?php echo $produtor['capa_conteudo'] ?>" alt="<?php echo $produtor['assunto_conteudo'] ?>">
+                                            <img class="card-img-top" src="../img/capa/<?php echo $produtor['capa_conteudo'] ?>" alt="<?php echo $produtor['assunto_conteudo'] ?>">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $produtor['titulo_conteudo'] ?></h5>
                                                 <p class="card-text">
@@ -155,28 +155,40 @@ if (!isset($_SESSION['id_pessoa'])) {
                         <div class="container py-4">
 
                             <h4>Novo conteúdo</h4>
-                            <form action="" method="" class="mt-4">
+                            <form action="../backend/cadastro_video_produtor.php" method="POST" enctype="multipart/form-data" class="mt-4">
                                 <div class="row form-group">
                                     <div class="col-md">
-                                        <input type="text" class="form-control form-control-sm" placeholder="Digite o título...">
+
+                                        <input type="text" class="form-control form-control-sm" name="titulo_conteudo" placeholder="Digite o título...">
+
                                     </div>
                                     <div class="col-md">
-                                        <input type="text" class="form-control form-control-sm" placeholder="Informe o assunto...">
+
+                                        <input type="text" name="assunto_conteudo" class="form-control form-control-sm" placeholder="Informe o assunto...">
+
                                     </div>
                                 </div>
-                                <textarea class="form-control form-control-sm" rows="3" placeholder="Insira aqui a descrição do seu conteudo."></textarea>
+
+                                <textarea class="form-control form-control-sm" name="descricao_conteudo" rows="3" placeholder="Insira aqui a descrição do seu conteudo."></textarea>
+
                                 <div class="custom-file mt-3">
-                                    <input type="file" class="custom-file-input form-control form-control-sm" id="customFileLang" lang="pt-br">
+
+                                    <input type="file" name="img_capa" class="custom-file-input form-control form-control-sm" id="customFileLang" lang="pt-br">
                                     <label class="custom-file-label" for="customFileLang">Selecione um arquivo de imagem para sua capa...</label>
+
                                 </div>
                                 <div class="custom-file my-3">
-                                    <input type="file" class="custom-file-input form-control form-control-sm" id="customFileLang" lang="pt-br">
+
+                                    <input type="file" name="video_conteudo" class="custom-file-input form-control form-control-sm" id="customFileLang" lang="pt-br">
                                     <label class="custom-file-label" for="customFileLang">Selecione um arquivo de vídeo...</label>
+
                                 </div>
                                 <div class="caixa mt-4">
                                     <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input form-control form-control-sm" id="customCheck1">
+
+                                        <input type="checkbox" name="ciente" class="custom-control-input form-control form-control-sm" id="customCheck1">
                                         <label class="custom-control-label" for="customCheck1"><i>Declaro que os dados postados são de minha autoria.</i> </label>
+
                                     </div>
                                     <div>
                                         <button class="btn" type="button">Voltar</button>

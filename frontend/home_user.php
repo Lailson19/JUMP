@@ -85,6 +85,7 @@ if (!isset($_SESSION['nome'])) {
                         <div class="container py-5">
                             <div class="row">
 
+
                                 <!-- CARD - LISTA TOTAL -------------------------------------------------------- -->
                                 <?php foreach ($videohome as $video) { ?>
                                     <div class="col-md-4 p-2">
@@ -97,6 +98,7 @@ if (!isset($_SESSION['nome'])) {
                                                         <?php echo $video['descricao_conteudo'] ?>
                                                     </p>
                                                 </div>
+
                                             </div>
                                         </a>
                                     </div>
