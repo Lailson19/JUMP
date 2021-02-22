@@ -6,17 +6,14 @@ h4 {
 .col-sm-9{
     margin-bottom: 0.6rem;
 }
-.p1{
-    margin-top: -1.5rem;
-    margin-bottom:-0.1rem;
+.col-lg-3 p{
+    font-size: 0.9em !important;
+    line-height: 1.2em;
+    font-style: italic;
 }
-.p2{
-    font-size: 15px;
-}
-h6 {
-    font-size:12px;
+h5 {
+    font-size: 0.9em !important;
     font-weight: bolder;
-    margin-bottom: -0.2rem;
 }
 .btn{
     color: #177681;
