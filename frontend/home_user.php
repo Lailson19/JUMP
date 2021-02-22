@@ -91,15 +91,14 @@ if (!isset($_SESSION['nome'])) {
                                     <div class="col-md-4 p-2">
                                         <a href="./home_video.php?id=<?php echo $video['id_conteudo']; ?>">
                                             <div class="card">
-                                                <img class="card-img-top" src="<?php echo $video['capa_conteudo'] ?>" alt="<?php echo $video['assunto_conteudo'] ?>">
+                                                <img class="card-img-top" src="../img/capa/<?php echo $video['capa_conteudo'] ?>" alt="<?php echo $video['assunto_conteudo'] ?>">
                                                 <div class="card-body">
                                                     <h5 class="card-title"><?php echo $video['titulo_conteudo'] ?></h5>
                                                     <p class="card-text">
                                                         <?php echo $video['descricao_conteudo'] ?>
                                                     </p>
                                                 </div>
-
-                             
+                                                <?php  } ?>                          
 
                                 <!--
                                 <div class="col-md-4 p-2">
