@@ -49,7 +49,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="form_cadastro" method="post" action="./backend/cadastro_usuario.php">
+                    <form class="form_cadastro" method="post" action="./backend/cadastro_usuario.php" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="exampleInputEmail1">
                                 <small class="text-white">
@@ -59,7 +59,9 @@
                             <input type="text" class="form-control form-control-sm mb-2" id="nome" name="nome" required
                             aria-describedby="emailHelp" placeholder="Digite seu nome" />
 
-                            <input class="form-control form-control-sm mb-2" id="img" name="img" type="url" placeholder="Informe um URL de uma foto sua online" />
+                            <!-- <input class="form-control form-control-sm mb-2" id="img" name="img" type="url" placeholder="Informe um URL de uma foto sua online" /> -->
+
+                            <input class="form-control mb-2" type="file" name="img" />
 
                             <input type="email" class="form-control form-control-sm mb-2" id="email" name="email" required aria-describedby="emailHelp" placeholder="Digite seu e-mail" />
 

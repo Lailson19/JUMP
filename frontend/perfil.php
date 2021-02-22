@@ -120,16 +120,10 @@ if (!isset($_SESSION['nome'])) {
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <!-- <div class="custom-file">
-                                        <input type="file" value="<?php echo $_SESSION['img']; ?>" name="img" class="custom-file-input" id="customFileLang" lang="en">
-                                        <label class="custom-file-label" for="customFileLang">Escolha sua foto do perfil...</label>
-                                    </div> -->
-
                                     <div class="custom-file">
                                         <label for="img">Imagem</label>
-                                        <input class="form-control" id="img" type="file" name="img"/>
+                                        <input class="form-control" type="file" name="img" />
                                     </div>
-
                                 </div>
                             </div>
                             <div class="row">

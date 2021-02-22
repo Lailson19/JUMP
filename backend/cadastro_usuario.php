@@ -3,23 +3,26 @@
 require_once('conexao.php');
 
 $nome = $_POST["nome"];
-$img = $_POST["img"];
+$img = $_FILES["img"];
 $email = $_POST["email"];
 $senha = $_POST["senha"];
 $confirmar_senha = $_POST["confirmar_senha"];
 
 // Se não cadastra imagem de perfil, entra imagem avatar
-if(!$img){
+if(isset($_FILES['img'])){
+
+    $extensao = strtolower(substr($_FILES['img']['name'], -4)); //pega a extensao do arquivo
+    $novo_nome = md5(time()).$extensao; //define o nome do arquivo
+    $diretorio = "../img/user/"; //define o diretorio para onde enviaremos o arquivo
+    move_uploaded_file($_FILES['img']['tmp_name'], $diretorio.$novo_nome); //efetua o upload
+    $img = $novo_nome;
+    
+} else {
+
     $img = 'avatar.png';
+
 }
 
-/*
-echo '<br> Nome: '.$nome;
-echo '<br> Imagem: '.$img;
-echo '<br> Email: '.$email;
-echo '<br> Senha: '.$senha;
-echo '<br> Confirmação: '.$confirmar_senha;
-*/
 
 if((strlen($nome) > 3) && (strlen($email) > 3) && (strlen($senha) > 3) && ($senha === $confirmar_senha)) {
     $senha_cripto = md5($senha);

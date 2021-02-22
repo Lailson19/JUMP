@@ -10,29 +10,29 @@ if (!isset($_SESSION['nome']) && !isset($_SESSION['id_pessoa'])) {
 
 $id_pessoa = $_SESSION['id_pessoa'];
 $nome = $_POST['nome'];
-$img = $_POST['img'];
+$img = $_FILES['img'];
 $email = $_POST['email'];
 $senha = $_POST['senha'];
-$confirmar_senha = $_POST["confirmar_senha"];
 $situacao = $_POST['situacao'];
 $grau = $_POST['grau'];
 $sexo = $_POST['sexo'];
 $dt_nasc = $_POST['dt_nasc'];
+$confirmar_senha = $_POST["confirmar_senha"];
 
 // Se não cadastra imagem de perfil, entra imagem avatar
+if(isset($_FILES['img'])){
 
-if(!$img){
+    $extensao = strtolower(substr($_FILES['img']['name'], -4)); //pega a extensao do arquivo
+    $novo_nome = md5(time()) . $extensao; //define o nome do arquivo
+    $diretorio = "../img/user/"; //define o diretorio para onde enviaremos o arquivo
+    move_uploaded_file($_FILES['img']['tmp_name'], $diretorio.$novo_nome); //efetua o upload
+    $img = $novo_nome;
+    
+} else {
+
     $img = 'avatar.png';
-}
 
-// echo '<br> Nome: '.$nome;
-// echo '<br> Imagem: '.$img;
-// echo '<br> Email: '.$email;
-// echo '<br> Senha: '.$senha;
-// echo '<br> Confirmação: '.$confirmar_senha;
-// echo '<br> Situação: '.$situacao;
-// echo '<br> Grau: '.$grau;
-// echo '<br> Data de Nascimento: '.$dt_nasc;
+}
 
 if($senha === $confirmar_senha) {    
     $senha_cripto = md5($senha);   
