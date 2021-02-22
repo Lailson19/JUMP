@@ -6,9 +6,14 @@ if (!isset($_SESSION['id_pessoa'])) {
     exit;
 } else {
     $id = $_SESSION['id_pessoa'];
-    $id_conteudo = 7;
 
     require_once('../backend/conexao.php');
+
+    $videohome = $link->query("SELECT * FROM conteudo");
+
+    $videointerprete = $link->query("SELECT * FROM conteudo JOIN video_traducao ON conteudo.id_vid_traducao = video_traducao.id_vid_traducao JOIN pessoa ON video_traducao.id_pessoa = pessoa.id_pessoa WHERE conteudo.id_vid_traducao = video_traducao.id_vid_traducao AND video_traducao.id_pessoa = $id");
+
+    $lista = $link->query("SELECT nome, titulo_conteudo, assunto_conteudo, temp_vid_produtor, data_vid_produtor FROM conteudo INNER JOIN pessoa ON pessoa.id_pessoa = conteudo.id_pessoa INNER JOIN video_produtor ON video_produtor.id_vid_produtor = conteudo.id_vid_produtor");
         
 }
 ?>
@@ -79,7 +84,23 @@ if (!isset($_SESSION['id_pessoa'])) {
                             <div class="row">
 
 <!-- CARD - LISTA TOTAL -------------------------------------------------------- -->
+                               <?php foreach ($videohome as $video) { ?>
+                                <div class="col-md-4 p-2">
+                                    <a href="#">
+                                        <div class="card">
+                                            <img class="card-img-top" src="<?php echo $video['capa_conteudo'] ?>" alt="<?php echo $video['assunto_conteudo'] ?>">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><?php echo $video['titulo_conteudo'] ?></h5>
+                                                <p class="card-text">
+                                                <?php echo $video['descricao_conteudo'] ?>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <?php } ?>
 
+                                <!--
                                 <div class="col-md-4 p-2">
                                     <a href="#">
                                         <div class="card">
@@ -93,21 +114,7 @@ if (!isset($_SESSION['id_pessoa'])) {
                                         </div>
                                     </a>
                                 </div>
-
-                                <div class="col-md-4 p-2">
-                                    <a href="#">
-                                        <div class="card">
-                                            <img class="card-img-top" src="../img/campo.jpg" alt="Imagem de capa do card">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Título</h5>
-                                                <p class="card-text">
-                                                    Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-
+                                -->
 <!-- FIM CARD -LISTA TOTAL ----------------------------------------------------- -->
 
                             </div>
@@ -122,20 +129,21 @@ if (!isset($_SESSION['id_pessoa'])) {
                             <div class="row">
 
  <!-- CARD - LISTA PRODUZIDOS -------------------------------------------------------- -->
-
+                               <?php foreach ($videointerprete as $interprete) { ?>
                                 <div class="col-md-4 p-2">
                                     <a href="#">
                                         <div class="card">
-                                            <img class="card-img-top" src="../img/campo.jpg" alt="Imagem de capa do card">
+                                            <img class="card-img-top" src="<?php echo $interprete['capa_conteudo'] ?>" alt="<?php echo $interprete['assunto_conteudo'] ?>">
                                             <div class="card-body">
-                                                <h5 class="card-title">Título</h5>
+                                                <h5 class="card-title"><?php echo $interprete['titulo_conteudo'] ?></h5>
                                                 <p class="card-text">
-                                                    Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.
+                                                <?php echo $interprete['descricao_conteudo'] ?>
                                                 </p>
                                             </div>
                                         </div>
                                     </a>
                                 </div>
+                                <?php } ?> 
 
 <!-- FIM CARD - LISTA PRODUZIDOS -------------------------------------------------------- -->
 
@@ -161,15 +169,18 @@ if (!isset($_SESSION['id_pessoa'])) {
           <th scope="col">Duração</th>
         </tr>
       </thead>
+      <?php foreach ($lista as $traduzir) { ?>
       <tbody>
 <tr>
-          <td>xxxxxx</td>
-          <td>xxxxxx</td>
-          <td>xxxxxx</td>
-          <td>00/00/0000</td>
-          <td>00:00</td>
+          <td><?php echo $traduzir['nome'] ?></td>
+          <td><?php echo $traduzir['titulo_conteudo'] ?></td>
+          <td><?php echo $traduzir['assunto_conteudo'] ?></td>
+          <td><?php echo $traduzir['data_vid_produtor'] ?></td>
+          <td><?php echo $traduzir['temp_vid_produtor'] ?></td>
           <td type="button" class="btn btn-secondary btn-sm" href="#">Interpretar</td>
         </tr>
+
+        <!--
         <tr>
             <td>xxxxxx</td>
             <td>xxxxxx</td>
@@ -178,7 +189,11 @@ if (!isset($_SESSION['id_pessoa'])) {
             <td>00:00</td>
             <td type="button" class="btn btn-secondary btn-sm" href="#">Interpretar</td>
           </tr>
+          -->
+
         </tbody>
+        <?php } ?> 
+
         </table>
   </div>
 
