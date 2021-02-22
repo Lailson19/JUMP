@@ -132,7 +132,7 @@ if (!isset($_SESSION['id_pessoa'])) {
                                 <div class="col-md-4 p-2">
                                     <a href="#">
                                         <div class="card">
-                                            <img class="card-img-top" src="../img/capa/<?php echo $video['capa_conteudo'] ?>" alt="<?php echo $produtor['assunto_conteudo'] ?>">
+                                            <img class="card-img-top" src="../img/capa/<?php echo $produtor['capa_conteudo'] ?>" alt="<?php echo $produtor['assunto_conteudo'] ?>">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $produtor['titulo_conteudo'] ?></h5>
                                                 <p class="card-text">
