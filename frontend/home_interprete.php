@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 require_once('../backend/conexao.php');
 
 session_start();
@@ -9,7 +10,7 @@ if (!isset($_SESSION['id_pessoa'])) {
 } else {
     $id = $_SESSION['id_pessoa'];
 
-    $videohome = $link->query("SELECT * FROM conteudo");
+    $videohome = $link->query("SELECT * FROM conteudo WHERE conteudo.id_vid_traducao IS NOT NULL");
 
     $videointerprete = $link->query("SELECT * FROM conteudo JOIN video_traducao ON conteudo.id_vid_traducao = video_traducao.id_vid_traducao JOIN pessoa ON video_traducao.id_pessoa = pessoa.id_pessoa WHERE conteudo.id_vid_traducao = video_traducao.id_vid_traducao AND video_traducao.id_pessoa = $id");
 
@@ -89,7 +90,7 @@ if (!isset($_SESSION['id_pessoa'])) {
                                     <div class="col-md-4 p-2">
                                         <a href="./home_video.php?id=<?php echo $video['id_conteudo']; ?>">
                                             <div class="card">
-                                                <img class="card-img-top" src="<?php echo $video['capa_conteudo'] ?>" alt="<?php echo $video['assunto_conteudo'] ?>">
+                                                <img class="card-img-top" src="../img/capa/<?php echo $video['capa_conteudo'] ?>" alt="<?php echo $video['assunto_conteudo'] ?>">
                                                 <div class="card-body">
                                                     <h5 class="card-title"><?php echo $video['titulo_conteudo'] ?></h5>
                                                     <p class="card-text">
