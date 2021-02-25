@@ -1,9 +1,16 @@
 <?php
 
+// CONEXÃO LOCAL: LAILSON
 $servername = "localhost";
 $username = "root";
-$password = "@recodepro";
+$password = "";
 $database = "jump_squad8";
+
+
+// $servername = "localhost";
+// $username = "root";
+// $password = "@recodepro";
+// $database = "jump_squad8";
 
 
 // $servername = "67.205.138.239";
