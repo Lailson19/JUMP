@@ -3,6 +3,7 @@ error_reporting(0);
 session_start();
 
 $id_conteudo = $_GET['id'];
+
 $_SESSION['id_conteudo_post'] = $id_conteudo;
 
 

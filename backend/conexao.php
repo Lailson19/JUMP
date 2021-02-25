@@ -2,7 +2,7 @@
 
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "@recodepro";
 $database = "jump_squad8";
 
 
