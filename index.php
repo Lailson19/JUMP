@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -11,6 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/index-css.css">
+
 </head>
 <body>
     <nav class="navbar navbar-expand-sm d-flex justify-content-between px-5">
@@ -22,6 +27,14 @@
             <button class="btn my-2 my-sm-0 text-white dropdown-toggle border-0" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Entrar</button>
             <div class="dropdown-menu pt-4" aria-labelledby="dropdownMenuLink">
                 <form action="./backend/login_usuario.php" method="post">
+
+                    <?php  
+                        if(isset($_SESSION['alert'])){
+                            echo $_SESSION['alert'];
+                            unset($_SESSION['alert']);
+                        }
+                    ?>
+
                     <div class="form-group">
                       <input type="email" class="form-control form-control-sm" id="Email" name="email" aria-describedby="emailHelp" placeholder="Seu email" required>
                     </div>
@@ -77,6 +90,17 @@
             </div>
         </div>
     </div>
+
+    <?php 
+        if(isset($_SESSION['alertesist'])){
+            echo $_SESSION['alertesist'];
+            unset($_SESSION['alertesist']);
+        }elseif(isset($_SESSION['alertsucess'])){
+            echo $_SESSION['alertsucess'];
+            unset($_SESSION['alertsucess']);
+        }
+    ?>
+
     <main>
         <section class="sessao1 d-flex align-items-center">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -240,10 +264,10 @@
           <div class="vw-plugin-top-wrapper"></div>
         </div>
     </div>
+
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script>
-        new window.VLibras.Widget('https://vlibras.gov.br/app');
-    </script>
+    <script> new window.VLibras.Widget('https://vlibras.gov.br/app'); </script>
     <script type="text/javascript" src="./js/script.js"></script>
+
 </body>
 </html>

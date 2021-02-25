@@ -6,7 +6,7 @@ session_start();
 $email = $_POST['email'];
 $senha = $_POST['senha'];
 
-if (strlen($email) > 3 && strlen($senha) > 3)  {
+if (strlen($email) > 7 && strlen($senha) > 3)  {
     $senha_cripto = md5($senha);
 
    $resultado_consulta = $link->query("SELECT * FROM pessoa WHERE email = '$email' AND senha = '$senha_cripto'");
@@ -24,32 +24,30 @@ if (strlen($email) > 3 && strlen($senha) > 3)  {
     $_SESSION['grau'] = $usuarios["grau"];
     $_SESSION['nivel_acesso'] = $usuarios["nivel_acesso"];
 
-}else{
 
-    session_destroy();
-    header('location: ../index.php');
+    if ($resultado_consulta == TRUE && $email == $_SESSION['email'])  {
 
-    // echo "<script>
-    // alert('E-mail ou Senha Inválidos!')
-    // location.href = '../index.php'
-    // </script>";
+        // Direciona o usuário para a página respectiva ao seu nível de acesso
+        if($_SESSION['nivel_acesso'] == "comum"){
+            header('location: ../frontend/home_user.php');
+        }elseif ($_SESSION['nivel_acesso'] == "produtor"){
+            header('location: ../frontend/home_produtor.php');
+        }elseif ($_SESSION['nivel_acesso'] == "interprete"){
+            header('location: ../frontend/home_interprete.php');
+        }
 
-}
+    }else{
 
-if ($email == $_SESSION['email']){
+        $_SESSION['alert'] = '<div style="font-size: 0.8em;" class="alert alert-danger" role="alert">
+        E-mail ou senha errada!</div>';
+        header('location: ../index.php');
 
-    // Direciona o usuário para a página respectiva ao seu nível de acesso
-    if($_SESSION['nivel_acesso'] == "comum"){
-        header('location: ../frontend/home_user.php');
-    }elseif ($_SESSION['nivel_acesso'] == "produtor"){
-        header('location: ../frontend/home_produtor.php');
-    }elseif ($_SESSION['nivel_acesso'] == "interprete"){
-        header('location: ../frontend/home_interprete.php');
     }
 
-} else{
+}else{
 
-    session_destroy();
+    $_SESSION['alert'] = '<div style="font-size: 0.8em;" class="alert alert-danger" role="alert">
+    Informações inválidas!</div>';
     header('location: ../index.php');
 
 }
