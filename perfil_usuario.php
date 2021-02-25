@@ -6,7 +6,7 @@ session_start();
 
 
 if (!isset($_SESSION['nome'])) {
-    header('Location: index.html');
+    header('Location: index.php');
     exit;
 }else {
  
@@ -62,7 +62,7 @@ if (!isset($_SESSION['nome'])) {
                   <span> Meu Perfil </span> </a>
             </li>
             <li class="nav-item mx-auto">
-                <a class="nav-link" href="index.html"> Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="index.php"> Home <span class="sr-only">(current)</span></a>
             </li>
             <!--<li class="nav-item mx-auto">
                 <a class="nav-link" href="#"> Certificados </a>

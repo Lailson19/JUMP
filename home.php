@@ -4,7 +4,7 @@
 
 //Se não existir um valor do índice 'nome', então encerre a aplicação
  if (!isset($_SESSION['id_pessoa'])) {
-   header('Location: index.html');
+   header('Location: index.php');
    exit;
  } else {
    $id = $_SESSION['id_pessoa'];

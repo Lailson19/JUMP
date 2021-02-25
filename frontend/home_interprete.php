@@ -5,7 +5,7 @@ require_once('../backend/conexao.php');
 session_start();
 
 if (!isset($_SESSION['id_pessoa'])) {
-    header('Location: ../index.html');
+    header('Location: ../index.php');
     exit;
 } else {
     $id = $_SESSION['id_pessoa'];
@@ -34,6 +34,7 @@ if (!isset($_SESSION['id_pessoa'])) {
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/global-home/home-user.css">
+    <link rel="stylesheet" href="../css/global-home/lista-interprete.css">
 </head>
 
 <body>
@@ -161,7 +162,7 @@ if (!isset($_SESSION['id_pessoa'])) {
                             <h4 class="pb-2 d-flex justify-content-center">Lista de conteúdo a ser interpretados</h4>
                             <!-- LISTA -------------------------------------------------------------------->
                             <div class="table-responsive">
-                                <table id="lista" class="table table-striped">
+                                <table class="table">
                                     <thead>
                                         <tr>
                                             <th scope="col">Autor</th>
@@ -171,17 +172,19 @@ if (!isset($_SESSION['id_pessoa'])) {
                                             <th scope="col">Duração</th>
                                         </tr>
                                     </thead>
+
                                     <?php foreach ($lista as $traduzir) { ?>
-                                        <tbody>
-                                            <tr>
-                                                <td><?php echo $traduzir['nome'] ?></td>
-                                                <td><?php echo $traduzir['titulo_conteudo'] ?></td>
-                                                <td><?php echo $traduzir['assunto_conteudo'] ?></td>
-                                                <td><?php echo $traduzir['data_conteudo'] ?></td>
-                                                <td><?php echo $traduzir['temp_vid_produtor'] ?></td>
-                                                <td type="button" class="btn btn-secondary btn-sm"><a href="./home_interprete_video.php?id=<?php echo $traduzir['id_conteudo'];?>">Interpretar</a></td>
-                                            </tr>
-                                        </tbody>
+
+                                    <tbody>
+                                        <tr>
+                                            <td><?php echo $traduzir['nome'] ?></td>
+                                            <td><?php echo $traduzir['titulo_conteudo'] ?></td>
+                                            <td><?php echo $traduzir['assunto_conteudo'] ?></td>
+                                            <td><?php echo $traduzir['data_conteudo'] ?></td>
+                                            <td><?php echo $traduzir['temp_vid_produtor'] ?></td>
+                                            <td type="button" class="btn"><a href="./home_interprete_video.php?id=<?php echo $traduzir['id_conteudo'];?>">Interpretar</a></td>
+                                        </tr>
+                                    </tbody>
                                     <?php } ?>
 
                                 </table>

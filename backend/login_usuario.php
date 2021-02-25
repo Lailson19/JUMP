@@ -27,11 +27,11 @@ if (strlen($email) > 3 && strlen($senha) > 3)  {
 }else{
 
     session_destroy();
-    header('location: ../index.html');
+    header('location: ../index.php');
 
     // echo "<script>
     // alert('E-mail ou Senha Inválidos!')
-    // location.href = '../index.html'
+    // location.href = '../index.php'
     // </script>";
 
 }
@@ -50,7 +50,7 @@ if ($email == $_SESSION['email']){
 } else{
 
     session_destroy();
-    header('location: ../index.html');
+    header('location: ../index.php');
 
 }
 

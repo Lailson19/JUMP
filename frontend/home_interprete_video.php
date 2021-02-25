@@ -1,15 +1,21 @@
 <?php
 error_reporting(0);
+require_once('../backend/conexao.php');
+
 session_start();
 
 if (!isset($_SESSION['id_pessoa'])) {
-    header('Location: ../index.html');
-    exit;
-} else {
-    $id = $_SESSION['id_pessoa'];
-    $id_conteudo = $id;
 
-    require_once('../backend/conexao.php');
+    header('Location: ../index.php');
+    exit;
+
+} else {
+
+    $id = $_SESSION['id_pessoa']; 
+    $id_cont_traduzir = $_GET['id'];
+
+    $conteudos = $link->query("SELECT * FROM conteudo JOIN video_produtor ON conteudo.id_vid_produtor = video_produtor.id_vid_produtor JOIN pessoa ON conteudo.id_pessoa = pessoa.id_pessoa WHERE conteudo.id_conteudo = $id_cont_traduzir");
+
 }
 ?>
 
@@ -57,16 +63,19 @@ if (!isset($_SESSION['id_pessoa'])) {
             <div class="container">
 
                 <!-- CONTEUDO DO HOME_INTERPRETE_VIDEO -------------------------------- -->
-
+                
                 <div class="container justify-content-center py-4">
                     <h4>Suba Sua interpretação</h4>
 
                     <!-- Video Interpretado ----------------------------------------------- -->
 
                     <div class="row">
-                        <div class="col-sm-9">
-                            <div class="embed-responsive embed-responsive-16by9">
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/aZIZPsqGnNw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <div class="col-lg-9">                            
+                            <?php foreach ($conteudos as $conteudo)  ?>
+                            <div class="embed-responsive embed-responsive-16by9 my-2">
+                            <video controls class="meus_videos parado">
+                                <source src="../video/principal/<?php echo $conteudo['nome_vid_produtor'];?>" type="video/mp4" />
+                            </video>
                             </div>
                         </div>
 
@@ -74,24 +83,24 @@ if (!isset($_SESSION['id_pessoa'])) {
 
                         <!-- Parte de Texto lado do video -------------------------------------- -->
 
-                        <div class="col-sm-3">
-                            <h6>Título:</h6>
-                            <p class="p2">Título do vídeo</p>
+                        <div class="col-lg-3">
+                            <h5>Título:</h5>
+                            <p><?php echo $conteudo['titulo_conteudo'] ?></p>
 
-                            <h6>Assunto:</h6>
-                            <p class="p2">Assunto do video</p>
+                            <h5>Assunto:</h5>
+                            <p><?php echo $conteudo['assunto_conteudo'] ?></p>
 
-                            <h6>Autor:</h6>
-                            <p class="p2">Nome do produtor</p>
+                            <h5>Autor:</h5>
+                            <p><?php echo $conteudo['nome'] ?></p>
 
-                            <h6>Data de Lançamento:</h6>
-                            <p class="p2">00/00/0000</p>
+                            <h5>Data de Lançamento:</h5>
+                            <p><?php echo $conteudo['data_conteudo'] ?></p>
 
-                            <h6>Tempo:</h6>
-                            <p class="p2">35:06 min.</p>
+                            <h5>Tempo:</h5>
+                            <p><?php echo $conteudo['temp_vid_conteudor'] ?></p>
 
-                            <h6>Descrição:</h6>
-                            <p class="p2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perferendis sed reiciendis ipsam deserunt est nam, quos assumenda exercitationem rerum aspernatur voluptate eaque quam delectus in cumque harum vitae debitis repudiandae!</p>
+                            <h5>Descrição:</h5>
+                            <p><?php echo $conteudo['descricao_conteudo'] ?></p>
 
                         </div>
                     </div><br><br>
@@ -102,29 +111,34 @@ if (!isset($_SESSION['id_pessoa'])) {
 
                     <p class="p1">Insira seu video de interpretação:</p>
 
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="validatedCustomFile" required>
-                        <label class="custom-file-label" for="validatedCustomFile"></label>
-                    </div>
-
-                    <!-- Fim do Imput de evio de arquivo --------------------------------------------------------------- -->
-
-                    <!-- Começo de termo de  concientização ------------------------------------------------------------------ -->
-
-                    <div class="caixa mt-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input form-control-sm" id="customCheck1">
-                            <label class="custom-control-label" for="customCheck1"><i>Declaro que os dados postados são de minha autoria.</i> </label>
+                    <form action="../backend/cadastro_traducao.php" method="POST" enctype="multipart/form-data">
+                        <div class="custom-file">
+                            <input type="file" name="vid_traducao" class="custom-file-input form-control form-control-sm" id="customFileLang" lang="pt-br">
+                            <label class="custom-file-label" for="customFileLang">Selecione um arquivo de vídeo...</label>
                         </div>
 
-                        <!-- Botões para envio,cancelar e limpar -------------------------------------------------------------- -->
+                        <input type="hidden" name="cont_traduzir" value="<?php echo $id_cont_traduzir ?>">
 
-                        <div>
-                            <input class="btn" type="button" value="Voltar">
-                            <input class="btn" type="reset" value="Limpar">
-                            <input class="btn" name="" type="submit" value="Enviar">
+                        <!-- Fim do Imput de evio de arquivo --------------------------------------------------------------- -->
+
+                        <!-- Começo de termo de  concientização ------------------------------------------------------------------ -->
+
+                        <div class="caixa mt-4">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" name="ciente" class="custom-control-input form-control-sm" id="customCheck1">
+                                <label class="custom-control-label" for="customCheck1"><i>Declaro que os dados postados são de minha autoria.</i> </label>
+                            </div>
+
+                            <!-- Botões para envio,cancelar e limpar -------------------------------------------------------------- -->
+
+                            <div>
+                                <input class="btn" type="button" value="Voltar">
+                                <input class="btn" type="reset" value="Limpar">
+                                <input class="btn" name="" type="submit" value="Enviar">
+                            </div>
                         </div>
-                    </div>
+
+                    </form>
 
                     <!-- Fim dos Botões ------------------------------------------------------------------------------------ -->
 
