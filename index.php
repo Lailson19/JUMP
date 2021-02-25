@@ -74,7 +74,7 @@
 
                             <!-- <input class="form-control form-control-sm mb-2" id="img" name="img" type="url" placeholder="Informe um URL de uma foto sua online" /> -->
 
-                            <input class="form-control mb-2" type="file" name="img" />
+                            <input class="form-control mb-2" type="file" name="imge" />
 
                             <input type="email" class="form-control form-control-sm mb-2" id="email" name="email" required aria-describedby="emailHelp" placeholder="Digite seu e-mail" />
 

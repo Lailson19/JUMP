@@ -3,25 +3,27 @@ require_once('conexao.php');
 session_start();
 
 $nome = $_POST["nome"];
-$img = $_FILES["img"];
+$_FILES["imge"];
 $email = $_POST["email"];
 $senha = $_POST["senha"];
 $confirmar_senha = $_POST["confirmar_senha"];
 
 // Se não cadastra imagem de perfil, entra imagem avatar
-if(isset($_FILES['img'])){
 
-    $extensao = strtolower(substr($_FILES['img']['name'], -4)); //pega a extensao do arquivo
+if($_FILES['imge']["name"] == TRUE){
+
+    $extensao = strtolower(substr($_FILES['imge']['name'], -4)); //pega a extensao do arquivo
     $novo_nome = md5(time()).$extensao; //define o nome do arquivo
     $diretorio = "../img/user/"; //define o diretorio para onde enviaremos o arquivo
-    move_uploaded_file($_FILES['img']['tmp_name'], $diretorio.$novo_nome); //efetua o upload
+    move_uploaded_file($_FILES['imge']['tmp_name'], $diretorio.$novo_nome); //efetua o upload
     $img = $novo_nome;
-    
-}elseif(!isset($_FILES['img'])){
 
-    $img = "avatar.png";
+}else{
+
+    $img = 'avatar.png';
 
 }
+
 
 
 if((strlen($nome) > 0) && (strlen($email) > 7) && (strlen($senha) >= 6) && ($senha === $confirmar_senha)) {
