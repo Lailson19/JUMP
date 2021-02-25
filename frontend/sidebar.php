@@ -1,3 +1,17 @@
+<?php
+
+    function navpag(){
+        if($_SESSION['nivel_acesso'] == "comum"){
+            return '../frontend/home_user.php';
+        }elseif ($_SESSION['nivel_acesso']  == "produtor"){
+            return '../frontend/home_produtor.php';
+        }elseif ($_SESSION['nivel_acesso']  == "interprete"){
+            return '../frontend/home_interprete.php';
+        }
+    }
+
+?>
+
 <nav id="sidebar">
             <div class="sidebar-header d-flex align-items-center justify-content-center">
 
@@ -25,7 +39,7 @@
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="./home_user.php">
+                    <a href="<?php echo navpag(); ?>">
                         <i class="fas fa-home"></i>
                         <span>Home</span>
                     </a>
@@ -37,8 +51,8 @@
                         <i class="fas fa-film"></i>
                         <span>Colaborar</span>
                     </a>
-                    <a href="../backend/sair.php">
-                        <i class="fas fa-sign-out-alt"></i>                       
+                    <a href="<?php echo '../backend/sair.php'; ?>">
+                        <i class="fas fa-sign-out-alt"></i>
                         <span>Sair</span>
                     </a>
                 </li>
@@ -55,7 +69,7 @@
                     &copycopyright SQUAD8-SP2
                 </span>
                 <span class="recode">
-                    Recode Pro | 2020-2021
+                    Recode Pro | 2020
                 </span>
             </p>
 

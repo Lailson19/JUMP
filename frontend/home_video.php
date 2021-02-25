@@ -3,10 +3,11 @@ error_reporting(0);
 session_start();
 
 $id_conteudo = $_GET['id'];
+$_SESSION['id_conteudo_post'] = $id_conteudo;
 
 
 if (!isset($_SESSION['id_pessoa'])) {
-    header('Location: ../index.html');
+    header('Location: ../index.php');
     exit;
 } else {
     $id = $_SESSION['id_pessoa'];    
@@ -17,7 +18,7 @@ if (!isset($_SESSION['id_pessoa'])) {
 
     $conteudos = $link->query("SELECT * FROM conteudo JOIN video_produtor ON conteudo.id_vid_produtor = video_produtor.id_vid_produtor JOIN pessoa ON conteudo.id_pessoa = pessoa.id_pessoa WHERE conteudo.id_conteudo = $id_conteudo");
      
-    $traducoes = $link->query("SELECT * from video_traducao JOIN conteudo on conteudo.id_vid_traducao = video_traducao.id_vid_traducao WHERE conteudo.id_conteudo = $id_conteudo");
+    $traducoes = $link->query("SELECT * from video_traducao JOIN conteudo on conteudo.id_vid_traducao = video_traducao.id_vid_traducao JOIN pessoa on video_traducao.id_pessoa = pessoa.id_pessoa WHERE conteudo.id_conteudo = $id_conteudo");
 
     $getvideos = $link->query("SELECT * FROM conteudo WHERE id_conteudo = $id_conteudo");
 }

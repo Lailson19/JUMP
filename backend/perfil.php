@@ -4,7 +4,7 @@ require_once('conexao.php');
 session_start();
 
 if (!isset($_SESSION['nome']) && !isset($_SESSION['id_pessoa'])) {
-   header('Location: ./index.html');
+   header('Location: ./index.php');
    exit;
 }
 
@@ -45,7 +45,7 @@ if($senha === $confirmar_senha) {
         
         echo "<script>
         alert('Atualizado com Sucesso!')
-        window.location.href = '../index.html'
+        window.location.href = '../index.php'
         </script>";
 
     } else {

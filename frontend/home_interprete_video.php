@@ -6,7 +6,7 @@ session_start();
 
 if (!isset($_SESSION['id_pessoa'])) {
 
-    header('Location: ../index.html');
+    header('Location: ../index.php');
     exit;
 
 } else {
