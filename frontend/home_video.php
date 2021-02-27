@@ -3,25 +3,32 @@ error_reporting(0);
 session_start();
 
 $id_conteudo = $_GET['id'];
-
 $_SESSION['id_conteudo_post'] = $id_conteudo;
-
 
 if (!isset($_SESSION['id_pessoa'])) {
     header('Location: ../index.php');
     exit;
 } else {
-    $id = $_SESSION['id_pessoa'];    
+    $id_pessoa = $_SESSION['id_pessoa'];
 
     require_once('../backend/conexao.php');
 
-    $postagens = $link->query("SELECT * FROM comentario inner join pessoa on pessoa.id_pessoa = comentario.id_pessoa  ORDER BY id_comentario DESC;"); //comentários
-
+    // Select para comentários
+    $postagens = $link->query("SELECT * FROM comentario join pessoa on pessoa.id_pessoa = comentario.id_pessoa  ORDER BY id_comentario DESC;");
+    // Select para dados do vídeo principal
     $conteudos = $link->query("SELECT * FROM conteudo JOIN video_produtor ON conteudo.id_vid_produtor = video_produtor.id_vid_produtor JOIN pessoa ON conteudo.id_pessoa = pessoa.id_pessoa WHERE conteudo.id_conteudo = $id_conteudo");
-     
+    //  Select para dados do interprete
     $traducoes = $link->query("SELECT * from video_traducao JOIN conteudo on conteudo.id_vid_traducao = video_traducao.id_vid_traducao JOIN pessoa on video_traducao.id_pessoa = pessoa.id_pessoa WHERE conteudo.id_conteudo = $id_conteudo");
-
+    // Select para vídeo principal
     $getvideos = $link->query("SELECT * FROM conteudo WHERE id_conteudo = $id_conteudo");
+
+    // Formatação de data e hora
+    function dataHrBR($dado){
+        $hhmmss = substr($dado,-8,2). ":" . substr($dado,-5,2). ":" .substr($dado,-2,2);
+        $ddmmaa = substr($dado,-11,2). "-" .substr($dado,-14,2). "-" .substr($dado,-19,4);
+        return " &nbsp; ".$hhmmss. " &nbsp; " .$ddmmaa;
+    }
+
 }
 
 ?>
@@ -56,6 +63,16 @@ if (!isset($_SESSION['id_pessoa'])) {
         <!-- CONTEUDO --------------------------------------------------- -->
 
         <div id="content">
+
+            <?php 
+                if(isset($_SESSION['sucesscoment'])){
+                    echo $_SESSION['sucesscoment'];
+                    unset($_SESSION['sucesscoment']);
+                }elseif(isset($_SESSION['errocoment'])){
+                    echo $_SESSION['errocoment'];
+                    unset($_SESSION['errocoment']);
+                }
+            ?>
 
             <!-- BOTÃO PARA ABRIR/FECHAR SIDEBAR ---------------------------- -->
 
@@ -123,24 +140,27 @@ if (!isset($_SESSION['id_pessoa'])) {
                         </div>
 
                         <h4 class="titulo mt-4 mb-1"><i>Comentários</i></h4>
-
                         <div class="line-escura mt-0 mb-4"></div>
 
                         <?php foreach ($postagens as $postagem) { ?>
-
-                            <p class="autor-msg">
-                                <img class="rounded-circle img_pessoa" src="../img/user/<?php echo $postagem["img"] ?>" alt="<?php echo $postagem['nome'] ?>">
-                                <?php echo $postagem['nome'] ?> Postado: <?php echo $postagem['data_comentario'] ?>
-                            </p>
-                            <p class="msg"><?php echo $postagem["comentario"] ?></p>
-
+                            <span class="post-msg">
+                                <p class="autor-msg">
+                                    <img class="rounded-circle img_pessoa" src="../img/user/<?php echo $postagem["img"] ?>" alt="<?php echo $postagem['nome'] ?>">
+                                    <span class="dados-post">
+                                        <?php 
+                                            echo $postagem['nome'];
+                                            echo dataHrBR($postagem['data_comentario']);
+                                            //echo delete_coment($postagem['id_pessoa'], $postagem['data_comentario']);
+                                            if($postagem['id_pessoa'] == $id_pessoa){
+                                                echo '<a style="color: #C06161;" href="../backend/remove_coment.php?dtpost='. $postagem['data_comentario'] .'&id_pessoa_post='. $postagem['id_pessoa'] .'&id_conteudo='. $id_conteudo .'">&nbsp;- remove</a>';
+                                            }
+                                        ?>
+                                    </span>
+                                </p>
+                                <p class="msg"><?php echo $postagem["comentario"] ?></p>
+                            </span>
                         <?php  } ?>
                      
-                        <!--
-                            <p class="autor-msg">Sicrano Astolfo - 06:13h - 02/02/2021</p>                            
-                            <p class="msg">Lorem ipsum dolor sit amet, consectetur adipisicing elit ipsum dolor sit.</p>
-                          -->
-
                         <form action="../backend/registra_postagens.php" method="post">
                             <div class="base-msg">
                                 <input type="text" id="disabledTextInput" class="area-msg form-control form-control-sm" name="post" placeholder="No que você está pensando, <?php echo $_SESSION['nome'] ?>?">

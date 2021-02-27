@@ -8,8 +8,8 @@ $email = $_POST["email"];
 $senha = $_POST["senha"];
 $confirmar_senha = $_POST["confirmar_senha"];
 
-// Se não cadastra imagem de perfil, entra imagem avatar
 
+// Se não cadastra imagem de perfil, entra imagem avatar.
 if($_FILES['imge']["name"] == TRUE){
 
     $extensao = strtolower(substr($_FILES['imge']['name'], -4)); //pega a extensao do arquivo
@@ -24,8 +24,6 @@ if($_FILES['imge']["name"] == TRUE){
 
 }
 
-
-
 if((strlen($nome) > 0) && (strlen($email) > 7) && (strlen($senha) >= 6) && ($senha === $confirmar_senha)) {
     $senha_cripto = md5($senha);
 
@@ -34,8 +32,12 @@ if((strlen($nome) > 0) && (strlen($email) > 7) && (strlen($senha) >= 6) && ($sen
 
     if($link->query($existente) == TRUE && $result["email"] == $email){
 
-        $_SESSION['alertesist'] = '<div style="font-size: 1em; margin: 0;" class="alert alert-danger" role="alert">
-        O e-mail: '. $email .', já existe!</div>';
+        $_SESSION['alertesist'] = '<div style="font-size: 1em; margin: 0;" class="alert alert-danger alert-dismissible fade show" role="alert">
+            O e-mail: '. $email .', já existe!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>';
         header('location: ../index.php');
 
     }else{
@@ -43,14 +45,22 @@ if((strlen($nome) > 0) && (strlen($email) > 7) && (strlen($senha) >= 6) && ($sen
         $sql = "INSERT INTO pessoa (`nome`,`img`, `email`, `senha`) VALUES ('$nome','$img', '$email','$senha_cripto')";        
         if($link->query($sql) == TRUE){
 
-            $_SESSION['alertsucess'] = '<div style="font-size: 1em; margin: 0;" class="alert alert-success" role="alert">
-            Seu cadastro foi realizado com sucesso!</div>';
+            $_SESSION['alertsucess'] = '<div style="font-size: 1em; margin: 0;" class="alert alert-success alert-dismissible fade show" role="alert">
+                Seu cadastro foi realizado com sucesso!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>';
             header('location: ../index.php');
 
         }else{
 
-            $_SESSION['alertesist'] = '<div style="font-size: 1em; margin: 0;" class="alert alert-danger" role="alert">
-            Erro ao cadastrar, tente novamente!</div>';
+            $_SESSION['alertesist'] = '<div style="font-size: 1em; margin: 0;" class="alert alert-danger alert-dismissible fade show" role="alert">
+                Erro ao cadastrar, tente novamente!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>';
             header('location: ../index.php');
 
         }
@@ -59,26 +69,42 @@ if((strlen($nome) > 0) && (strlen($email) > 7) && (strlen($senha) >= 6) && ($sen
 
 }else if ($senha != $confirmar_senha){
 
-    $_SESSION['alertesist'] = '<div style="font-size: 1em; margin: 0;" class="alert alert-danger" role="alert">
-    Suas senhas são diferentes!</div>';
+    $_SESSION['alertesist'] = '<div style="font-size: 1em; margin: 0;" class="alert alert-danger alert-dismissible fade show" role="alert">
+        Suas senhas são diferentes!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>';
     header('location: ../index.php');
    
 }else if (strlen($nome) < 1){
 
-    $_SESSION['alertesist'] = '<div style="font-size: 1em; margin: 0;" class="alert alert-danger" role="alert">
-    Digite algo no campo "Nome"!</div>';
+    $_SESSION['alertesist'] = '<div style="font-size: 1em; margin: 0;" class="alert alert-danger alert-dismissible fade show" role="alert">
+        Digite algo no campo "Nome"
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>';
     header('location: ../index.php');
   
 }else if (strlen($email) < 7){
 
-    $_SESSION['alertesist'] = '<div style="font-size: 1em; margin: 0;" class="alert alert-danger" role="alert">
-    Seu e-mail é muito curto!</div>';
+    $_SESSION['alertesist'] = '<div style="font-size: 1em; margin: 0;" class="alert alert-danger alert-dismissible fade show" role="alert">
+        Seu e-mail é muito curto!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>';
     header('location: ../index.php');
     
 }else if (strlen($senha) < 6){
 
-    $_SESSION['alertesist'] = '<div style="font-size: 1em; margin: 0;" class="alert alert-danger" role="alert">
-    Sua senha é muito curta, digite uma senha com no mínimo 6 dígitos!</div>';
+    $_SESSION['alertesist'] = '<div style="font-size: 1em; margin: 0;" class="alert alert-danger alert-dismissible fade show" role="alert">
+        Sua senha é muito curta, digite uma senha com no mínimo 6 dígitos!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>';
     header('location: ../index.php');
     
 }

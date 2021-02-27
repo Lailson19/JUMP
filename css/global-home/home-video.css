@@ -52,17 +52,25 @@ video::-webkit-media-controls-fullscreen-button {
     font-size: 0.9em;
 }
 
+.post-msg{
+    display: block;
+    border-radius: 10px;
+    background-image: linear-gradient(to right, #cce4e6, #d1e6e9, #d6e9eb, #daebee, #dfeef0);
+
+}
+
 .autor-msg{
-    font-size: 0.9em;
     font-weight: 600;
     font-style: italic;
-    margin: 0;
+    margin-bottom: -0.6em;
+    color: #187782;
 }
 
 .msg{
-    font-size: 0.9em;
+    font-size: 0.85em;
     font-style: italic;
-    margin-bottom: 1em;
+    margin-left: 3em;
+    color: #187782;
 }
 
 .base-msg{
@@ -82,8 +90,13 @@ video::-webkit-media-controls-fullscreen-button {
     font-size: 0.5em;
 }
 .img_pessoa {
-    width: 48px;
-    height: 48px;
+    width: 30px;
+    height: 30px;
+    margin: 10px 10px;
+ }
+
+ .dados-post{
+     font-size: 0.8em ;
  }
 
 

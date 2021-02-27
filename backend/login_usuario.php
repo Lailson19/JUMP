@@ -38,16 +38,24 @@ if (strlen($email) > 7 && strlen($senha) > 3)  {
 
     }else{
 
-        $_SESSION['alert'] = '<div style="font-size: 0.8em;" class="alert alert-danger" role="alert">
-        E-mail ou senha errada!</div>';
+        $_SESSION['alert'] = '<div style="font-size: 0.8em;" class="alert alert-danger alert-dismissible fade show" role="alert">
+            E-mail ou senha errada!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>';
         header('location: ../index.php');
 
     }
 
 }else{
 
-    $_SESSION['alert'] = '<div style="font-size: 0.8em;" class="alert alert-danger" role="alert">
-    Informações inválidas!</div>';
+    $_SESSION['alert'] = '<div style="font-size: 0.8em;" class="alert alert-danger alert-dismissible fade show" role="alert">
+        Informações inválidas!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>';
     header('location: ../index.php');
 
 }

@@ -52,6 +52,13 @@ if (!isset($_SESSION['nome'])) {
 
         <div id="content">
 
+            <?php  
+                if(isset($_SESSION['erroexclud'])){
+                    echo $_SESSION['erroexclud'];
+                    unset($_SESSION['erroexclud']);
+                }
+            ?>
+
             <!-- BOTÃO PARA ABRIR/FECHAR SIDEBAR ---------------------------- -->
 
             <nav class="container-fluid">
@@ -122,7 +129,7 @@ if (!isset($_SESSION['nome'])) {
                                 <div class="col-md-12">
                                     <div class="custom-file">
                                         <label for="img">Imagem</label>
-                                        <input class="form-control" type="file" name="img" />
+                                        <input class="form-control" type="file" name="imge" />
                                     </div>
                                 </div>
                             </div>
@@ -150,8 +157,10 @@ if (!isset($_SESSION['nome'])) {
                                 <div class="col-md-12">
                                     <div class="caixa">
                                         <div class="base-btn">
-                                            <button class="btn" onclick="confirmar()"type="button">Excluir conta</button>
+                                            <button class="btn" type="button" data-toggle="modal" data-target="#exampleModal">Excluir conta</button>
+
                                             <button class="btn" type="reset">Resetar</button>
+
                                             <button class="btn" type="submit">Atualizar</button>
                                         </div>
                                     </div>
@@ -164,17 +173,25 @@ if (!isset($_SESSION['nome'])) {
         </div>
     </div>
 
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="background-color: #1a7a857e;">
+        <div class="modal-dialog" role="document" >
+            <div class="modal-content" style="background-color: #DFEEF0;">
+                <div class="modal-header" style="background-color: #ffa5a5;">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color:#950000;">Deseja excluir sua conta?</h5>
+                </div>
+                <div class="modal-body" style="color: #950000; border-bottom: 1px solid #1A7B86;">
+                    Ao excluir sua conta, não será possível recuperar seus dados.
+                </div>
+                <div class="modal-footer">
 
-    <!-- CONTROLE CONFIRMAÇÃO DE EXCLUSÃO E ENVIO DE ID PARA EXCLUSÃO ----------------------- -->
-    <script>
-        function confirmar(){
-            let confirmacao = confirm("Você Realmente Deseja Excluir sua Conta? \nAo Remover sua Conta, não poderá ser recuperada!");
+                    <button type="button" class="btn" style="background-color:#39aebb5d; color: #1A7B86;" data-dismiss="modal">Não</button>
 
-            if (confirmacao == true) {
-                location.href = "../backend/remover.php?id=" + <?php echo $_SESSION['id_pessoa']; ?>
-            }
-        }
-    </script>
+                    <a class="btn" href="../backend/remover.php?id=<?php echo $_SESSION['id_pessoa']; ?>" style="background-color: #ffa5a5; color:#950000">Sim</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- CONTROLE DO BOTÃO DE ABRIR/FECHAR SIDEBAR ----------------------- -->
     <script type="text/javascript">

@@ -5,11 +5,13 @@ require_once('../backend/conexao.php');
 session_start();
 
 
-
 if (!isset($_SESSION['nome'])) {
+
     header('Location: ../index.php');
     exit;
+
 } else {
+    
     $id = $_SESSION['id_pessoa'];
 
     $videohome = $link->query("SELECT * FROM conteudo WHERE conteudo.id_vid_traducao IS NOT NULL");
