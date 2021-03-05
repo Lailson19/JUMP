@@ -1,22 +1,30 @@
 <?php
-error_reporting(0);
-require_once('../backend/conexao.php');
+    error_reporting(0);
+    require_once('../backend/conexao.php');
 
-session_start();
+    session_start();
 
-if (!isset($_SESSION['id_pessoa'])) {
+    if (!isset($_SESSION['id_pessoa'])) {
 
-    header('Location: ../index.php');
-    exit;
+        header('Location: ../index.php');
+        exit;
 
-} else {
+    } else {
 
-    $id = $_SESSION['id_pessoa']; 
-    $id_cont_traduzir = $_GET['id'];
+        $id = $_SESSION['id_pessoa']; 
+        $id_cont_traduzir = $_GET['id'];
 
-    $conteudos = $link->query("SELECT * FROM conteudo JOIN video_produtor ON conteudo.id_vid_produtor = video_produtor.id_vid_produtor JOIN pessoa ON conteudo.id_pessoa = pessoa.id_pessoa WHERE conteudo.id_conteudo = $id_cont_traduzir");
+        $conteudos = $link->query("SELECT * FROM conteudo JOIN video_produtor ON conteudo.id_vid_produtor = video_produtor.id_vid_produtor JOIN pessoa ON conteudo.id_pessoa = pessoa.id_pessoa WHERE conteudo.id_conteudo = $id_cont_traduzir");
 
-}
+    }
+
+    // Formatação de data e hora
+    function dataHrBR($dado){
+        $hhmmss = substr($dado,-8,2). ":" . substr($dado,-5,2). ":" .substr($dado,-2,2);
+        $ddmmaa = substr($dado,-11,2). "-" .substr($dado,-14,2). "-" .substr($dado,-19,4);
+        return $ddmmaa. " &nbsp; " .$hhmmss;
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -94,7 +102,7 @@ if (!isset($_SESSION['id_pessoa'])) {
                             <p><?php echo $conteudo['nome'] ?></p>
 
                             <h5>Data de Lançamento:</h5>
-                            <p><?php echo $conteudo['data_conteudo'] ?></p>
+                            <p><?php echo dataHrBR($conteudo['data_conteudo']) ?></p>
 
                             <h5>Tempo:</h5>
                             <p><?php echo $conteudo['temp_vid_conteudor'] ?></p>
