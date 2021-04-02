@@ -1,24 +1,18 @@
 <?php
-
  session_start();
-
 //Se não existir um valor do índice 'nome', então encerre a aplicação
  if (!isset($_SESSION['id_pessoa'])) {
    header('Location: index.php');
    exit;
  } else {
    $id = $_SESSION['id_pessoa'];
-
    require_once('./backend/conexao.php');
-
   $postagens = $link->query("SELECT * FROM comentario inner join pessoa on pessoa.id_pessoa = comentario.id_pessoa  ORDER BY id_comentario DESC;");
- 
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -110,8 +104,6 @@
               </div>
             </div>
           </div>
-
-
 
           <!-- Cards -->
           <div class="row" style="text-align: center;">
