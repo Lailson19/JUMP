@@ -19,6 +19,42 @@
 
 </head>
 <body>
+
+<!-- Início - Modal de aviso ao carregar a página -->
+
+<div class="modal fade" id="modalInicio" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-white" id="TituloModalCentralizado">
+                        Login já disponíveis para testes.
+                    </h4>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Fechar">
+                        <span style="font-size: 30px;" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-white">
+                    <p>
+                        Existem 4 cadastros já disponíveis com 3 níveis de acesso (Produtor de conteúdo, Interprete em LIBRAS e Acesso padrão).
+                    </p>
+                    <dl>
+                        <dt>Produtor de conteúdo:</dt>
+                        <dd><em>filipe@123 | andesson@123</em></dd>
+                        <dt>Interprete em LIBRAS:</dt>
+                        <dd><em>sara@123</em></dd>
+                        <dt>Acesso padrão:</dt>
+                        <dd><em>lailson@123</em></dd>
+                        <dt>Senhas:</dt>
+                        <dd><em>123123</em></dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Fim - Modal de aviso ao carregar a página -->
+
+
     <nav class="navbar navbar-expand-sm d-flex justify-content-between px-5">
         <a class="navbar-brand text-white" href="#">
             <img src="./img/marca.svg" class="img-logo" alt="Projeto: JUMP, SQUAD8/EDUCAÇÃO, Recode Pro 2020-2021">
@@ -269,6 +305,11 @@
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <script> new window.VLibras.Widget('https://vlibras.gov.br/app'); </script>
     <script type="text/javascript" src="./js/script.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#modalInicio').modal('show');
+        })
+    </script>
 
 </body>
 </html>
