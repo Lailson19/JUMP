@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 22-Fev-2021 às 09:34
+-- Tempo de geração: 02-Abr-2021 às 10:45
 -- Versão do servidor: 10.4.17-MariaDB
 -- versão do PHP: 7.4.15
 
@@ -28,10 +28,8 @@ USE `jump_squad8`;
 --
 -- Estrutura da tabela `comentario`
 --
--- Criação: 21-Fev-2021 às 20:54
--- Última actualização: 22-Fev-2021 às 02:56
---
 
+DROP TABLE IF EXISTS `comentario`;
 CREATE TABLE `comentario` (
   `id_comentario` int(11) NOT NULL,
   `id_pessoa` int(11) DEFAULT NULL,
@@ -41,20 +39,21 @@ CREATE TABLE `comentario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- RELACIONAMENTOS PARA TABELAS `comentario`:
---   `id_pessoa`
---       `pessoa` -> `id_pessoa`
+-- Extraindo dados da tabela `comentario`
 --
+
+INSERT INTO `comentario` (`id_comentario`, `id_pessoa`, `comentario`, `data_comentario`, `status_comentario`) VALUES
+(50, 48, 'Parabéns, conteúdo muito interessante!', '2021-04-02 04:04:47', 0),
+(53, 50, 'Show \\o/', '2021-04-02 04:07:35', 0),
+(54, 47, 'Que beleza....', '2021-04-02 04:08:47', 0);
 
 -- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `conteudo`
 --
--- Criação: 22-Fev-2021 às 07:19
--- Última actualização: 22-Fev-2021 às 07:49
---
 
+DROP TABLE IF EXISTS `conteudo`;
 CREATE TABLE `conteudo` (
   `id_conteudo` int(11) NOT NULL,
   `id_pessoa` int(11) DEFAULT NULL,
@@ -69,35 +68,27 @@ CREATE TABLE `conteudo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- RELACIONAMENTOS PARA TABELAS `conteudo`:
---   `id_pessoa`
---       `pessoa` -> `id_pessoa`
---   `id_vid_produtor`
---       `video_produtor` -> `id_vid_produtor`
---   `id_vid_traducao`
---       `video_traducao` -> `id_vid_traducao`
---
-
---
 -- Extraindo dados da tabela `conteudo`
 --
 
 INSERT INTO `conteudo` (`id_conteudo`, `id_pessoa`, `id_vid_produtor`, `id_vid_traducao`, `titulo_conteudo`, `assunto_conteudo`, `capa_conteudo`, `descricao_conteudo`, `status_conteudo`, `data_conteudo`) VALUES
-(9, 17, 19, NULL, 'Três técnicas para programar', 'Programação', '9f15dd0915eb47a4f513c5ea96709bef.jpg', 'Três técnicas que eu uso para aprender a programar.', 0, '2021-02-22 03:09:10');
+(28, 47, 36, 26, 'Três técnicas para programar', 'Tecnologia', '9677c7fed84fb94782e7076105cae5d3.jpg', 'Três técnicas que eu uso para aprender a programar qualquer coisa.', 0, '2021-04-02 03:20:26'),
+(29, 47, 36, NULL, 'Segundo conteúdo', 'Outros', '88e7bc838881fa3374fb46c8bd2040ff.jpg', 'Esse é o segundo conteúdo do Filipe, para o propósito de exemplificar uma segunda postagem.', 0, '2021-04-02 03:23:02'),
+(30, 50, 38, 26, 'Jump', 'Exemplo', '477a53054d079ac643c64e7e9792c7b9.jpg', 'Esse é um conteúdo para exemplificar uma postagem de um outro produtor de conteúdo.', 0, '2021-04-02 03:39:52'),
+(31, 50, 38, 26, 'A Industria automotiva no Brasil', 'História', '93260d1803941b397ee3323c31fa2b43.jpg', 'Esse é um conteúdo para exemplificar outra postagem de outro produtor de conteúdo.', 0, '2021-04-02 03:57:38'),
+(32, 50, 38, NULL, 'A indústria no Brasil', 'História', '4353393a7aa5f13853499d8f7a2827c6.jpg', 'Esse é outro conteúdo para exemplificar uma postagem do produtor de conteúdo.', 0, '2021-04-02 03:59:54');
 
 -- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `pessoa`
 --
--- Criação: 21-Fev-2021 às 23:59
--- Última actualização: 22-Fev-2021 às 08:24
---
 
+DROP TABLE IF EXISTS `pessoa`;
 CREATE TABLE `pessoa` (
   `id_pessoa` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
-  `img` varchar(500) DEFAULT 'avatar.png',
+  `img` varchar(500) NOT NULL DEFAULT 'avatar.png',
   `email` varchar(80) NOT NULL,
   `senha` varchar(45) NOT NULL,
   `sexo` varchar(45) DEFAULT NULL,
@@ -110,26 +101,22 @@ CREATE TABLE `pessoa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- RELACIONAMENTOS PARA TABELAS `pessoa`:
---
-
---
 -- Extraindo dados da tabela `pessoa`
 --
 
 INSERT INTO `pessoa` (`id_pessoa`, `nome`, `img`, `email`, `senha`, `sexo`, `situacao`, `grau`, `dt_nasc`, `status`, `dt_pessoa`, `nivel_acesso`) VALUES
-(17, 'Lailson', '7e80429bed496f8aad6a5876a1e5db64', 'lailson@123', '4297f44b13955235245b2497399d7a93', 'Masculino', 'Não', 'Nenhum', '0000-00-00', 0, '2021-02-22 00:43:08', 'comum'),
-(19, 'Andesson', '42b5b7f7625b26d3e50d90c3c195ebffjfif', 'andesson@123', '4297f44b13955235245b2497399d7a93', 'Masculino', 'Sim', 'Moderado', '1991-08-19', 0, '2021-02-22 04:01:38', 'produtor');
+(47, 'Filipe', '7a125d2e4f1a6f8e925c665407fc60de.png', 'filipe@123', '4297f44b13955235245b2497399d7a93', 'Masculino', 'Não', 'Nenhum', '2001-01-01', 0, '2021-04-02 02:46:58', 'produtor'),
+(48, 'Lailson', 'avatar.png', 'lailson@123', '4297f44b13955235245b2497399d7a93', 'Masculino', 'Não', 'Nenhum', '0000-00-00', 0, '2021-04-02 03:26:47', 'comum'),
+(49, 'Sara', 'b13acab965e9e95186426c4d8bbce0e8.jpg', 'sara@123', '4297f44b13955235245b2497399d7a93', 'Feminino', 'Não', 'Nenhum', '0000-00-00', 0, '2021-04-02 03:32:26', 'interprete'),
+(50, 'Andesson', 'ee902965006c7c59f5c40485b993a394.jpg', 'andesson@123', '4297f44b13955235245b2497399d7a93', 'Masculino', 'Não', 'Nenhum', '0000-00-00', 0, '2021-04-02 03:34:40', 'produtor');
 
 -- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `video_produtor`
 --
--- Criação: 22-Fev-2021 às 07:17
--- Última actualização: 22-Fev-2021 às 07:49
---
 
+DROP TABLE IF EXISTS `video_produtor`;
 CREATE TABLE `video_produtor` (
   `id_vid_produtor` int(11) NOT NULL,
   `id_pessoa` int(11) DEFAULT NULL,
@@ -140,27 +127,22 @@ CREATE TABLE `video_produtor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- RELACIONAMENTOS PARA TABELAS `video_produtor`:
---   `id_pessoa`
---       `pessoa` -> `id_pessoa`
---
-
---
 -- Extraindo dados da tabela `video_produtor`
 --
 
 INSERT INTO `video_produtor` (`id_vid_produtor`, `id_pessoa`, `nome_vid_produtor`, `temp_vid_produtor`, `data_vid_produtor`, `avaliacao_vid_produtor`) VALUES
-(19, 17, '9f15dd0915eb47a4f513c5ea96709bef.mp4', '', '2021-02-22 03:09:10', NULL);
+(36, 47, '9677c7fed84fb94782e7076105cae5d3.mp4', '', '2021-04-02 03:20:26', NULL),
+(38, 50, '477a53054d079ac643c64e7e9792c7b9.mp4', '', '2021-04-02 03:39:52', NULL),
+(39, 50, '93260d1803941b397ee3323c31fa2b43.mp4', '', '2021-04-02 03:57:37', NULL),
+(40, 50, '4353393a7aa5f13853499d8f7a2827c6.mp4', '', '2021-04-02 03:59:54', NULL);
 
 -- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `video_traducao`
 --
--- Criação: 21-Fev-2021 às 20:55
--- Última actualização: 22-Fev-2021 às 02:56
---
 
+DROP TABLE IF EXISTS `video_traducao`;
 CREATE TABLE `video_traducao` (
   `id_vid_traducao` int(11) NOT NULL,
   `id_pessoa` int(11) DEFAULT NULL,
@@ -171,10 +153,13 @@ CREATE TABLE `video_traducao` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- RELACIONAMENTOS PARA TABELAS `video_traducao`:
---   `id_pessoa`
---       `pessoa` -> `id_pessoa`
+-- Extraindo dados da tabela `video_traducao`
 --
+
+INSERT INTO `video_traducao` (`id_vid_traducao`, `id_pessoa`, `nome_vid_traducao`, `temp_vid_traducao`, `data_vid_traducao`, `avaliacao_vid_traduc`) VALUES
+(26, 49, '2b96a38cd5dc45ae6a632ec4dab8b345.mp4', NULL, '2021-04-02 04:01:39', NULL),
+(27, 49, '9c82b5e23355e64bf60957fd2ee0739e.mp4', NULL, '2021-04-02 04:02:17', NULL),
+(28, 49, '93c11a205fef3cca1ddd3b8976710017.mp4', NULL, '2021-04-02 04:02:42', NULL);
 
 --
 -- Índices para tabelas despejadas
@@ -225,31 +210,31 @@ ALTER TABLE `video_traducao`
 -- AUTO_INCREMENT de tabela `comentario`
 --
 ALTER TABLE `comentario`
-  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT de tabela `conteudo`
 --
 ALTER TABLE `conteudo`
-  MODIFY `id_conteudo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_conteudo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de tabela `pessoa`
 --
 ALTER TABLE `pessoa`
-  MODIFY `id_pessoa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_pessoa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT de tabela `video_produtor`
 --
 ALTER TABLE `video_produtor`
-  MODIFY `id_vid_produtor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_vid_produtor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT de tabela `video_traducao`
 --
 ALTER TABLE `video_traducao`
-  MODIFY `id_vid_traducao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_vid_traducao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- Restrições para despejos de tabelas
@@ -266,8 +251,7 @@ ALTER TABLE `comentario`
 --
 ALTER TABLE `conteudo`
   ADD CONSTRAINT `conteudo_pessoa` FOREIGN KEY (`id_pessoa`) REFERENCES `pessoa` (`id_pessoa`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `conteudo_produtor` FOREIGN KEY (`id_vid_produtor`) REFERENCES `video_produtor` (`id_vid_produtor`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `conteudo_traducao` FOREIGN KEY (`id_vid_traducao`) REFERENCES `video_traducao` (`id_vid_traducao`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `conteudo_produtor` FOREIGN KEY (`id_vid_produtor`) REFERENCES `video_produtor` (`id_vid_produtor`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `video_produtor`
