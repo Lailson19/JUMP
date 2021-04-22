@@ -2,7 +2,7 @@
     <img alt="Jump" title="Happy" src=".github/marca-preto.png" />
 </h1>
 
-### Jump Projeto-Recode v2
+### Jump Projeto-Recode v2:
 
 A Jump é uma plataforma de vídeos educativos com acessibilidade para surdos. Aqui você poderá acessar diversos conteúdos com interpretação em LIBRAS.
 
@@ -16,20 +16,20 @@ E você que é intérprete de LIBRAS poderá contribuir com seus vídeos interpr
 
 - [JUMP](http://jump.sytes.net/)
 
-## 🚀 Tecnologias
+## 🚀 Tecnologias:
 
 Esse projeto foi desenvolvido com as seguintes tecnologias:
 
-- [HTML](https://www.w3schools.com/html/)
-- [CSS](https://cssreference.io//)
-- [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- [HTML](https://www.w3schools.com/html/);
+- [CSS](https://cssreference.io//);
+- [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript);
 - [PHP](https://www.php.net/)
 
-## 💻 Projeto
+## 💻 Projeto:
 
 <p>Jump é uma plataforma onde as pessoas podem, colaborativamente, subir traduções em LIBRAS para vídeos sem acessibilidade de maneira prática e fácil. </p>
 
-## by Squad8 | Jump - Recode Pro 
+## by Squad8 | Jump - Recode Pro :
 
 
 
